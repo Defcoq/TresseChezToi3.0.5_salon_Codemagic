@@ -9,14 +9,16 @@ import '../services/global_service.dart';
 import 'parents/model.dart';
 
 class Media extends Model {
-  String id;
-  String name;
-  String url;
-  String thumb;
-  String icon;
-  String size;
 
-  Media({String id, String url, String thumb, String icon}) {
+
+  String? id;
+  String? name;
+  String? url;
+  String? thumb;
+  String? icon;
+  String? size;
+
+  Media({String? id, String? url, String? thumb, String? icon})  {
     this.id = id ?? UniqueKey().toString();
     this.url = url ?? "${Get.find<GlobalService>().baseUrl}images/image_default.png";
     this.thumb = thumb ?? "${Get.find<GlobalService>().baseUrl}images/image_default.png";
@@ -51,7 +53,7 @@ class Media extends Model {
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is Media &&

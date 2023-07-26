@@ -1,44 +1,47 @@
 import 'parents/model.dart';
 
 class Setting extends Model {
-  String appName;
-  String salonAppName;
-  bool enableStripe;
-  String defaultTax;
-  String defaultCurrency;
-  String fcmKey;
-  bool enablePaypal;
-  String defaultTheme;
-  String mainColor;
-  String mainDarkColor;
-  String secondColor;
-  String secondDarkColor;
-  String accentColor;
-  String accentDarkColor;
-  String scaffoldDarkColor;
-  String scaffoldColor;
-  String googleMapsKey;
-  String mobileLanguage;
-  String defaultCountryCode;
-  String appVersion;
-  bool enableVersion;
-  bool currencyRight;
-  int defaultCurrencyDecimalDigits;
-  bool enableRazorpay;
-  String distanceUnit;
-  String homeSection1;
-  String homeSection2;
-  String homeSection3;
-  String homeSection4;
-  String homeSection5;
-  String homeSection6;
-  String homeSection7;
-  String homeSection8;
-  String homeSection9;
-  String homeSection10;
-  String homeSection11;
-  String homeSection12;
-  bool enableOtp;
+
+  String? salonAppName;
+
+  String? appName;
+  bool? enableStripe;
+  String? defaultTax;
+  String? defaultCurrency;
+  String? fcmKey;
+  bool? enablePaypal;
+  String? defaultTheme;
+  String? mainColor;
+  String? mainDarkColor;
+  String? secondColor;
+  String? secondDarkColor;
+  String? accentColor;
+  String? accentDarkColor;
+  String? scaffoldDarkColor;
+  String? scaffoldColor;
+  String? googleMapsKey;
+  String? mobileLanguage;
+  String? defaultCountryCode;
+  String? appVersion;
+  bool? enableVersion;
+
+  bool? currencyRight;
+  int? defaultCurrencyDecimalDigits;
+  bool? enableRazorpay;
+  String? distanceUnit;
+  String? homeSection1;
+  String? homeSection2;
+  String? homeSection3;
+  String? homeSection4;
+  String? homeSection5;
+  String? homeSection6;
+  String? homeSection7;
+  String? homeSection8;
+  String? homeSection9;
+  String? homeSection10;
+  String? homeSection11;
+  String? homeSection12;
+  bool? enableOtp = false;
 
   Setting(
       {this.appName,

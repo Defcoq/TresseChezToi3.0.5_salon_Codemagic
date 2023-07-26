@@ -7,9 +7,9 @@ import 'dart:core';
 import 'parents/model.dart';
 
 class Experience extends Model {
-  String id;
-  String title;
-  String description;
+  String? id;
+  String? title;
+  String? description;
 
   Experience({this.id, this.title, this.description});
 

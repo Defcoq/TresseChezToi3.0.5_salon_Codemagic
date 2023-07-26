@@ -18,7 +18,7 @@ class AccountView extends GetView<AccountController> {
         appBar: AppBar(
           title: Text(
             "Account".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(color: context.theme.primaryColor)),
+            style: Get.textTheme.headline6?.merge(TextStyle(color: context.theme.primaryColor)),
           ),
           centerTitle: true,
           backgroundColor: Get.theme.colorScheme.secondary,
@@ -59,10 +59,10 @@ class AccountView extends GetView<AccountController> {
                         children: [
                           Text(
                             _currentUser.value.name ?? '',
-                            style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor)),
+                            style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor)),
                           ),
                           SizedBox(height: 10),
-                          Text(_currentUser.value.email ?? '', style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
+                          Text(_currentUser.value.email ?? '', style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor))),
                         ],
                       ),
                     ),

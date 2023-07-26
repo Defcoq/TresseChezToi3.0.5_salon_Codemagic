@@ -8,13 +8,13 @@ class SelectDialogItem<V> {
 }
 
 class SelectDialog<V> extends StatefulWidget {
-  SelectDialog({Key key, this.items, this.initialSelectedValue, this.title, this.submitText, this.cancelText}) : super(key: key);
+  SelectDialog({Key? key, required this.items, this.initialSelectedValue, this.title, this.submitText, this.cancelText}) : super(key: key);
 
   final List<SelectDialogItem<V>> items;
-  final V initialSelectedValue;
-  final String title;
-  final String submitText;
-  final String cancelText;
+  final V? initialSelectedValue;
+  final String? title;
+  final String? submitText;
+  final String? cancelText;
 
   @override
   State<StatefulWidget> createState() => _SelectDialogState<V>();
@@ -82,7 +82,7 @@ class _SelectDialogState<V> extends State<SelectDialog<V>> {
       value: checked,
       title: Text(item.label, style: Theme.of(context).textTheme.bodyText2),
       controlAffinity: ListTileControlAffinity.leading,
-      onChanged: (checked) => _onItemCheckedChange(item.value, checked),
+      onChanged: (checked) => _onItemCheckedChange(item.value, checked!),
     );
   }
 }

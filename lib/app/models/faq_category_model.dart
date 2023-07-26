@@ -1,8 +1,8 @@
 import 'parents/model.dart';
 
 class FaqCategory extends Model {
-  String id;
-  String name;
+  String? id;
+  String? name;
 
   FaqCategory({this.id, this.name});
 

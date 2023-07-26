@@ -8,20 +8,21 @@ import 'parents/model.dart';
 import 'salon_model.dart';
 
 class EService extends Model {
-  String id;
-  String name;
-  String description;
-  List<Media> images;
-  double price;
-  double discountPrice;
-  String duration;
-  bool featured;
-  bool enableBooking;
-  bool isFavorite;
-  List<Category> categories;
-  List<Category> subCategories;
-  List<OptionGroup> optionGroups;
-  Salon salon;
+
+  String? id;
+  String? name;
+  String? description;
+  List<Media>? images;
+  double? price;
+  double? discountPrice;
+  String? duration;
+  bool? featured;
+  bool? enableBooking;
+  bool? isFavorite;
+  List<Category>? categories;
+  List<Category>? subCategories;
+  List<OptionGroup>? optionGroups;
+  Salon? salon;
 
   EService(
       {this.id,
@@ -48,7 +49,7 @@ class EService extends Model {
     discountPrice = doubleFromJson(json, 'discount_price');
     print("Before duration value --------------------------------------");
     print("Duration fron json " + stringFromJson(json, 'duration'));
-    String durationFromJson = stringFromJson(json, 'duration')?? null;
+    String durationFromJson = stringFromJson(json, 'duration')?? "";
     if(durationFromJson.isNotEmpty)
     duration = DateFormat("HH'h' mm'm'").format(DateFormat('HH:mm').parse(stringFromJson(json, 'duration')));
     else
@@ -75,19 +76,20 @@ class EService extends Model {
     if (enableBooking != null) data['enable_booking'] = this.enableBooking;
     if (isFavorite != null) data['is_favorite'] = this.isFavorite;
     if (this.categories != null) {
-      data['categories'] = this.categories.map((v) => v?.id).toList();
+      data['categories'] = this.categories?.map((v) => v?.id).toList();
     }
     if (this.images != null) {
-      data['image'] = this.images.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
+      data['image'] = this.images?.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
     }
+
     if (this.subCategories != null) {
-      data['sub_categories'] = this.subCategories.map((v) => v.toJson()).toList();
+      data['sub_categories'] = this.subCategories?.map((v) => v.toJson()).toList();
     }
     if (this.optionGroups != null) {
-      data['option_groups'] = this.optionGroups.map((v) => v.toJson()).toList();
+      data['option_groups'] = this.optionGroups?.map((v) => v.toJson()).toList();
     }
-    if (this.salon != null && this.salon.hasData) {
-      data['salon_id'] = this.salon.id;
+    if (this.salon != null && this.salon!.hasData) {
+      data['salon_id'] = this.salon?.id;
     }
     return data;
   }
@@ -109,18 +111,18 @@ class EService extends Model {
   * otherwise it return the discount price instead
   * */
   double get getPrice {
-    return (discountPrice ?? 0) > 0 ? discountPrice : price;
+    return (discountPrice! ?? 0) > 0 ? discountPrice! : price!;
   }
 
   /*
   * Get discount price
   * */
   double get getOldPrice {
-    return (discountPrice ?? 0) > 0 ? price : 0;
+    return (discountPrice! ?? 0) > 0 ? price! : 0;
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is EService &&

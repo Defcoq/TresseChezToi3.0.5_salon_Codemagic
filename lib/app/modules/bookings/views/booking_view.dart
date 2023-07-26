@@ -23,7 +23,7 @@ class BookingView extends GetView<BookingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: controller.booking.value.atSalon ? BookingAtSalonActionsWidget() : BookingActionsWidget(),
+      bottomNavigationBar: controller.booking.value.atSalon! ? BookingAtSalonActionsWidget() : BookingActionsWidget(),
       body: RefreshIndicator(
           onRefresh: () async {
             Get.find<LaravelApiClient>().forceRefresh();
@@ -50,7 +50,7 @@ class BookingView extends GetView<BookingController> {
                 actions: [
                   MaterialButton(
                     elevation: 0,
-                    onPressed: () => openMapsSheet(context, controller.booking.value.address, controller.booking.value.id),
+                    onPressed: () => openMapsSheet(context, controller.booking.value.address!, controller.booking.value.id!),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     color: Get.theme.colorScheme.secondary,
                     child: Wrap(
@@ -58,7 +58,7 @@ class BookingView extends GetView<BookingController> {
                       spacing: 5,
                       children: [
                         Icon(Icons.map_outlined, color: Get.theme.primaryColor),
-                        Text("On Maps".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                        Text("On Maps".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                       ],
                     ),
                   ).paddingSymmetric(horizontal: 20, vertical: 8),
@@ -101,7 +101,7 @@ class BookingView extends GetView<BookingController> {
                       else
                         return BookingTilWidget(
                           title: Text("Booking Details".tr, style: Get.textTheme.subtitle2),
-                          actions: [Text("#" + controller.booking.value.id, style: Get.textTheme.subtitle2)],
+                          actions: [Text("#" + controller.booking.value.id!, style: Get.textTheme.subtitle2)],
                           content: Column(
                             children: [
                               BookingRowWidget(
@@ -118,7 +118,7 @@ class BookingView extends GetView<BookingController> {
                                           color: Get.theme.focusColor.withOpacity(0.1),
                                         ),
                                         child: Text(
-                                          controller.booking.value.status.status,
+                                          controller.booking.value.status!.status!,
                                           overflow: TextOverflow.clip,
                                           maxLines: 1,
                                           softWrap: true,
@@ -160,7 +160,7 @@ class BookingView extends GetView<BookingController> {
                                             color: Get.theme.focusColor.withOpacity(0.1),
                                           ),
                                           child: Text(
-                                            controller.booking.value.payment?.paymentMethod?.getName(),
+                                            controller.booking.value.payment!.paymentMethod!.getName(),
                                             style: TextStyle(color: Get.theme.hintColor),
                                           ),
                                         ),
@@ -169,7 +169,7 @@ class BookingView extends GetView<BookingController> {
                                     hasDivider: true),
                               BookingRowWidget(
                                 description: "Hint".tr,
-                                child: Ui.removeHtml(controller.booking.value.hint, alignment: Alignment.centerRight, textAlign: TextAlign.end),
+                                child: Ui.removeHtml(controller.booking.value.hint!, alignment: Alignment.centerRight, textAlign: TextAlign.end),
                               ),
                             ],
                           ),
@@ -205,7 +205,7 @@ class BookingView extends GetView<BookingController> {
                                       child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
-                                            DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.bookingAt),
+                                            DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.bookingAt!),
                                             style: Get.textTheme.caption,
                                             textAlign: TextAlign.end,
                                           )),
@@ -216,7 +216,7 @@ class BookingView extends GetView<BookingController> {
                                       child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
-                                            DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.startAt),
+                                            DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.startAt!),
                                             style: Get.textTheme.caption,
                                             textAlign: TextAlign.end,
                                           )),
@@ -227,7 +227,7 @@ class BookingView extends GetView<BookingController> {
                                     child: Align(
                                         alignment: Alignment.centerRight,
                                         child: Text(
-                                          DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.endsAt),
+                                          DateFormat('d, MMMM y  HH:mm', Get.locale.toString()).format(controller.booking.value.endsAt!),
                                           style: Get.textTheme.caption,
                                           textAlign: TextAlign.end,
                                         )),
@@ -267,7 +267,7 @@ class BookingView extends GetView<BookingController> {
                 children: [
                   AutoSizeText(
                     _booking.value.salon?.name ?? '',
-                    style: Get.textTheme.headline5.merge(TextStyle(height: 1.1)),
+                    style: Get.textTheme.headline5?.merge(TextStyle(height: 1.1)),
                     overflow: TextOverflow.fade,
                   ),
                   SizedBox(height: 5),
@@ -277,7 +277,7 @@ class BookingView extends GetView<BookingController> {
                         Icon(Icons.badge_outlined, color: Get.theme.focusColor),
                         SizedBox(width: 8),
                         Text(
-                          _booking.value.employee.name,
+                          _booking.value.employee!.name!,
                           style: Get.textTheme.bodyText1,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
@@ -314,25 +314,25 @@ class BookingView extends GetView<BookingController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(DateFormat('HH:mm', Get.locale.toString()).format(_booking.value.bookingAt),
+                    Text(DateFormat('HH:mm', Get.locale.toString()).format(_booking.value.bookingAt!),
                         maxLines: 1,
-                        style: Get.textTheme.bodyText2.merge(
+                        style: Get.textTheme.bodyText2?.merge(
                           TextStyle(color: Get.theme.colorScheme.secondary, height: 1.4),
                         ),
                         softWrap: false,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade),
-                    Text(DateFormat('dd', Get.locale.toString()).format(_booking.value.bookingAt ?? ''),
+                    Text(DateFormat('dd', Get.locale.toString()).format(_booking.value.bookingAt! ??  DateTime.now()),
                         maxLines: 1,
-                        style: Get.textTheme.headline3.merge(
+                        style: Get.textTheme.headline3?.merge(
                           TextStyle(color: Get.theme.colorScheme.secondary, height: 1),
                         ),
                         softWrap: false,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade),
-                    Text(DateFormat('MMM', Get.locale.toString()).format(_booking.value.bookingAt ?? ''),
+                    Text(DateFormat('MMM', Get.locale.toString()).format(_booking.value.bookingAt! ?? DateTime.now()),
                         maxLines: 1,
-                        style: Get.textTheme.bodyText2.merge(
+                        style: Get.textTheme.bodyText2?.merge(
                           TextStyle(color: Get.theme.colorScheme.secondary, height: 1),
                         ),
                         softWrap: false,
@@ -412,7 +412,7 @@ class BookingView extends GetView<BookingController> {
 
   openMapsSheet(context, Address address, String _title) async {
     try {
-      final coords = launcher.Coords(address.getLatLng().latitude, address.getLatLng().longitude);
+      final coords = launcher.Coords(address.getLatLng()!.latitude!, address.getLatLng()!.longitude);
       final title = _title ?? "";
       final availableMaps = await launcher.MapLauncher.installedMaps;
 

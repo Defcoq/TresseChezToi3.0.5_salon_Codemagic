@@ -5,20 +5,22 @@ import "parents/model.dart";
 import 'user_model.dart';
 
 class Chat extends Model {
-  String id = UniqueKey().toString();
+  String? id = UniqueKey().toString();
 
   // message text
-  String text;
+  String? text;
 
   // time of the message
-  int time;
+  int? time;
 
   // user id who send the message
-  String userId;
+  String? userId;
 
-  User user;
+  User? user;
 
   Chat(this.text, this.time, this.userId, this.user);
+
+
 
   Chat.fromDocumentSnapshot(DocumentSnapshot jsonMap) {
     try {
@@ -47,7 +49,7 @@ class Chat extends Model {
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other && other is Chat && runtimeType == other.runtimeType && id == other.id && text == other.text && time == other.time && userId == other.userId;
 

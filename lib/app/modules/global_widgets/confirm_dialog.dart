@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ConfirmDialog<V> extends StatefulWidget {
-  ConfirmDialog({Key key, this.content, this.title, this.submitText, this.cancelText}) : super(key: key);
+  ConfirmDialog({Key? key, this.content, this.title, this.submitText, this.cancelText}) : super(key: key);
 
-  final String title;
-  final String content;
-  final String submitText;
-  final String cancelText;
+  final String? title;
+  final String? content;
+  final String? submitText;
+  final String? cancelText;
 
   @override
   State<StatefulWidget> createState() => _ConfirmDialogState<V>();

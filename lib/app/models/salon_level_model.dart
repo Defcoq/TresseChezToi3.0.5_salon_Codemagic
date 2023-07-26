@@ -7,9 +7,9 @@ import 'dart:core';
 import 'parents/model.dart';
 
 class SalonLevel extends Model {
-  String id;
-  String name;
-  double commission;
+  String? id;
+  String? name;
+  double? commission;
 
   SalonLevel({this.id, this.name, this.commission});
 

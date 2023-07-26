@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 class DurationChipWidget extends StatelessWidget {
   const DurationChipWidget({
-    Key key,
-    @required String duration,
+    Key? key,
+    required String duration,
   })  : _duration = duration,
         super(key: key);
 

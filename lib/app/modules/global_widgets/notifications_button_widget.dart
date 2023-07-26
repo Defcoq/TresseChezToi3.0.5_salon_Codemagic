@@ -9,11 +9,11 @@ class NotificationsButtonWidget extends GetView<RootController> {
   const NotificationsButtonWidget({
     this.iconColor,
     this.labelColor,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Color iconColor;
-  final Color labelColor;
+  final Color? iconColor;
+  final Color? labelColor;
 
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -41,7 +41,7 @@ class NotificationsButtonWidget extends GetView<RootController> {
                 child: Text(
                   controller.notificationsCount.value.toString(),
                   textAlign: TextAlign.center,
-                  style: Get.textTheme.caption.merge(
+                  style: Get.textTheme.caption?.merge(
                     TextStyle(color: Get.theme.primaryColor, fontSize: 9, height: 1.4),
                   ),
                 ),

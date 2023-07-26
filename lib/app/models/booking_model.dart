@@ -10,26 +10,26 @@ import 'tax_model.dart';
 import 'user_model.dart';
 
 class Booking extends Model {
-  String id;
-  String hint;
-  bool cancel;
-  bool atSalon;
-  double duration;
-  int quantity;
-  BookingStatus status;
-  User user;
-  User employee;
-  List<EService> eServices;
-  Salon salon;
-  List<Option> options;
-  List<Tax> taxes;
-  Address address;
-  Coupon coupon;
-  DateTime bookingAt;
-  DateTime startAt;
-  DateTime endsAt;
-  Payment payment;
-  bool iSProviderSubscriptionActive=false;
+  String? id;
+  String? hint;
+  bool? cancel;
+  bool? atSalon;
+  double? duration;
+  int? quantity;
+  BookingStatus? status;
+  User? user;
+  User? employee;
+  List<EService>? eServices;
+  Salon? salon;
+  List<Option>? options;
+  List<Tax>? taxes;
+  Address? address;
+  Coupon? coupon;
+  DateTime? bookingAt;
+  DateTime? startAt;
+  DateTime? endsAt;
+  Payment? payment;
+  bool? iSProviderSubscriptionActive=false;
 
   Booking(
       {this.id,
@@ -114,43 +114,43 @@ class Booking extends Model {
       data['cancel'] = this.cancel;
     }
     if (this.status != null) {
-      data['booking_status_id'] = this.status.id;
+      data['booking_status_id'] = this.status?.id;
     }
-    if (this.coupon != null && this.coupon.id != null) {
-      data['code'] = this.coupon.code;
+    if (this.coupon != null && this.coupon?.id != null) {
+      data['code'] = this.coupon?.code;
     }
     if (this.taxes != null) {
-      data['taxes'] = this.taxes.map((e) => e.toJson()).toList();
+      data['taxes'] = this.taxes?.map((e) => e.toJson()).toList();
     }
-    if (this.options != null && this.options.isNotEmpty) {
-      data['options'] = this.options.map((e) => e.id).toList();
+    if (this.options != null && this.options!.isNotEmpty) {
+      data['options'] = this.options?.map((e) => e.id).toList();
     }
     if (this.user != null) {
-      data['user_id'] = this.user.id;
+      data['user_id'] = this.user?.id;
     }
     if (this.employee != null) {
-      data['employee_id'] = this.employee.id;
+      data['employee_id'] = this.employee?.id;
     }
     if (this.address != null) {
-      data['address'] = this.address.toJson();
+      data['address'] = this.address?.toJson();
     }
     if (this.eServices != null) {
-      data['e_services'] = this.eServices.map((e) => e.id).toList();
+      data['e_services'] = this.eServices?.map((e) => e.id).toList();
     }
     if (this.salon != null) {
-      data['salon_id'] = this.salon.id;
+      data['salon_id'] = this.salon?.id;
     }
     if (this.payment != null) {
-      data['payment'] = this.payment.toJson();
+      data['payment'] = this.payment?.toJson();
     }
     if (this.bookingAt != null) {
-      data['booking_at'] = bookingAt.toUtc().toString();
+      data['booking_at'] = bookingAt?.toUtc().toString();
     }
     if (this.startAt != null) {
-      data['start_at'] = startAt.toUtc().toString();
+      data['start_at'] = startAt?.toUtc().toString();
     }
     if (this.endsAt != null) {
-      data['ends_at'] = endsAt.toUtc().toString();
+      data['ends_at'] = endsAt?.toUtc().toString();
     }
     return data;
   }
@@ -167,9 +167,9 @@ class Booking extends Model {
     double taxValue = 0.0;
     taxes?.forEach((element) {
       if (element.type == 'percent') {
-        taxValue += (total * element.value / 100);
+        taxValue += (total * element.value! / 100);
       } else {
-        taxValue += element.value;
+        taxValue += element.value!;
       }
     });
     return taxValue;
@@ -182,16 +182,16 @@ class Booking extends Model {
   double getSubtotal() {
     double total = 0.0;
     eServices?.forEach((element) {
-      total += element.getPrice * (quantity >= 1 ? quantity : 1);
+      total += element.getPrice! * (quantity! >= 1 ? quantity! : 1);
     });
     options?.forEach((element) {
-      total += element.price * (quantity >= 1 ? quantity : 1);
+      total += element.price! * (quantity! >= 1 ? quantity! : 1);
     });
     return total;
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is Booking &&

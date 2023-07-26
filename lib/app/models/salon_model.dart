@@ -16,26 +16,28 @@ import 'tax_model.dart';
 import 'user_model.dart';
 
 class Salon extends Model {
-  String id;
-  String name;
-  String description;
-  List<Media> images;
-  String phoneNumber;
-  String mobileNumber;
-  SalonLevel salonLevel;
-  List<AvailabilityHour> availabilityHours;
-  double availabilityRange;
-  double distance;
-  bool closed;
-  bool featured;
-  Address address;
-  List<Tax> taxes;
 
-  List<User> employees;
-  double rate;
-  List<Review> reviews;
-  int totalReviews;
-  bool verified;
+  String? id;
+  String? name;
+  String? description;
+  List<Media>? images;
+  String? phoneNumber;
+  String? mobileNumber;
+  SalonLevel? salonLevel;
+  List<AvailabilityHour>? availabilityHours;
+  double? availabilityRange;
+  double? distance;
+  bool? closed;
+  bool? featured;
+  Address? address;
+  List<Tax>? taxes;
+
+  List<User>? employees;
+  double? rate;
+  List<Review>? reviews;
+  int? totalReviews;
+  bool? verified;
+
 
   Salon(
       {this.id,
@@ -60,7 +62,7 @@ class Salon extends Model {
   Salon.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
     name = transStringFromJson(json, 'name');
-    description = transStringFromJson(json, 'description', defaultValue: null);
+    description = transStringFromJson(json, 'description', defaultValue: "");
     images = mediaListFromJson(json, 'images');
     phoneNumber = stringFromJson(json, 'phone_number');
     mobileNumber = stringFromJson(json, 'mobile_number');
@@ -75,7 +77,7 @@ class Salon extends Model {
     employees = listFromJson(json, 'users', (v) => User.fromJson(v));
     rate = doubleFromJson(json, 'rate');
     reviews = listFromJson(json, 'salon_reviews', (v) => Review.fromJson(v));
-    totalReviews = reviews.isEmpty ? intFromJson(json, 'total_reviews') : reviews.length;
+    totalReviews = reviews!.isEmpty ? intFromJson(json, 'total_reviews') : reviews?.length;
     verified = boolFromJson(json, 'verified');
   }
 
@@ -107,50 +109,50 @@ class Salon extends Model {
 
  void SorteAvailabilityHour()
   {
-    this.availabilityHours.map((e) => {
-       if(e.day.toLowerCase() == "monday")
+    this.availabilityHours?.map((e) => {
+       if(e.day?.toLowerCase() == "monday")
          {
            e.sortOrder =1
          }
-      else if(e.day.toLowerCase() == "tuesday")
+      else if(e.day?.toLowerCase() == "tuesday")
         {
           e.sortOrder =2
         }
-       else if(e.day.toLowerCase() == "wednesday")
+       else if(e.day?.toLowerCase() == "wednesday")
            {
              e.sortOrder =3
            }
-         else if(e.day.toLowerCase() == "thursday")
+         else if(e.day?.toLowerCase() == "thursday")
              {
                e.sortOrder =4
              }
-           else if(e.day.toLowerCase() == "friday")
+           else if(e.day?.toLowerCase() == "friday")
                {
                  e.sortOrder =5
                }
-             else if(e.day.toLowerCase() == "saturday")
+             else if(e.day?.toLowerCase() == "saturday")
                  {
                    e.sortOrder =6
                  }
 
-               else if(e.day.toLowerCase() == "sunday")
+               else if(e.day?.toLowerCase() == "sunday")
                    {
                      e.sortOrder =7
                    }
 
 
     });
-    this.availabilityHours.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+    this.availabilityHours?.sort((a, b) => a.sortOrder!.compareTo(b.sortOrder!));
 
   }
 
   Map<String, List<String>> groupedAvailabilityHours() {
     Map<String, List<String>> result = {};
-    this.availabilityHours.forEach((element) {
+    this.availabilityHours?.forEach((element) {
       if (result.containsKey(element.day)) {
-        result[element.day].add(element.startAt + ' - ' + element.endAt);
+        result[element.day]?.add(element.startAt! + ' - ' + element.endAt!);
       } else {
-        result[element.day] = [element.startAt + ' - ' + element.endAt];
+        result[element.day!] = [element.startAt! + ' - ' + element.endAt!];
       }
     });
     return result;
@@ -158,16 +160,16 @@ class Salon extends Model {
 
   List<String> getAvailabilityHoursData(String day) {
     List<String> result = [];
-    this.availabilityHours.forEach((element) {
+    this.availabilityHours?.forEach((element) {
       if (element.day == day) {
-        result.add(element.data);
+        result.add(element.data!);
       }
     });
     return result;
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is Salon &&

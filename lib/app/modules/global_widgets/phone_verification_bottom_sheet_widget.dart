@@ -49,7 +49,7 @@ class PhoneVerificationBottomSheetWidget extends GetView<ProfileController> {
           TextFieldWidget(
             labelText: "OTP Code".tr,
             hintText: "- - - - - -".tr,
-            style: Get.textTheme.headline4.merge(TextStyle(letterSpacing: 8)),
+            style: Get.textTheme.headline4?.merge(TextStyle(letterSpacing: 8)),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             onChanged: (input) => controller.smsSent.value = input,
@@ -61,7 +61,7 @@ class PhoneVerificationBottomSheetWidget extends GetView<ProfileController> {
             color: Get.theme.colorScheme.secondary,
             text: Text(
               "Verify".tr,
-              style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor)),
+              style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor)),
             ),
           ).paddingSymmetric(vertical: 30, horizontal: 20),
         ],

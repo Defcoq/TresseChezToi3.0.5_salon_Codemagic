@@ -2,13 +2,15 @@ import 'media_model.dart';
 import 'parents/model.dart';
 
 class Option extends Model {
-  String id;
-  String optionGroupId;
-  String eServiceId;
-  String name;
-  double price;
-  Media image;
-  String description;
+
+
+  String? id;
+  String? optionGroupId;
+  String? eServiceId;
+  String? name;
+  double? price;
+  Media? image;
+  String? description;
 
   Option({this.id, this.optionGroupId, this.eServiceId, this.name, this.price, this.image, this.description});
 
@@ -31,13 +33,13 @@ class Option extends Model {
     if (optionGroupId != null) map["option_group_id"] = optionGroupId;
     if (eServiceId != null) map["e_service_id"] = eServiceId;
     if (this.image != null) {
-      map['image'] = this.image.toJson();
+      map['image'] = this.image?.toJson();
     }
     return map;
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is Option &&

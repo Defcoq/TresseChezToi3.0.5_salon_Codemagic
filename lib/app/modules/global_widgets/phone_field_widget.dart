@@ -13,7 +13,7 @@ import 'package:intl_phone_field/phone_number.dart';
 
 class PhoneFieldWidget extends StatelessWidget {
   const PhoneFieldWidget(
-      {Key key,
+      {Key? key,
       this.onSaved,
       this.onChanged,
       this.validator,
@@ -32,22 +32,27 @@ class PhoneFieldWidget extends StatelessWidget {
       this.countries})
       : super(key: key);
 
-  final FormFieldSetter<PhoneNumber> onSaved;
-  final ValueChanged<PhoneNumber> onChanged;
-  final FormFieldValidator<String> validator;
-  final String initialValue;
-  final String hintText;
-  final String errorText;
-  final TextAlign textAlign;
-  final String labelText;
-  final TextStyle style;
-  final bool obscureText;
-  final String initialCountryCode;
-  final List<String> countries;
-  final bool isFirst;
-  final bool isLast;
-  final Widget suffixIcon;
-  final Widget suffix;
+
+
+
+
+  final FormFieldSetter<PhoneNumber>? onSaved;
+  final ValueChanged<PhoneNumber>? onChanged;
+  final FormFieldValidator<String>? validator;
+  final String? initialValue;
+  final String? hintText;
+  final String? errorText;
+  final TextAlign? textAlign;
+  final String? labelText;
+  final TextStyle? style;
+  final bool? obscureText;
+  final String? initialCountryCode;
+  final List<String>? countries;
+  final bool? isFirst;
+  final bool? isLast;
+  final Widget? suffixIcon;
+  final Widget? suffix;
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,20 +103,20 @@ class PhoneFieldWidget extends StatelessWidget {
   }
 
   BorderRadius get buildBorderRadius {
-    if (isFirst != null && isFirst) {
+    if (isFirst != null && isFirst!) {
       return BorderRadius.vertical(top: Radius.circular(10));
     }
-    if (isLast != null && isLast) {
+    if (isLast != null && isLast!) {
       return BorderRadius.vertical(bottom: Radius.circular(10));
     }
-    if (isFirst != null && !isFirst && isLast != null && !isLast) {
+    if (isFirst != null && !isFirst! && isLast != null && !isLast!) {
       return BorderRadius.all(Radius.circular(0));
     }
     return BorderRadius.all(Radius.circular(10));
   }
 
   double get topMargin {
-    if ((isFirst != null && isFirst)) {
+    if ((isFirst != null && isFirst!)) {
       return 20;
     } else if (isFirst == null) {
       return 20;
@@ -121,7 +126,7 @@ class PhoneFieldWidget extends StatelessWidget {
   }
 
   double get bottomMargin {
-    if ((isLast != null && isLast)) {
+    if ((isLast != null && isLast!)) {
       return 10;
     } else if (isLast == null) {
       return 10;

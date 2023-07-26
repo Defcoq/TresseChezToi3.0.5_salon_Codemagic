@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import '../../../../common/ui.dart';
 
 class BookingTilWidget extends StatelessWidget {
-  final Widget title;
-  final Widget content;
-  final List<Widget> actions;
-  final double horizontalPadding;
+  final Widget? title;
+  final Widget? content;
+  final List<Widget>? actions;
+  final double? horizontalPadding;
 
-  const BookingTilWidget({Key key, this.title, this.content, this.actions, this.horizontalPadding}) : super(key: key);
+  const BookingTilWidget({Key? key, this.title, this.content, this.actions, this.horizontalPadding}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class BookingTilWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: title),
+              Expanded(child: title!),
               if (actions != null)
                 Wrap(
-                  children: actions,
+                  children: actions!,
                 )
             ],
           ),
@@ -36,7 +36,7 @@ class BookingTilWidget extends StatelessWidget {
             height: 26,
             thickness: 1.2,
           ),
-          content,
+          content!,
         ],
       ),
     );

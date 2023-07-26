@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'parents/model.dart';
 
 class Statistic extends Model {
-  String id;
-  String value;
-  String description;
-  Color textColor;
-  Color backgroundColor;
+  String? id;
+  String? value;
+  String? description;
+  Color? textColor;
+  Color? backgroundColor;
 
   Statistic({this.id, this.value, this.description, this.textColor, this.backgroundColor});
 

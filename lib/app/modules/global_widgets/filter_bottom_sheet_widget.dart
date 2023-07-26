@@ -40,10 +40,10 @@ class FilterBottomSheetWidget extends GetView<SearchController> {
                           controlAffinity: ListTileControlAffinity.trailing,
                           value: controller.selectedCategories.contains(_category.id),
                           onChanged: (value) {
-                            controller.toggleCategory(value, _category);
+                            controller.toggleCategory(value!, _category);
                           },
                           title: Text(
-                            _category.name,
+                            _category.name!,
                             style: Get.textTheme.bodyText1,
                             overflow: TextOverflow.fade,
                             softWrap: false,

@@ -2,10 +2,12 @@ import 'option_model.dart';
 import 'parents/model.dart';
 
 class OptionGroup extends Model {
-  String id;
-  String name;
-  bool allowMultiple;
-  List<Option> options;
+
+
+  String? id;
+  String? name;
+  bool? allowMultiple;
+  List<Option>? options;
 
   OptionGroup({this.id, this.name, this.options});
 
@@ -15,7 +17,7 @@ class OptionGroup extends Model {
     allowMultiple = boolFromJson(json, 'allow_multiple');
     options = listFromJson(json, 'options', (v) => Option.fromJson(v));
     if (eServiceId != null) {
-      options.removeWhere((element) => element.eServiceId != eServiceId);
+      options?.removeWhere((element) => element.eServiceId != eServiceId);
     }
   }
 
@@ -28,7 +30,7 @@ class OptionGroup extends Model {
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is OptionGroup &&

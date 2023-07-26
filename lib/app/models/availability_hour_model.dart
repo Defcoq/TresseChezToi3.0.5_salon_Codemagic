@@ -10,12 +10,14 @@ import 'dart:core';
 import 'parents/model.dart';
 
 class AvailabilityHour extends Model {
-  String id;
-  String day;
-  String startAt;
-  String endAt;
-  String data;
-  int sortOrder;
+
+  int? sortOrder;
+
+  String? id;
+  String? day;
+  String? startAt;
+  String? endAt;
+  String? data;
 
   AvailabilityHour({this.id, this.day, this.startAt, this.endAt, this.data,this.sortOrder});
 
@@ -26,32 +28,32 @@ class AvailabilityHour extends Model {
     endAt = stringFromJson(json, 'end_at');
     data = transStringFromJson(json, 'data');
 
-    if(day.toLowerCase() == "monday")
+    if(day?.toLowerCase() == "monday")
     {
       this.sortOrder =1;
     }
-    else if(day.toLowerCase() == "tuesday")
+    else if(day?.toLowerCase() == "tuesday")
     {
       this.sortOrder =2;
     }
-    else if(day.toLowerCase() == "wednesday")
+    else if(day?.toLowerCase() == "wednesday")
     {
       this.sortOrder =3;
     }
-    else if(day.toLowerCase() == "thursday")
+    else if(day?.toLowerCase() == "thursday")
     {
       this.sortOrder =4;
     }
-    else if(day.toLowerCase() == "friday")
+    else if(day?.toLowerCase() == "friday")
     {
       this.sortOrder =5;
     }
-    else if(day.toLowerCase() == "saturday")
+    else if(day?.toLowerCase() == "saturday")
     {
       this.sortOrder =6;
     }
 
-    else if(day.toLowerCase() == "sunday")
+    else if(day?.toLowerCase() == "sunday")
     {
       this.sortOrder =7;
     }

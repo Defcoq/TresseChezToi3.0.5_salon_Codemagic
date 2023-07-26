@@ -3,14 +3,15 @@ import 'package:beauty_clud_salon_owner/app/models/payment_model.dart';
 import 'package:beauty_clud_salon_owner/app/models/salon_model.dart';
 import 'package:beauty_clud_salon_owner/app/models/subscription_package_model.dart';
 
+
 class SalonSubscription extends Model {
-  String id;
-  Salon salon;
-  SubscriptionPackage subscriptionPackage;
-  DateTime startsAt;
-  DateTime expiresAt;
-  Payment payment;
-  bool active;
+  String? id;
+  Salon? salon;
+  SubscriptionPackage? subscriptionPackage;
+  DateTime? startsAt;
+  DateTime? expiresAt;
+  Payment? payment;
+  bool? active;
 
   SalonSubscription({this.id, this.salon, this.subscriptionPackage, this.startsAt, this.expiresAt, this.payment, this.active});
 
@@ -27,20 +28,20 @@ class SalonSubscription extends Model {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
-    if (this.salon != null && this.salon.hasData) {
-      data['e_provider_id'] = this.salon.id;
+    if (this.salon != null && this.salon!.hasData) {
+      data['e_provider_id'] = this.salon?.id;
     }
-    if (this.subscriptionPackage != null && this.subscriptionPackage.hasData) {
-      data['subscription_package_id'] = this.subscriptionPackage.id;
+    if (this.subscriptionPackage != null && this.subscriptionPackage!.hasData) {
+      data['subscription_package_id'] = this.subscriptionPackage?.id;
     }
     if (this.startsAt != null) {
-      data['starts_at'] = startsAt.toUtc().toString();
+      data['starts_at'] = startsAt?.toUtc().toString();
     }
     if (this.expiresAt != null) {
-      data['expires_at'] = expiresAt.toUtc().toString();
+      data['expires_at'] = expiresAt?.toUtc().toString();
     }
     if (this.payment != null) {
-      data['payment'] = this.payment.toJson();
+      data['payment'] = this.payment?.toJson();
     }
     if (this.active != null) {
       data['active'] = active;

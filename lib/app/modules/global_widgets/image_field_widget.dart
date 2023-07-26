@@ -10,14 +10,15 @@ import '../../models/media_model.dart';
 import '../../repositories/upload_repository.dart';
 
 class ImageFieldController extends GetxController {
-  Rx<File> image = Rx<File>(null);
-  String uuid;
+  Rx<File?> image = Rx<File?>(null);
+  String? uuid;
   final uploading = false.obs;
-  UploadRepository _uploadRepository;
+  late UploadRepository _uploadRepository;
 
   ImageFieldController() {
     _uploadRepository = new UploadRepository();
   }
+
 
   @override
   void onInit() {
@@ -31,8 +32,8 @@ class ImageFieldController extends GetxController {
 
   Future pickImage(ImageSource source, String field, ValueChanged<String> uploadCompleted) async {
     ImagePicker imagePicker = ImagePicker();
-    XFile pickedFile = await imagePicker.pickImage(source: source, imageQuality: 80);
-    File imageFile = File(pickedFile.path);
+    XFile? pickedFile = await imagePicker.pickImage(source: source, imageQuality: 80);
+    File imageFile = File(pickedFile!.path);
     print(imageFile);
     if (imageFile != null) {
       try {
@@ -40,7 +41,7 @@ class ImageFieldController extends GetxController {
         await deleteUploaded();
         uuid = await _uploadRepository.image(imageFile, field);
         image.value = imageFile;
-        uploadCompleted(uuid);
+        uploadCompleted(uuid!);
         uploading.value = false;
       } catch (e) {
         uploading.value = false;
@@ -54,10 +55,10 @@ class ImageFieldController extends GetxController {
 
   Future<void> deleteUploaded() async {
     if (uuid != null) {
-      final done = await _uploadRepository.delete(uuid);
+      final done = await _uploadRepository.delete(uuid!);
       if (done) {
         uuid = null;
-        image = Rx<File>(null);
+        image = Rx<File?>(null);
       }
     }
   }
@@ -65,23 +66,23 @@ class ImageFieldController extends GetxController {
 
 class ImageFieldWidget extends StatelessWidget {
   ImageFieldWidget({
-    Key key,
-    @required this.label,
-    @required this.tag,
-    @required this.field,
+    Key ? key,
+    required this.label,
+    required this.tag,
+    required this.field,
     this.placeholder,
     this.buttonText,
-    @required this.uploadCompleted,
+    required this.uploadCompleted,
     this.initialImage,
-    @required this.reset,
+    required this.reset,
   }) : super(key: key);
 
   final String label;
-  final String placeholder;
-  final String buttonText;
+  final String? placeholder;
+  final String? buttonText;
   final String tag;
   final String field;
-  final Media initialImage;
+  final Media? initialImage;
   final ValueChanged<String> uploadCompleted;
   final ValueChanged<String> reset;
 
@@ -117,7 +118,7 @@ class ImageFieldWidget extends StatelessWidget {
               MaterialButton(
                 onPressed: () async {
                   await controller.deleteUploaded();
-                  reset(controller.uuid);
+                  reset(controller.uuid!);
                 },
                 shape: StadiumBorder(),
                 color: Get.theme.focusColor.withOpacity(0.1),
@@ -130,7 +131,7 @@ class ImageFieldWidget extends StatelessWidget {
             ],
           ),
           Obx(() {
-            return buildImage(initialImage, controller.image.value);
+            return buildImage(initialImage!, controller.image.value!);
           })
         ],
       ),

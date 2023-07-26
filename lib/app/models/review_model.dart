@@ -8,11 +8,12 @@ import 'booking_model.dart';
 import 'parents/model.dart';
 
 class Review extends Model {
-  String id;
-  double rate;
-  String review;
-  DateTime createdAt;
-  Booking booking;
+
+  String? id;
+  double? rate;
+  String? review;
+  DateTime? createdAt;
+  Booking? booking;
 
   Review({this.id, this.rate, this.review, this.createdAt});
 
@@ -30,13 +31,13 @@ class Review extends Model {
     data['rate'] = this.rate;
     data['review'] = this.review;
     if (booking != null) {
-      data['booking_id'] = booking.id;
+      data['booking_id'] = booking?.id;
     }
     return data;
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is Review &&

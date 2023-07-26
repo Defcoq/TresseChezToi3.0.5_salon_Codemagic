@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 class BookingRowWidget extends StatelessWidget {
   const BookingRowWidget({
-    Key key,
-    @required this.description,
+    Key? key,
+    required this.description,
     this.value,
     this.valueStyle,
     this.hasDivider,
@@ -14,12 +14,12 @@ class BookingRowWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String description;
-  final int descriptionFlex;
-  final int valueFlex;
-  final String value;
-  final Widget child;
-  final TextStyle valueStyle;
-  final bool hasDivider;
+  final int? descriptionFlex;
+  final int? valueFlex;
+  final String? value;
+  final Widget? child;
+  final TextStyle? valueStyle;
+  final bool? hasDivider;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +38,15 @@ class BookingRowWidget extends StatelessWidget {
                 flex: valueFlex ?? 1,
                 child: child ??
                     Text(
-                      value,
+                      value!,
                       style: valueStyle ?? Get.textTheme.bodyText2,
                       maxLines: 3,
                       textAlign: TextAlign.end,
                     )),
           ],
         ),
-        if (hasDivider != null && hasDivider) Divider(thickness: 1, height: 25),
-        if (hasDivider != null && !hasDivider) SizedBox(height: 6),
+        if (hasDivider != null && hasDivider!) Divider(thickness: 1, height: 25),
+        if (hasDivider != null && !hasDivider!) SizedBox(height: 6),
       ],
     );
   }

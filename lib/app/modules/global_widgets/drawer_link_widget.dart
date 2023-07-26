@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DrawerLinkWidget extends StatelessWidget {
-  final IconData icon;
-  final String text;
+  final IconData? icon;
+  final String? text;
   final ValueChanged<void> onTap;
 
   const DrawerLinkWidget({
-    Key key,
+    Key? key,
     this.icon,
     this.text,
-    this.onTap,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class DrawerLinkWidget extends StatelessWidget {
               color: Get.theme.focusColor.withOpacity(0.2),
             ),
             Expanded(
-              child: Text(text.tr, style: Get.textTheme.bodyText2.merge(TextStyle(fontSize: 14))),
+              child: Text(text!.tr, style: Get.textTheme.bodyText2?.merge(TextStyle(fontSize: 14))),
             ),
           ],
         ),

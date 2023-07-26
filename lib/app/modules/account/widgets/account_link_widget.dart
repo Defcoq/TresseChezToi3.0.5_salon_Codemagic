@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AccountLinkWidget extends StatelessWidget {
-  final Icon icon;
+  final Icon  icon;
   final Widget text;
   final ValueChanged<void> onTap;
 
   const AccountLinkWidget({
-    Key key,
-    this.icon,
-    this.text,
-    this.onTap,
+    Key? key,
+    required this.icon,
+    required this.text,
+    required this.onTap,
   }) : super(key: key);
 
   @override

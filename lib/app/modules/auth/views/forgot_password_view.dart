@@ -20,7 +20,7 @@ class ForgotPasswordView extends GetView<AuthController> {
         appBar: AppBar(
           title: Text(
             "Forgot Password".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(color: context.theme.primaryColor)),
+            style: Get.textTheme.headline6?.merge(TextStyle(color: context.theme.primaryColor)),
           ),
           centerTitle: true,
           backgroundColor: Get.theme.colorScheme.secondary,
@@ -51,13 +51,13 @@ class ForgotPasswordView extends GetView<AuthController> {
                       child: Column(
                         children: [
                           Text(
-                            _settings.appName,
-                            style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 24)),
+                            _settings.appName!,
+                            style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 24)),
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Welcome to the best salon service system!".tr,
-                            style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor)),
+                            style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor)),
                             textAlign: TextAlign.center,
                           ),
                           // Text("Fill the following credentials to login your account", style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
@@ -94,7 +94,7 @@ class ForgotPasswordView extends GetView<AuthController> {
                         hintText: "johndoe@gmail.com".tr,
                         initialValue: controller.currentUser?.value?.email,
                         onSaved: (input) => controller.currentUser.value.email = input,
-                        validator: (input) => !GetUtils.isEmail(input) ? "Should be a valid email".tr : null,
+                        validator: (input) => !GetUtils.isEmail(input!) ? "Should be a valid email".tr : null,
                         iconData: Icons.alternate_email,
                       ),
                       BlockButtonWidget(
@@ -102,7 +102,7 @@ class ForgotPasswordView extends GetView<AuthController> {
                         color: Get.theme.colorScheme.secondary,
                         text: Text(
                           "Send Reset Link".tr,
-                          style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor)),
+                          style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor)),
                         ),
                       ).paddingSymmetric(vertical: 35, horizontal: 20),
                       Row(

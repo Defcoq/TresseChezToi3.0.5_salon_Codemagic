@@ -4,9 +4,9 @@ import '../../common/uuid.dart';
 import 'parents/model.dart';
 
 class Wallet extends Model {
-  String id;
-  String name;
-  double balance;
+  String? id;
+  String? name;
+  double? balance;
 
   Wallet({this.id, this.name, this.balance});
 
@@ -33,12 +33,12 @@ class Wallet extends Model {
 
   String getName() {
     name = name ?? "";
-    return name.substring(name.length - min(name.length, 16), name.length);
+    return name!.substring(name!.length! - min(name!.length!, 16), name!.length!);
   }
 
-  String getId() {
+  String? getId() {
     if (Uuid.isUuid(id)) {
-      return id.substring(0, 3) + ' . . . ' + id.substring(id.length - 5, id.length);
+      return id!.substring(0, 3) + ' . . . ' + id!.substring(id!.length - 5, id!.length);
     } else {
       return id;
     }

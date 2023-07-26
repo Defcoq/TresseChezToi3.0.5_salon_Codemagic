@@ -5,20 +5,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'parents/model.dart';
 
 class Address extends Model {
-  String id;
-  String description;
-  String address;
-  double latitude;
-  double longitude;
-  bool isDefault;
-  String userId;
+
+  String? id;
+  String? description;
+  String? address;
+  double? latitude;
+  double? longitude;
+  bool? isDefault;
+  String? userId;
 
   Address({this.id, this.description, this.address, this.latitude, this.longitude, this.isDefault, this.userId});
 
   Address.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
-    description = stringFromJson(json, 'description');
-    address = stringFromJson(json, 'address');
+    description = stringFromJson(json, 'description').replaceAll('\n', ' ');
+    address = stringFromJson(json, 'address').replaceAll('\n', ' ');
     latitude = doubleFromJson(json, 'latitude', defaultValue: null);
     longitude = doubleFromJson(json, 'longitude', defaultValue: null);
     isDefault = boolFromJson(json, 'default');
@@ -43,21 +44,21 @@ class Address extends Model {
     return latitude == null || longitude == null;
   }
 
-  String get getDescription {
+  String? get getDescription {
     if (hasDescription()) return description;
-    return address.substring(0, min(address.length, 10));
+    return address?.substring(0, min(address!.length, 10));
   }
 
   bool hasDescription() {
-    if (description != null && description.isNotEmpty) return true;
+    if (description != null && description!.isNotEmpty) return true;
     return false;
   }
 
-  LatLng getLatLng() {
+  LatLng? getLatLng() {
     if (this.isUnknown()) {
       return LatLng(38.806103, 52.4964453);
     } else {
-      return LatLng(this.latitude, this.longitude);
+      return LatLng(this.latitude!, this.longitude!);
     }
   }
 }

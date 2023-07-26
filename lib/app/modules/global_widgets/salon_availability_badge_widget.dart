@@ -5,8 +5,8 @@ import '../../models/salon_model.dart';
 
 class SalonAvailabilityBadgeWidget extends StatelessWidget {
   const SalonAvailabilityBadgeWidget({
-    Key key,
-    @required Salon salon,
+    Key? key,
+    required Salon salon,
     bool withImage = false,
   })  : _salon = salon,
         _withImage = withImage,
@@ -22,7 +22,7 @@ class SalonAvailabilityBadgeWidget extends StatelessWidget {
         width: _withImage ? 80 : null,
         child: Text("Closed".tr,
             maxLines: 1,
-            style: Get.textTheme.bodyText2.merge(
+            style: Get.textTheme.bodyText2?.merge(
               TextStyle(color: Colors.grey, height: 1.4, fontSize: 10),
             ),
             softWrap: false,
@@ -38,7 +38,7 @@ class SalonAvailabilityBadgeWidget extends StatelessWidget {
       width: _withImage ? 80 : null,
       child: Text("Open".tr,
           maxLines: 1,
-          style: Get.textTheme.bodyText2.merge(
+          style: Get.textTheme.bodyText2?.merge(
             TextStyle(color: Colors.green, height: 1.4, fontSize: 10),
           ),
           softWrap: false,

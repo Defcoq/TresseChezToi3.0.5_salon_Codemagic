@@ -13,27 +13,28 @@ import '../../../services/settings_service.dart';
 
 class AuthController extends GetxController {
   final Rx<User> currentUser = Get.find<AuthService>().user;
-  GlobalKey<FormState> loginFormKey;
-  GlobalKey<FormState> registerFormKey;
-  GlobalKey<FormState> forgotPasswordFormKey;
+
+  GlobalKey<FormState>  loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState>  registerFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState>  forgotPasswordFormKey = GlobalKey<FormState>();
   final hidePassword = true.obs;
   final loading = false.obs;
   final smsSent = ''.obs;
-  UserRepository _userRepository;
+  late UserRepository _userRepository;
 
   AuthController() {
     _userRepository = UserRepository();
   }
 
   void login() async {
-    Get.focusScope.unfocus();
-    if (loginFormKey.currentState.validate()) {
-      loginFormKey.currentState.save();
+    Get.focusScope!.unfocus();
+    if (loginFormKey.currentState!.validate()) {
+      loginFormKey.currentState!.save();
       loading.value = true;
       try {
         await Get.find<FireBaseMessagingService>().setDeviceToken();
         currentUser.value = await _userRepository.login(currentUser.value);
-        await _userRepository.signInWithEmailAndPassword(currentUser.value.email, currentUser.value.apiToken);
+        await _userRepository.signInWithEmailAndPassword(currentUser.value.email!, currentUser.value.apiToken!);
         loading.value = false;
         await Get.toNamed(Routes.ROOT, arguments: 0);
       } catch (e) {
@@ -45,9 +46,9 @@ class AuthController extends GetxController {
   }
 
   void register() async {
-    Get.focusScope.unfocus();
-    if (registerFormKey.currentState.validate()) {
-      registerFormKey.currentState.save();
+    Get.focusScope!.unfocus();
+    if (registerFormKey.currentState!.validate()) {
+      registerFormKey.currentState!.save();
       loading.value = true;
       try {
        /* await _userRepository.sendCodeToPhone();
@@ -55,14 +56,14 @@ class AuthController extends GetxController {
         await Get.toNamed(Routes.PHONE_VERIFICATION);*/
 
         //inizio
-        if (Get.find<SettingsService>().setting.value.enableOtp) {
+        if (Get.find<SettingsService>().setting.value.enableOtp!) {
           await _userRepository.sendCodeToPhone();
           loading.value = false;
           await Get.toNamed(Routes.PHONE_VERIFICATION);
         } else {
           await Get.find<FireBaseMessagingService>().setDeviceToken();
           currentUser.value = await _userRepository.register(currentUser.value);
-          await _userRepository.signUpWithEmailAndPassword(currentUser.value.email, currentUser.value.apiToken);
+          await _userRepository.signUpWithEmailAndPassword(currentUser.value.email!, currentUser.value.apiToken!);
           await Get.find<AuthService>().removeCurrentUser();
           loading.value = false;
           await Get.toNamed(Routes.LOGIN);
@@ -82,7 +83,7 @@ class AuthController extends GetxController {
       await _userRepository.verifyPhone(smsSent.value);
       await Get.find<FireBaseMessagingService>().setDeviceToken();
       currentUser.value = await _userRepository.register(currentUser.value);
-      await _userRepository.signUpWithEmailAndPassword(currentUser.value.email, currentUser.value.apiToken);
+      await _userRepository.signUpWithEmailAndPassword(currentUser.value.email!, currentUser.value.apiToken!);
       await Get.find<AuthService>().removeCurrentUser();
       loading.value = false;
       await Get.toNamed(Routes.LOGIN);
@@ -100,14 +101,14 @@ class AuthController extends GetxController {
   }
 
   void sendResetLink() async {
-    Get.focusScope.unfocus();
-    if (forgotPasswordFormKey.currentState.validate()) {
-      forgotPasswordFormKey.currentState.save();
+    Get.focusScope!.unfocus();
+    if (forgotPasswordFormKey.currentState!.validate()) {
+      forgotPasswordFormKey.currentState!.save();
       loading.value = true;
       try {
         await _userRepository.sendResetLinkEmail(currentUser.value);
         loading.value = false;
-        Get.showSnackbar(Ui.SuccessSnackBar(message: "The Password reset link has been sent to your email: ".tr + currentUser.value.email));
+        Get.showSnackbar(Ui.SuccessSnackBar(message: "The Password reset link has been sent to your email: ".tr + currentUser.value.email!));
         Timer(Duration(seconds: 5), () {
           Get.offAndToNamed(Routes.LOGIN);
         });

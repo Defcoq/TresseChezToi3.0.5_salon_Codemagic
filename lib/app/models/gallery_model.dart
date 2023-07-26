@@ -8,9 +8,9 @@ import 'media_model.dart';
 import 'parents/model.dart';
 
 class Gallery extends Model {
-  String id;
-  Media image;
-  String description;
+  String? id;
+  Media? image;
+  String? description;
 
   Gallery({this.id, this.image, this.description});
 

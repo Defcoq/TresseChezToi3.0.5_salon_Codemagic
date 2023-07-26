@@ -1,10 +1,10 @@
 import 'parents/model.dart';
 
 class CustomPage extends Model {
-  String id;
-  String title;
-  String content;
-  DateTime updatedAt;
+  String? id;
+  String? title;
+  String? content;
+  DateTime? updatedAt;
 
   CustomPage({this.id, this.title, this.content, this.updatedAt});
 
@@ -25,7 +25,7 @@ class CustomPage extends Model {
   }
 
   @override
-  bool operator ==(Object other) =>
+  bool operator ==(Object? other) =>
       identical(this, other) ||
       super == other &&
           other is CustomPage &&

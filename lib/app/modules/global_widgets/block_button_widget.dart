@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BlockButtonWidget extends StatelessWidget {
-  const BlockButtonWidget({Key key, @required this.color, @required this.text, @required this.onPressed}) : super(key: key);
+  const BlockButtonWidget({Key? key, required this.color, required this.text, required this.onPressed}) : super(key: key);
 
   final Color color;
   final Widget text;
-  final VoidCallback onPressed;
-
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(

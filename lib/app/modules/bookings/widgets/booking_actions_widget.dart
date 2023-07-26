@@ -7,7 +7,7 @@ import '../controllers/booking_controller.dart';
 
 class BookingActionsWidget extends GetView<BookingController> {
   const BookingActionsWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class BookingActionsWidget extends GetView<BookingController> {
           ],
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          if (_booking.value.status.order == Get.find<GlobalService>().global.value.received)
+          if (_booking.value.status!.order == Get.find<GlobalService>().global.value.received)
             Expanded(
               child: BlockButtonWidget(
                   text: Stack(
@@ -38,7 +38,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                         child: Text(
                           "Accept".tr,
                           textAlign: TextAlign.center,
-                          style: Get.textTheme.headline6.merge(
+                          style: Get.textTheme.headline6?.merge(
                             TextStyle(color: Get.theme.primaryColor),
                           ),
                         ),
@@ -51,7 +51,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                     controller.acceptBookingService();
                   }),
             ),
-          if (_booking.value.status.order == Get.find<GlobalService>().global.value.accepted)
+          if (_booking.value.status!.order == Get.find<GlobalService>().global.value.accepted)
             Expanded(
                 child: BlockButtonWidget(
                     text: Stack(
@@ -62,7 +62,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                           child: Text(
                             "On the Way".tr,
                             textAlign: TextAlign.center,
-                            style: Get.textTheme.headline6.merge(
+                            style: Get.textTheme.headline6?.merge(
                               TextStyle(color: Get.theme.primaryColor),
                             ),
                           ),
@@ -74,7 +74,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                     onPressed: () {
                       controller.onTheWayBookingService();
                     })),
-          if (_booking.value.status.order == Get.find<GlobalService>().global.value.onTheWay)
+          if (_booking.value.status?.order == Get.find<GlobalService>().global.value.onTheWay)
             Expanded(
               child: BlockButtonWidget(
                   text: Stack(
@@ -85,7 +85,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                         child: Text(
                           "Ready".tr,
                           textAlign: TextAlign.center,
-                          style: Get.textTheme.headline6.merge(
+                          style: Get.textTheme.headline6?.merge(
                             TextStyle(color: Get.theme.primaryColor),
                           ),
                         ),
@@ -98,7 +98,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                     controller.readyBookingService();
                   }),
             ),
-          if (_booking.value.status.order == Get.find<GlobalService>().global.value.ready || _booking.value.status.order == Get.find<GlobalService>().global.value.inProgress)
+          if (_booking.value.status!.order == Get.find<GlobalService>().global.value.ready || _booking.value.status!.order == Get.find<GlobalService>().global.value.inProgress)
             Expanded(
               child: Text(
                 "Waiting for Confirmation from Customer".tr,
@@ -106,7 +106,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                 style: Get.textTheme.bodyText1,
               ),
             ),
-          if (_booking.value.status.order >= Get.find<GlobalService>().global.value.done && _booking.value.payment == null)
+          if (_booking.value.status!.order! >= Get.find<GlobalService>().global.value.done! && _booking.value.payment == null)
             Expanded(
               child: Text(
                 "Waiting for Payment".tr,
@@ -114,7 +114,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                 style: Get.textTheme.bodyText1,
               ),
             ),
-          if (_booking.value.cancel)
+          if (_booking.value.cancel!)
             Expanded(
               child: Text(
                 "Booking Canceled".tr,
@@ -123,7 +123,7 @@ class BookingActionsWidget extends GetView<BookingController> {
               ),
             ),
           SizedBox(width: 5),
-          if (_booking.value.payment != null && (_booking.value.payment.paymentStatus?.id ?? '') == '1' && (_booking.value.payment.paymentMethod?.route ?? '') == '/Cash')
+          if (_booking.value.payment != null && (_booking.value.payment!.paymentStatus?.id ?? '') == '1' && (_booking.value.payment!.paymentMethod?.route ?? '') == '/Cash')
             Expanded(
               child: BlockButtonWidget(
                   text: Stack(
@@ -134,7 +134,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                         child: Text(
                           "Paid".tr,
                           textAlign: TextAlign.center,
-                          style: Get.textTheme.headline6.merge(
+                          style: Get.textTheme.headline6?.merge(
                             TextStyle(color: Get.theme.primaryColor),
                           ),
                         ),
@@ -148,7 +148,7 @@ class BookingActionsWidget extends GetView<BookingController> {
                   }),
             ),
           SizedBox(width: 5),
-          if (!_booking.value.cancel && _booking.value.status.order < Get.find<GlobalService>().global.value.onTheWay)
+          if (!_booking.value.cancel! && _booking.value.status!.order! < Get.find<GlobalService>().global.value.onTheWay!)
             MaterialButton(
               elevation: 0,
               onPressed: () {

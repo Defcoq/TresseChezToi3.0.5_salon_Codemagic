@@ -1,16 +1,17 @@
 import 'parents/model.dart';
 
 class Global extends Model {
-  String mockBaseUrl;
-  String laravelBaseUrl;
-  String apiPath;
-  int received;
-  int accepted;
-  int onTheWay;
-  int ready;
-  int inProgress;
-  int done;
-  int failed;
+
+  String? mockBaseUrl;
+  String? laravelBaseUrl;
+  String? apiPath;
+  int? received;
+  int? accepted;
+  int? onTheWay;
+  int? ready;
+  int? inProgress;
+  int? done;
+  int? failed;
 
   Global({this.mockBaseUrl, this.laravelBaseUrl, this.apiPath});
 

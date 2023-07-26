@@ -3,11 +3,13 @@ import 'payment_method_model.dart';
 import 'payment_status_model.dart';
 
 class Payment extends Model {
-  String id;
-  String description;
-  double amount;
-  PaymentMethod paymentMethod;
-  PaymentStatus paymentStatus;
+
+
+  String? id;
+  String? description;
+  double? amount;
+  PaymentMethod? paymentMethod;
+  PaymentStatus? paymentStatus;
 
   Payment({this.id, this.description, this.amount, this.paymentMethod, this.paymentStatus});
 
@@ -32,10 +34,10 @@ class Payment extends Model {
       data['amount'] = this.amount;
     }
     if (paymentMethod != null) {
-      data['payment_method_id'] = this.paymentMethod.id;
+      data['payment_method_id'] = this.paymentMethod?.id;
     }
     if (paymentStatus != null) {
-      data['payment_status_id'] = this.paymentStatus.id;
+      data['payment_status_id'] = this.paymentStatus?.id;
     }
     return data;
   }

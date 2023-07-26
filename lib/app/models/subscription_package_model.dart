@@ -1,12 +1,12 @@
 import 'parents/model.dart';
 
 class SubscriptionPackage extends Model {
-  String id;
-  String name;
-  String description;
-  double price;
-  double discountPrice;
-  int durationInDays;
+  String? id;
+  String? name;
+  String? description;
+  double? price;
+  double? discountPrice;
+  int? durationInDays;
 
   SubscriptionPackage({this.id, this.name, this.description, this.price, this.discountPrice, this.durationInDays});
 
@@ -37,13 +37,13 @@ class SubscriptionPackage extends Model {
   * otherwise it return the discount price instead
   * */
   double get getPrice {
-    return (discountPrice ?? 0) > 0 ? discountPrice : price;
+    return (discountPrice! ?? 0) > 0 ? discountPrice! : price!;
   }
 
   /*
   * Get discount price
   * */
   double get getOldPrice {
-    return (discountPrice ?? 0) > 0 ? price : 0;
+    return (discountPrice! ?? 0) > 0 ? price! : 0;
   }
 }
