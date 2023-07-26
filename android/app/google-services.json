@@ -1,0 +1,841 @@
+{
+  "project_info": {
+    "project_number": "791673509409",
+    "project_id": "montechnicien-7e50f",
+    "storage_bucket": "montechnicien-7e50f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:c95c1498cc2942b13a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.kayzaka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-afiqonbuq644asbmvfdjkr3j5npagni2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.kayzaka",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-kb7cicjn4h1hvr3sq61ham7933dk9ih5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.kayzaka",
+            "certificate_hash": "bd17f1f60ab92e3a67e6e9228009d05cdf2b7480"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:9807168a89f0ba883a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.kayzaka_livreur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-rfonm2mminm8eh6r23v7ddql7spf3bme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.kayzaka_livreur",
+            "certificate_hash": "bd17f1f60ab92e3a67e6e9228009d05cdf2b7480"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:ecc76ffa927fa1203a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.kayzakaboutiquier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-k62mddmne6nt06tlc36pguijbqq43agg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.kayzakaboutiquier",
+            "certificate_hash": "bd17f1f60ab92e3a67e6e9228009d05cdf2b7480"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:11e4b98d092426473a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.montechnicien"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-1k383p2s3iih63tl1penuch88gvhseqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicien",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-36fm1ff458junmqfesh5rkasmbspn4kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicien",
+            "certificate_hash": "8d851907bf225fb348e5f80756e6feec19984aa5"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:e64bab538c27ab903a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.montechnicienbenin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-3qth6tie4fu6882ctmaob1tkjqfmrflo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicienbenin",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-gl03eofuoe05dg5if7bfdh5llqtoop6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicienbenin",
+            "certificate_hash": "37609f6ec5cf96c8fe3d4402889f996fd052b946"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:e99143ae6763ff443a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.montechniciencoteivoir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-5ge2ebfnnbls7gc53dqjtugm0cih11nf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechniciencoteivoir",
+            "certificate_hash": "f0937e71de072c35a5913c150827f11efcf0b9fe"
+          }
+        },
+        {
+          "client_id": "791673509409-d2d5krvuv1fnt60rpvpqs0ccmnnqomrq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechniciencoteivoir",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:5daa575e7380517d3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.montechnicienfaso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-2efbbuje7v664l4idk909o04u1eoiqnb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicienfaso",
+            "certificate_hash": "36c4bd546a5c98808c4995f40da74eb11153b828"
+          }
+        },
+        {
+          "client_id": "791673509409-k33s25sl7udpvo98sme67h072tlq6r2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicienfaso",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:1ad91cc267d14a263a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.montechnicientogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-27m6rekfnfk24dql2g85985i26bsod3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.montechnicientogo",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:a24320aa68e6f64c3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.rekouclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-prk7ldarvupv6f9leentrce7lk2vgqne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.rekouclient",
+            "certificate_hash": "40dfa995e913d1280a9678730eb8945765ee0c12"
+          }
+        },
+        {
+          "client_id": "791673509409-vdmte5864pfs4matdmsu4b591s57u4bb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.rekouclient",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:898b93b6a384c4483a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.rekoufournisseur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-1i0s190g97mn9t6t005rpuidkabqvt02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.rekoufournisseur",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-88irhapfnt1lfdqolhlgf88o95edp7ds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.rekoufournisseur",
+            "certificate_hash": "bea9e889fa57912c93cf765481817f1783edfe4a"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:794016a0a6d841943a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.ronelizasalonclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-15dherqv8to32tcd8e5foddr719mc171.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.ronelizasalonclient",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-p4r5sith8hrnd1osivuhob0984b3ovef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.ronelizasalonclient",
+            "certificate_hash": "9b5ad6e8758e46c215d00816d18ba8eddd05faad"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:e8b9f2762d4f99fb3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.ronelizasaloncoiffeur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-jjjr0r7vttie2ucm2sdg58eje06ki31r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.ronelizasaloncoiffeur",
+            "certificate_hash": "9b5ad6e8758e46c215d00816d18ba8eddd05faad"
+          }
+        },
+        {
+          "client_id": "791673509409-tppiv1b4kjio1a2opkgbv69h3125abrp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.ronelizasaloncoiffeur",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:3580a4ff5e5518aa3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.technicien"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-4t84qbal9g4k4vba5629gggthrrivu48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicien",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-ddqbg9plutr0dvutus5e59fd8ml64teh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicien",
+            "certificate_hash": "42f78317c4bc7fac422b8848aa73df205e62f200"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:0023bc40682983c13a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.technicienbenin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-d4ne99c606rem1ht3taroib1t6eenvpu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicienbenin",
+            "certificate_hash": "9e983d35048a38569ef9a9e1340511f0102c2acc"
+          }
+        },
+        {
+          "client_id": "791673509409-oubmfqnfirp4d4tgv3247u7tpl0emr3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicienbenin",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:59711d8922e4bfdb3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.techniciencoteivoir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-0uudstfso90so16bgm0r9mom2dt2ldlu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.techniciencoteivoir",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2f8nrmr3gvukfuvg4pj2se9g4tjae9a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.techniciencoteivoir",
+            "certificate_hash": "bae23e2de20d1ba3c538523b04b9aa3e8bc2479d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:ed36efa954da62a43a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.technicienfaso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-2pe6eiannsr1h3mgkefjgiafrbpga896.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicienfaso",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-8f0qmlsdfl0p106c5ulp4hrb6dlo06pu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicienfaso",
+            "certificate_hash": "13f2920f562f8da194c8f1279d3925756587d58c"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:0a8226706d0ac56d3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.technicientogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-evto9qpmo11sk4jb1btqo7b6s1vgolsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.technicientogo",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:2da4868e6ef3734c3a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.treccineacasatuasalone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-l2ojn7kk83nv32ep7slkl9ccrhm27fsp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.treccineacasatuasalone",
+            "certificate_hash": "9b5ad6e8758e46c215d00816d18ba8eddd05faad"
+          }
+        },
+        {
+          "client_id": "791673509409-sftr2jabn63tm8m86gb5m2akri9j9f5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.treccineacasatuasalone",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791673509409:android:77d4ef3916d80aa53a3560",
+        "android_client_info": {
+          "package_name": "com.itinnovdesign.treccineacasatuautente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791673509409-2g4gc1l69506firu29mgtj5jl4d3p30r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.treccineacasatuautente",
+            "certificate_hash": "03ef700f5142837d8e66af3fc48a0ed5a3e5162d"
+          }
+        },
+        {
+          "client_id": "791673509409-7u03cbn2ddn84aqmn1j8v4fmau228u7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.treccineacasatuautente",
+            "certificate_hash": "9b5ad6e8758e46c215d00816d18ba8eddd05faad"
+          }
+        },
+        {
+          "client_id": "791673509409-h27p31nv29hfh39uf64bjf1fcdndl9u8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itinnovdesign.treccineacasatuautente",
+            "certificate_hash": "c9bbdf095ed3bd34f34be9036941683336f1f313"
+          }
+        },
+        {
+          "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS1IDmUeKG2e8Z17yDJcJQ2D8wN1q2yXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791673509409-2ip7lqlhk34t44aljg4s5uhm3bt96egv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
