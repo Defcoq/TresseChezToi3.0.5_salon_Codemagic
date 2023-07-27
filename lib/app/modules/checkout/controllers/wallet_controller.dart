@@ -11,7 +11,7 @@ class WalletController extends GetxController {
   final eProviderSubscription = new SalonSubscription().obs;
   final wallet = new Wallet().obs;
 
-  SubscriptionRepository _subscriptionRepository;
+  late SubscriptionRepository _subscriptionRepository;
 
   WalletController() {
     _subscriptionRepository = new SubscriptionRepository();

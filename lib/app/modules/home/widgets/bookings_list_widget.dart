@@ -6,7 +6,7 @@ import '../controllers/home_controller.dart';
 import 'bookings_list_item_widget.dart';
 
 class BookingsListWidget extends GetView<HomeController> {
-  BookingsListWidget({Key key}) : super(key: key);
+  BookingsListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

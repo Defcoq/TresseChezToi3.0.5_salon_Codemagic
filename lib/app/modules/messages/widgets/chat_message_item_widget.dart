@@ -9,20 +9,20 @@ import '../../../routes/app_routes.dart';
 import '../../../services/auth_service.dart';
 
 class ChatMessageItem extends StatelessWidget {
-  final Chat chat;
+  final Chat? chat;
 
   ChatMessageItem({this.chat});
 
   @override
   Widget build(BuildContext context) {
-    if (Get.find<AuthService>().user.value.id == this.chat.userId) {
-      if (chat.text.isURL) {
+    if (Get.find<AuthService>().user.value.id == this.chat!.userId!) {
+      if (chat!.text!.isURL!) {
         return getSentMessageImageLayout(context);
       } else {
         return getSentMessageTextLayout(context);
       }
     } else {
-      if (chat.text.isURL) {
+      if (chat!.text!.isURL) {
         return getReceivedMessageImageLayout(context);
       } else {
         return getReceivedMessageTextLayout(context);
@@ -51,10 +51,10 @@ class ChatMessageItem extends StatelessWidget {
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      new Text(this.chat.user.name, style: Get.textTheme.bodyText2.merge(TextStyle(fontWeight: FontWeight.w600))),
+                      new Text(this.chat!.user!.name!, style: Get.textTheme.bodyText2?.merge(TextStyle(fontWeight: FontWeight.w600))),
                       new Container(
                         margin: const EdgeInsets.only(top: 5.0),
-                        child: new Text(chat.text, style: Get.textTheme.bodyText1),
+                        child: new Text(chat!.text!, style: Get.textTheme.bodyText1),
                       ),
                     ],
                   ),
@@ -68,7 +68,7 @@ class ChatMessageItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      imageUrl: this.chat.user.avatar.thumb,
+                      imageUrl: this.chat!.user!.avatar!.thumb!,
                       placeholder: (context, url) => Image.asset(
                         'assets/img/loading.gif',
                         fit: BoxFit.cover,
@@ -84,7 +84,7 @@ class ChatMessageItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat.time)),
+              DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat!.time!)),
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Get.textTheme.caption,
@@ -116,14 +116,14 @@ class ChatMessageItem extends StatelessWidget {
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      new Text(this.chat.user.name, style: Get.textTheme.bodyText1.merge(TextStyle(fontWeight: FontWeight.w600))),
+                      new Text(this.chat!.user!.name!, style: Get.textTheme.bodyText1?.merge(TextStyle(fontWeight: FontWeight.w600))),
                       new Container(
                         margin: const EdgeInsets.only(top: 5.0),
                         child: InkWell(
                           onTap: () {
                             Get.toNamed(Routes.GALLERY, arguments: {
-                              'media': [new Media(id: this.chat.text, url: this.chat.text)],
-                              'current': new Media(id: this.chat.text, url: this.chat.text),
+                              'media': [new Media(id: this.chat!.text, url: this.chat!.text)],
+                              'current': new Media(id: this.chat!.text, url: this.chat!.text),
                               'heroTag': 'chat_image'
                             });
                           },
@@ -133,7 +133,7 @@ class ChatMessageItem extends StatelessWidget {
                               width: double.infinity,
                               fit: BoxFit.cover,
                               height: 200,
-                              imageUrl: this.chat.text,
+                              imageUrl: this.chat!.text!,
                               placeholder: (context, url) => Image.asset(
                                 'assets/img/loading.gif',
                                 fit: BoxFit.cover,
@@ -156,7 +156,7 @@ class ChatMessageItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      imageUrl: this.chat.user.avatar.thumb,
+                      imageUrl: this.chat!.user!.avatar!.thumb!,
                       placeholder: (context, url) => Image.asset(
                         'assets/img/loading.gif',
                         fit: BoxFit.cover,
@@ -172,7 +172,7 @@ class ChatMessageItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat.time)),
+              DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat!.time!)),
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Get.textTheme.caption,
@@ -209,7 +209,7 @@ class ChatMessageItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      imageUrl: this.chat.user.avatar.thumb,
+                      imageUrl: this.chat!.user!.avatar!.thumb!,
                       placeholder: (context, url) => Image.asset(
                         'assets/img/loading.gif',
                         fit: BoxFit.cover,
@@ -223,12 +223,12 @@ class ChatMessageItem extends StatelessWidget {
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      new Text(this.chat.user.name, style: Get.textTheme.bodyText2.merge(TextStyle(fontWeight: FontWeight.w600, color: Get.theme.primaryColor))),
+                      new Text(this.chat!.user!.name!, style: Get.textTheme.bodyText2?.merge(TextStyle(fontWeight: FontWeight.w600, color: Get.theme.primaryColor))),
                       new Container(
                         margin: const EdgeInsets.only(top: 5.0),
                         child: new Text(
-                          chat.text,
-                          style: Get.textTheme.bodyText1.merge(TextStyle(color: Get.theme.primaryColor)),
+                          chat!.text!,
+                          style: Get.textTheme.bodyText1?.merge(TextStyle(color: Get.theme.primaryColor)),
                         ),
                       ),
                     ],
@@ -240,7 +240,7 @@ class ChatMessageItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              DateFormat('HH:mm | d, MMMM y', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat.time)),
+              DateFormat('HH:mm | d, MMMM y', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat!.time!)),
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Get.textTheme.caption,
@@ -277,7 +277,7 @@ class ChatMessageItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      imageUrl: this.chat.user.avatar.thumb,
+                      imageUrl: this.chat!.user!.avatar!.thumb!,
                       placeholder: (context, url) => Image.asset(
                         'assets/img/loading.gif',
                         fit: BoxFit.cover,
@@ -291,14 +291,14 @@ class ChatMessageItem extends StatelessWidget {
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      new Text(this.chat.user.name, style: Get.textTheme.bodyText2.merge(TextStyle(fontWeight: FontWeight.w600, color: Get.theme.primaryColor))),
+                      new Text(this.chat!.user!.name!, style: Get.textTheme.bodyText2?.merge(TextStyle(fontWeight: FontWeight.w600, color: Get.theme.primaryColor))),
                       new Container(
                         margin: const EdgeInsets.only(top: 5.0),
                         child: InkWell(
                           onTap: () {
                             Get.toNamed(Routes.GALLERY, arguments: {
-                              'media': [new Media(id: this.chat.text, url: this.chat.text)],
-                              'current': new Media(id: this.chat.text, url: this.chat.text),
+                              'media': [new Media(id: this.chat!.text!, url: this.chat!.text!)],
+                              'current': new Media(id: this.chat!.text!, url: this.chat!.text!),
                               'heroTag': 'chat_image'
                             });
                           },
@@ -308,7 +308,7 @@ class ChatMessageItem extends StatelessWidget {
                               width: double.infinity,
                               fit: BoxFit.cover,
                               height: 200,
-                              imageUrl: this.chat.text,
+                              imageUrl: this.chat!.text!,
                               placeholder: (context, url) => Image.asset(
                                 'assets/img/loading.gif',
                                 fit: BoxFit.cover,
@@ -328,7 +328,7 @@ class ChatMessageItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              DateFormat('HH:mm | d, MMMM y', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat.time)),
+              DateFormat('HH:mm | d, MMMM y', Get.locale.toString()).format(DateTime.fromMillisecondsSinceEpoch(this.chat!.time!)),
               overflow: TextOverflow.fade,
               softWrap: false,
               style: Get.textTheme.caption,

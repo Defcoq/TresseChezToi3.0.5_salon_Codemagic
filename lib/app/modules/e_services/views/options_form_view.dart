@@ -68,7 +68,7 @@ class OptionsFormView extends GetView<OptionsFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -84,7 +84,7 @@ class OptionsFormView extends GetView<OptionsFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary.withOpacity(0.2),
-                  child: Text("Save & Add Other".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
+                  child: Text("Save & Add Other".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -127,26 +127,26 @@ class OptionsFormView extends GetView<OptionsFormController> {
                     initialImage: controller.option.value.image,
                     uploadCompleted: (uuid) {
                       controller.option.update((val) {
-                        val.image = new Media(id: uuid);
+                        val?.image = new Media(id: uuid);
                       });
                     },
                     reset: (uuid) {
                       controller.option.update((val) {
-                        val.image = null;
+                        val?.image = null;
                       });
                     },
                   );
                 }),
                 TextFieldWidget(
                   onSaved: (input) => controller.option.value.name = input,
-                  validator: (input) => input.length < 1 ? "Field is required".tr : null,
+                  validator: (input) => input!.length < 1 ? "Field is required".tr : null,
                   initialValue: controller.option.value.name,
                   hintText: "Large Size".tr,
                   labelText: "Name".tr,
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.option.value.description = input,
-                  validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                  validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                   keyboardType: TextInputType.multiline,
                   initialValue: controller.option.value.description,
                   hintText: "Description for option".tr,
@@ -192,7 +192,7 @@ class OptionsFormView extends GetView<OptionsFormController> {
                                 },
                               );
                               controller.option.update((val) {
-                                val.optionGroupId = selectedValue.id;
+                                val?.optionGroupId = selectedValue!.id;
                               });
                             },
                             shape: StadiumBorder(),
@@ -211,19 +211,19 @@ class OptionsFormView extends GetView<OptionsFormController> {
                           orElse: () => controller.optionGroups.isNotEmpty ? controller.optionGroups.first : new OptionGroup(),
                         );
                         print(selectedOptionGroup);
-                        return buildOptionGroup(selectedOptionGroup.name);
+                        return buildOptionGroup(selectedOptionGroup.name!);
                       })
                     ],
                   ),
                 ),
                 TextFieldWidget(
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  onSaved: (input) => controller.option.value.price = (double.tryParse(input) ?? 0),
-                  validator: (input) => (double.tryParse(input) ?? 0) <= 0 ? "Should be number more than 0".tr : null,
+                  onSaved: (input) => controller.option.value.price = (double.tryParse(input!) ?? 0),
+                  validator: (input) => (double.tryParse(input!) ?? 0) <= 0 ? "Should be number more than 0".tr : null,
                   initialValue: controller.option.value.price?.toString(),
                   hintText: "23.00".tr,
                   labelText: "Price".tr,
-                  suffix: Text(Get.find<SettingsService>().setting.value.defaultCurrency),
+                  suffix: Text(Get.find<SettingsService>().setting.value.defaultCurrency!),
                 ),
               ],
             ),

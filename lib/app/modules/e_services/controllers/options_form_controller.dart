@@ -15,7 +15,7 @@ class OptionsFormController extends GetxController {
   final option = Option().obs;
   final optionGroups = <OptionGroup>[].obs;
   GlobalKey<FormState> optionForm = new GlobalKey<FormState>();
-  EServiceRepository _eServiceRepository;
+  late EServiceRepository _eServiceRepository;
 
   OptionsFormController() {
     _eServiceRepository = new EServiceRepository();
@@ -41,7 +41,7 @@ class OptionsFormController extends GetxController {
     }
   }
 
-  void _initOption({Map<String, dynamic> arguments}) {
+  void _initOption({Map<String, dynamic>? arguments}) {
     if (arguments != null) {
       option.value = (arguments['option'] as Option) ?? Option();
     } else {
@@ -52,7 +52,7 @@ class OptionsFormController extends GetxController {
 
   void _initOptionGroup() {
     option.update((val) {
-      val.optionGroupId = optionGroups
+      val?.optionGroupId = optionGroups
           .firstWhere(
             (element) => element.id == option.value.optionGroupId,
             orElse: () => optionGroups.isNotEmpty ? optionGroups.first : new OptionGroup(),
@@ -68,7 +68,7 @@ class OptionsFormController extends GetxController {
 
   List<SelectDialogItem<OptionGroup>> getSelectOptionGroupsItems() {
     return optionGroups.map((element) {
-      return SelectDialogItem(element, element.name);
+      return SelectDialogItem(element, element.name!);
     }).toList();
   }
 
@@ -89,10 +89,10 @@ class OptionsFormController extends GetxController {
   }
 
   void createOptionForm({bool addOther = false}) async {
-    Get.focusScope.unfocus();
-    if (optionForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (optionForm.currentState!.validate()) {
       try {
-        optionForm.currentState.save();
+        optionForm.currentState!.save();
         await _eServiceRepository.createOption(option.value);
         if (addOther) {
           _resetOptionForm();
@@ -112,14 +112,14 @@ class OptionsFormController extends GetxController {
 
     _initOptionGroup();
     Get.find<ImageFieldController>(tag: optionForm.hashCode.toString()).reset();
-    optionForm.currentState.reset();
+    optionForm.currentState!.reset();
   }
 
   void updateOptionForm() async {
-    Get.focusScope.unfocus();
-    if (optionForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (optionForm.currentState!.validate()) {
       try {
-        optionForm.currentState.save();
+        optionForm.currentState!.save();
         await _eServiceRepository.updateOption(option.value);
         Get.offAndToNamed(Routes.E_SERVICE, arguments: {'eService': eService.value, 'heroTag': 'option_update_form'});
       } catch (e) {
@@ -132,7 +132,7 @@ class OptionsFormController extends GetxController {
 
   void deleteOption(Option option) async {
     try {
-      await _eServiceRepository.deleteOption(option.id);
+      await _eServiceRepository.deleteOption(option!.id!);
       Get.offAndToNamed(Routes.E_SERVICE, arguments: {'eService': eService.value, 'heroTag': 'option_remove_form'});
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));

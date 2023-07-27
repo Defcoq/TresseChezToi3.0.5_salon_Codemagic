@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 
 class ThemeModeController extends GetxController {
   final selectedThemeMode = ThemeMode.light.obs;
-  GetStorage _box;
+  GetStorage? _box;
 
   ThemeModeController() {
     _box = new GetStorage();
@@ -18,7 +18,7 @@ class ThemeModeController extends GetxController {
   }
 
   void initThemeMode() {
-    String _themeMode = _box.read<String>('theme_mode');
+    String _themeMode = _box!.read<String>('theme_mode')!;
     switch (_themeMode) {
       case 'ThemeMode.light':
         selectedThemeMode.value = ThemeMode.light;
@@ -34,8 +34,8 @@ class ThemeModeController extends GetxController {
     }
   }
 
-  void changeThemeMode(ThemeMode themeMode) {
-    Get.changeThemeMode(themeMode);
+  void changeThemeMode(ThemeMode? themeMode) {
+    Get.changeThemeMode(themeMode!);
     selectedThemeMode.value = themeMode;
     if (themeMode == ThemeMode.dark) {
       //Get.rootController.setTheme(Get.find<SettingsService>().getDarkTheme());
@@ -48,7 +48,7 @@ class ThemeModeController extends GetxController {
         SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: Colors.white),
       );
     }
-    _box.write('theme_mode', themeMode.toString());
+    _box!.write('theme_mode', themeMode.toString());
     Get.rootController.refresh();
   }
 }

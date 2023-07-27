@@ -79,7 +79,7 @@ class SalonFormView extends GetView<SalonFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                 ),
               ),
@@ -92,7 +92,7 @@ class SalonFormView extends GetView<SalonFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary.withOpacity(0.2),
-                  child: Text("Save & Add Options".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
+                  child: Text("Save & Add Options".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
                   elevation: 0,
                 ),
             ],
@@ -132,27 +132,27 @@ class SalonFormView extends GetView<SalonFormController> {
                     initialImages: controller.salon.value.images,
                     uploadCompleted: (uuid) {
                       controller.salon.update((val) {
-                        val.images = val.images ?? [];
-                        val.images.add(new Media(id: uuid));
+                        val?.images = val.images ?? [];
+                        val?.images?.add(new Media(id: uuid));
                       });
                     },
                     reset: (uuids) {
                       controller.salon.update((val) {
-                        val.images.clear();
+                        val?.images?.clear();
                       });
                     },
                   );
                 }),
                 TextFieldWidget(
                   onSaved: (input) => controller.salon.value.name = input,
-                  validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                  validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                   initialValue: controller.salon.value.name,
                   hintText: "Post Party Cleaning".tr,
                   labelText: "Name".tr,
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.salon.value.description = input,
-                  validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                  validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                   keyboardType: TextInputType.multiline,
                   initialValue: controller.salon.value.description,
                   hintText: "Description for Post Party Cleaning".tr,
@@ -201,7 +201,7 @@ class SalonFormView extends GetView<SalonFormController> {
                                     },
                                   );
                                   controller.salon.update((val) {
-                                    val.address = selectedValue;
+                                    val?.address = selectedValue;
                                   });
                                 },
                                 shape: StadiumBorder(),

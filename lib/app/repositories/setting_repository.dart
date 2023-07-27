@@ -5,7 +5,7 @@ import '../models/setting_model.dart';
 import '../providers/laravel_provider.dart';
 
 class SettingRepository {
-  LaravelApiClient _laravelApiClient;
+ late  LaravelApiClient _laravelApiClient;
 
   SettingRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();

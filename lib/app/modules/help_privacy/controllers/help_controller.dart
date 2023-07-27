@@ -6,7 +6,7 @@ import '../../../models/faq_model.dart';
 import '../../../repositories/faq_repository.dart';
 
 class HelpController extends GetxController {
-  FaqRepository _faqRepository;
+ late FaqRepository _faqRepository;
   final faqCategories = <FaqCategory>[].obs;
   final faqs = <Faq>[].obs;
 
@@ -20,19 +20,19 @@ class HelpController extends GetxController {
     super.onInit();
   }
 
-  Future refreshFaqs({bool showMessage, String categoryId}) async {
+  Future refreshFaqs({bool? showMessage, String? categoryId}) async {
     getFaqCategories().then((value) async {
-      await getFaqs(categoryId: categoryId);
+      await getFaqs(categoryId: categoryId!);
     });
     if (showMessage == true) {
       Get.showSnackbar(Ui.SuccessSnackBar(message: "List of faqs refreshed successfully".tr));
     }
   }
 
-  Future getFaqs({String categoryId}) async {
+  Future getFaqs({String? categoryId}) async {
     try {
       if (categoryId == null) {
-        faqs.assignAll(await _faqRepository.getFaqs(faqCategories.elementAt(0).id));
+        faqs.assignAll(await _faqRepository.getFaqs(faqCategories!.elementAt(0).id!));
       } else {
         faqs.assignAll(await _faqRepository.getFaqs(categoryId));
       }

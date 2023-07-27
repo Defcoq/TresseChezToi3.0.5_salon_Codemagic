@@ -3,18 +3,18 @@ import 'package:get/get.dart';
 
 class SalonsStepWidget extends StatelessWidget {
   const SalonsStepWidget({
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.index,
     this.color,
-    @required this.title,
+    required this.title,
   }) : super(key: key);
 
-  final double width;
-  final double height;
-  final Widget index;
-  final Color color;
+  final double? width;
+  final double? height;
+  final Widget? index;
+  final Color? color;
   final Widget title;
 
   @override

@@ -38,6 +38,6 @@ class Uuid {
 
   // caf06b11-ceef-498b-a551-2ce18c1f8c6f
   static bool isUuid(String? input) {
-    return RegExp("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}").hasMatch(input);
+    return RegExp("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}").hasMatch(input!);
   }
 }

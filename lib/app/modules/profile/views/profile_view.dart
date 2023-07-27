@@ -52,7 +52,7 @@ class ProfileView extends GetView<ProfileController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                   highlightElevation: 0,
                   hoverElevation: 0,
@@ -93,13 +93,13 @@ class ProfileView extends GetView<ProfileController> {
                     controller.avatar.value = new Media(id: uuid);
                   },
                   reset: (uuid) {
-                    controller.avatar.value = new Media(thumb: controller.user.value.avatar.thumb);
+                    controller.avatar.value = new Media(thumb: controller.user.value.avatar!.thumb);
                   },
                 );
               }),
               TextFieldWidget(
                 onSaved: (input) => controller.user.value.name = input,
-                validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                 initialValue: controller.user.value.name,
                 hintText: "John Doe".tr,
                 labelText: "Full Name".tr,
@@ -107,7 +107,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
               TextFieldWidget(
                 onSaved: (input) => controller.user.value.email = input,
-                validator: (input) => !input.contains('@') ? "Should be a valid email" : null,
+                validator: (input) => !input!.contains('@') ? "Should be a valid email" : null,
                 initialValue: controller.user.value.email,
                 hintText: "johndoe@gmail.com",
                 labelText: "Email".tr,
@@ -116,29 +116,29 @@ class ProfileView extends GetView<ProfileController> {
               TextFieldWidget(
                 keyboardType: TextInputType.phone,
                 onSaved: (input) {
-                  if (input.startsWith("00")) {
+                  if (input!.startsWith("00")) {
                     input = "+" + input.substring(2);
                   }
-                  return controller.user.value.phoneNumber = input;
+                   controller!.user.value.phoneNumber = input;
                 },
-                validator: (input) => !input.startsWith('+') && !input.startsWith('00') ? "Phone number must start with country code!".tr : null,
+                validator: (input) => !input!.startsWith('+') && !input.startsWith('00') ? "Phone number must start with country code!".tr : null,
                 initialValue: controller.user.value.phoneNumber,
                 hintText: "+1 223 665 7896".tr,
                 labelText: "Phone number".tr,
                 iconData: Icons.phone_android_outlined,
-                suffix: controller.user.value.verifiedPhone
+                suffix: controller.user.value.verifiedPhone!
                     ? Text(
                         "Verified".tr,
-                        style: Get.textTheme.caption.merge(TextStyle(color: Colors.green)),
+                        style: Get.textTheme.caption?.merge(TextStyle(color: Colors.green)),
                       )
                     : Text(
                         "Not Verified".tr,
-                        style: Get.textTheme.caption.merge(TextStyle(color: Colors.redAccent)),
+                        style: Get.textTheme.caption?.merge(TextStyle(color: Colors.redAccent)),
                       ),
               ),
               TextFieldWidget(
                 onSaved: (input) => controller.user.value.address = input,
-                validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                 initialValue: controller.user.value.address,
                 hintText: "123 Street, City 136, State, Country".tr,
                 labelText: "Address".tr,
@@ -158,9 +158,9 @@ class ProfileView extends GetView<ProfileController> {
                 return TextFieldWidget(
                   labelText: "Old Password".tr,
                   hintText: "••••••••••••".tr,
-                  onSaved: (input) => controller.oldPassword.value = input,
+                  onSaved: (input) => controller.oldPassword.value = input!,
                   onChanged: (input) => controller.oldPassword.value = input,
-                  validator: (input) => input.length > 0 && input.length < 3 ? "Should be more than 3 letters".tr : null,
+                  validator: (input) => input!.length > 0 && input.length < 3 ? "Should be more than 3 letters".tr : null,
                   initialValue: controller.oldPassword.value,
                   obscureText: controller.hidePassword.value,
                   iconData: Icons.lock_outline,
@@ -180,10 +180,10 @@ class ProfileView extends GetView<ProfileController> {
                 return TextFieldWidget(
                   labelText: "New Password".tr,
                   hintText: "••••••••••••".tr,
-                  onSaved: (input) => controller.newPassword.value = input,
+                  onSaved: (input) => controller.newPassword.value = input!,
                   onChanged: (input) => controller.newPassword.value = input,
                   validator: (input) {
-                    if (input.length > 0 && input.length < 3) {
+                    if (input!.length > 0 && input.length < 3) {
                       return "Should be more than 3 letters".tr;
                     } else if (input != controller.confirmPassword.value) {
                       return "Passwords do not match".tr;
@@ -203,10 +203,10 @@ class ProfileView extends GetView<ProfileController> {
                 return TextFieldWidget(
                   labelText: "Confirm New Password".tr,
                   hintText: "••••••••••••".tr,
-                  onSaved: (input) => controller.confirmPassword.value = input,
+                  onSaved: (input) => controller.confirmPassword.value = input!,
                   onChanged: (input) => controller.confirmPassword.value = input,
                   validator: (input) {
-                    if (input.length > 0 && input.length < 3) {
+                    if (input!.length > 0 && input.length < 3) {
                       return "Should be more than 3 letters".tr;
                     } else if (input != controller.newPassword.value) {
                       return "Passwords do not match".tr;

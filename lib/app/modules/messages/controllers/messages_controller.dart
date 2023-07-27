@@ -23,13 +23,13 @@ import '../../../services/auth_service.dart';
 class MessagesController extends GetxController {
   final uploading = false.obs;
   var message = Message([]).obs;
-  ChatRepository _chatRepository;
-  NotificationRepository _notificationRepository;
-  AuthService _authService;
+  late ChatRepository _chatRepository;
+  late NotificationRepository _notificationRepository;
+  late AuthService _authService;
   var messages = <Message>[].obs;
   var chats = <Chat>[].obs;
-  File imageFile;
-  Rx<DocumentSnapshot> lastDocument = new Rx<DocumentSnapshot>(null);
+  File? imageFile;
+  Rx<DocumentSnapshot?> lastDocument = new Rx<DocumentSnapshot?>(null);
   final isLoading = true.obs;
   final isDone = false.obs;
   ScrollController scrollController = ScrollController();
@@ -60,9 +60,9 @@ class MessagesController extends GetxController {
   }
 
   Future createMessage(Message _message) async {
-    _message.users.insert(0, _authService.user.value);
+    _message.users!.insert(0, _authService.user.value);
     _message.lastMessageTime = DateTime.now().millisecondsSinceEpoch;
-    _message.readByUsers = [_authService.user.value.id];
+    _message.readByUsers = [_authService!.user.value.id!];
 
     message.value = _message;
 
@@ -78,7 +78,7 @@ class MessagesController extends GetxController {
 
   Future refreshMessages() async {
     messages.clear();
-    lastDocument = new Rx<DocumentSnapshot>(null);
+    lastDocument = new Rx<DocumentSnapshot?>(null);
     await listenForMessages();
   }
 
@@ -88,9 +88,9 @@ class MessagesController extends GetxController {
     isDone.value = false;
     Stream<QuerySnapshot> _userMessages;
     if (lastDocument.value == null) {
-      _userMessages = _chatRepository.getUserMessages(_authService.user.value.id);
+      _userMessages = _chatRepository.getUserMessages(_authService!.user.value.id!);
     } else {
-      _userMessages = _chatRepository.getUserMessagesStartAt(_authService.user.value.id, lastDocument.value);
+      _userMessages = _chatRepository.getUserMessagesStartAt(_authService.user.value.id!, lastDocument.value!);
     }
     _userMessages.listen((QuerySnapshot query) {
       if (query.docs.isNotEmpty) {
@@ -107,7 +107,7 @@ class MessagesController extends GetxController {
 
   listenForChats() async {
     message.value = await _chatRepository.getMessage(message.value);
-    message.value.readByUsers.add(_authService.user.value.id);
+    message.value.readByUsers!.add(_authService.user.value.id!);
     _chatRepository.getChats(message.value).listen((event) {
       chats.assignAll(event);
     });
@@ -121,27 +121,27 @@ class MessagesController extends GetxController {
     }
     _message.lastMessage = text;
     _message.lastMessageTime = _chat.time;
-    _message.readByUsers = [_authService.user.value.id];
+    _message.readByUsers = [_authService.user.value.id!];
     uploading.value = false;
     _chatRepository.addMessage(_message, _chat).then((value) {}).then((value) {
       List<User> _users = [];
-      _users.addAll(_message.users);
+      _users.addAll(_message.users!);
       _users.removeWhere((element) => element.id == _authService.user.value.id);
-      _notificationRepository.sendNotification(_users, _authService.user.value, "App\\Notifications\\NewMessage", text, _message.id);
+      _notificationRepository.sendNotification(_users, _authService.user.value, "App\\Notifications\\NewMessage", text, _message.id!);
     });
   }
 
   Future getImage(ImageSource source) async {
     ImagePicker imagePicker = ImagePicker();
-    XFile pickedFile;
+    XFile? pickedFile;
 
     pickedFile = await imagePicker.pickImage(source: source);
-    imageFile = File(pickedFile.path);
+    imageFile = File(pickedFile!.path);
 
     if (imageFile != null) {
       try {
         uploading.value = true;
-        return await _chatRepository.uploadFile(imageFile);
+        return await _chatRepository.uploadFile(imageFile!);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       }

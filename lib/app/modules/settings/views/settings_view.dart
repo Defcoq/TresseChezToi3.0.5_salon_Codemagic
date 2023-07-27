@@ -56,8 +56,8 @@ class SettingsView extends GetView<SettingsController> {
           )),
       body: WillPopScope(
         onWillPop: () async {
-          if (_navigatorKey.currentState.canPop()) {
-            _navigatorKey.currentState.pop();
+          if (_navigatorKey!.currentState!.canPop()) {
+            _navigatorKey!.currentState!.pop();
             return false;
           }
           return true;

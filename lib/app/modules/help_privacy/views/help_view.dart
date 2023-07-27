@@ -25,7 +25,7 @@ class HelpView extends GetView<HelpController> {
                     var _category = controller.faqCategories.elementAt(index);
                     return ChipWidget(
                       tag: 'help',
-                      text: _category.name.tr,
+                      text: _category.name!.tr,
                       id: _category.id,
                       onSelected: (id) {
                         controller.getFaqs(categoryId: id);
@@ -35,7 +35,7 @@ class HelpView extends GetView<HelpController> {
                 ),
           title: Text(
             "Help & Faq".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
+            style: Get.textTheme.headline6?.merge(TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
           ),
           automaticallyImplyLeading: false,
           leading: new IconButton(
@@ -48,7 +48,7 @@ class HelpView extends GetView<HelpController> {
             Get.find<LaravelApiClient>().forceRefresh();
             controller.refreshFaqs(
               showMessage: true,
-              categoryId: Get.find<TabBarController>(tag: '/help').selectedId.value,
+              categoryId: Get.find<TabBarController>(tag: '/help').selectedId!.value!,
             );
             Get.find<LaravelApiClient>().unForceRefresh();
           },

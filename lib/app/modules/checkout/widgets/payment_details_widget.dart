@@ -11,8 +11,8 @@ import '../../bookings/widgets/booking_row_widget.dart';
 
 class PaymentDetailsWidget extends StatelessWidget {
   const PaymentDetailsWidget({
-    Key key,
-    @required SalonSubscription salonSubscription,
+    Key? key,
+    required SalonSubscription salonSubscription,
   })  : _salonSubscription = salonSubscription,
         super(key: key);
 
@@ -36,11 +36,11 @@ class PaymentDetailsWidget extends StatelessWidget {
           ),
           Divider(height: 8, thickness: 1),
           BookingRowWidget(
-            description: _salonSubscription.subscriptionPackage.name,
+            description: _salonSubscription.subscriptionPackage!.name!,
             valueStyle: Get.textTheme.bodyText2,
             child: Align(
               alignment: Alignment.centerRight,
-              child: Ui.getPrice(_salonSubscription.subscriptionPackage.getPrice, style: Get.textTheme.subtitle2),
+              child: Ui.getPrice(_salonSubscription.subscriptionPackage!.getPrice, style: Get.textTheme.subtitle2!),
             ),
           ),
         ],

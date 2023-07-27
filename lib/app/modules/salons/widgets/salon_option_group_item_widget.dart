@@ -15,8 +15,8 @@ import '../controllers/salon_controller.dart';
 
 class SalonOptionGroupItemWidget extends GetWidget<SalonController> {
   SalonOptionGroupItemWidget({
-    @required AvailabilityHour availabilityHour,
-    @required Salon salon
+    required AvailabilityHour availabilityHour,
+    required Salon salon
   }) : _availabilityHour = availabilityHour,_salon = salon;
 
 
@@ -35,11 +35,11 @@ class SalonOptionGroupItemWidget extends GetWidget<SalonController> {
             Expanded(
               child: Column(
                 children: [
-                  Text(_availabilityHour.day.tr.capitalizeFirst).paddingSymmetric(vertical: 5),
+                  Text(_availabilityHour.day!.tr.capitalizeFirst!).paddingSymmetric(vertical: 5),
                 ] +
                     List.generate(1, (index) {
                       return Text(
-                        _availabilityHour.data,
+                        _availabilityHour.data!,
                         style: Get.textTheme.caption,
                       );
                     }),
@@ -52,7 +52,7 @@ class SalonOptionGroupItemWidget extends GetWidget<SalonController> {
                   margin: EdgeInsets.symmetric(vertical: 3),
                   width: 125,
                   child: Text(
-                    _availabilityHour.startAt + "-" + _availabilityHour.endAt,
+                    _availabilityHour.startAt! + "-" + _availabilityHour.endAt!,
                     style: Get.textTheme.bodyText1,
                     textAlign: TextAlign.center,
                   ),

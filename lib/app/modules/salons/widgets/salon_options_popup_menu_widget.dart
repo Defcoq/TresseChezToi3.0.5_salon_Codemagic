@@ -9,8 +9,8 @@ import '../controllers/salons_controller.dart';
 
 class SalonOptionsPopupMenuWidget extends GetView<SalonsController> {
   const SalonOptionsPopupMenuWidget({
-    Key key,
-    @required Salon salon,
+    Key? key,
+    required Salon salon,
   })  : _salon = salon,
         super(key: key);
 

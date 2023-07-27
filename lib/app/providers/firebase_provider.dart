@@ -34,7 +34,7 @@ class FirebaseProvider extends GetxService {
 
   Future<void> verifyPhone(String smsCode) async {
     try {
-      final fba.AuthCredential credential = fba.PhoneAuthProvider.credential(verificationId: Get.find<AuthService>().user.value.verificationId, smsCode: smsCode);
+      final fba.AuthCredential credential = fba.PhoneAuthProvider.credential(verificationId: Get.find<AuthService>().user.value.verificationId!, smsCode: smsCode);
       await fba.FirebaseAuth.instance.signInWithCredential(credential);
       Get.find<AuthService>().user.value.verifiedPhone = true;
     } catch (e) {
@@ -46,7 +46,7 @@ class FirebaseProvider extends GetxService {
   Future<void> sendCodeToPhone() async {
     Get.find<AuthService>().user.value.verificationId = '';
     final fba.PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {};
-    final fba.PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResent]) {
+    final fba.PhoneCodeSent smsCodeSent = (String? verId, [int? forceCodeResent]) {
       Get.find<AuthService>().user.value.verificationId = verId;
     };
     final fba.PhoneVerificationCompleted _verifiedSuccess = (fba.AuthCredential auth) async {

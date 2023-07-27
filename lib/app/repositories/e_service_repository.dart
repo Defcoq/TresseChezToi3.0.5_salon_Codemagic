@@ -7,7 +7,7 @@ import '../models/review_model.dart';
 import '../providers/laravel_provider.dart';
 
 class EServiceRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   EServiceRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();

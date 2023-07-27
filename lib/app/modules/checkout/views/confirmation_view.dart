@@ -117,7 +117,7 @@ class ConfirmationView extends GetView<CheckoutController> {
                 child: Text(
                   "Home".tr,
                   textAlign: TextAlign.center,
-                  style: Get.textTheme.headline6.merge(
+                  style: Get.textTheme.headline6?.merge(
                     TextStyle(color: Get.theme.primaryColor),
                   ),
                 ),

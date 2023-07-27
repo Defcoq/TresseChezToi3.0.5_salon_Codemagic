@@ -5,7 +5,7 @@ import '../models/faq_model.dart';
 import '../providers/laravel_provider.dart';
 
 class FaqRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   FaqRepository() {
     _laravelApiClient = Get.find<LaravelApiClient>();

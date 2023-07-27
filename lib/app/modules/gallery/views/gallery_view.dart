@@ -35,7 +35,7 @@ class GalleryView extends GetView<GalleryController> {
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               Hero(
-                tag: controller.heroTag.value + controller.current.value.id,
+                tag: controller.heroTag.value + controller.current.value.id!,
                 child: CarouselSlider(
                   options: CarouselOptions(
                     autoPlay: false,
@@ -61,7 +61,7 @@ class GalleryView extends GetView<GalleryController> {
                           child: CachedNetworkImage(
                             width: double.infinity,
                             fit: BoxFit.contain,
-                            imageUrl: _media.url,
+                            imageUrl: _media.url!,
                             placeholder: (context, url) => CircularLoadingWidget(height: 200),
                             errorWidget: (context, url, error) => Icon(Icons.error_outline),
                           ),
@@ -77,7 +77,7 @@ class GalleryView extends GetView<GalleryController> {
                   return Text(
                     controller.current.value.name ?? '',
                     maxLines: 2,
-                    style: Get.textTheme.bodyText2.merge(
+                    style: Get.textTheme.bodyText2?.merge(
                       TextStyle(
                         color: Get.theme.primaryColor,
                         shadows: <Shadow>[

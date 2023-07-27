@@ -8,7 +8,7 @@ import '../models/wallet_transaction_model.dart';
 import '../providers/laravel_provider.dart';
 
 class PaymentRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   PaymentRepository() {
     _laravelApiClient = Get.find<LaravelApiClient>();

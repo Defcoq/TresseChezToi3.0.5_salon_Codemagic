@@ -20,7 +20,7 @@ import 'app/services/global_service.dart';
 import 'app/services/settings_service.dart';
 import 'app/services/translation_service.dart';
 
-void initServices() async {
+Future<void> initServices() async {
   Get.log('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => TranslationService().init());
@@ -36,6 +36,7 @@ void initServices() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
+
 
   runApp(
     GetMaterialApp(

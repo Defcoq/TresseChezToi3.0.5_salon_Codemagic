@@ -13,9 +13,9 @@ import '../../../services/global_service.dart';
 import '../../root/controllers/root_controller.dart';
 
 class HomeController extends GetxController {
-  StatisticRepository _statisticRepository;
-  BookingRepository _bookingsRepository;
-  SubscriptionRepository _subscriptionRepository;
+  late StatisticRepository _statisticRepository;
+  late BookingRepository _bookingsRepository;
+  late SubscriptionRepository _subscriptionRepository;
 
   final statistics = <Statistic>[].obs;
   final bookings = <Booking>[].obs;
@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   final isDone = false.obs;
   final currentStatus = '1'.obs;
 
-  ScrollController scrollController;
+  ScrollController? scrollController;
 
   HomeController() {
     _statisticRepository = new StatisticRepository();
@@ -44,11 +44,11 @@ class HomeController extends GetxController {
     scrollController?.dispose();
   }
 
-  Future refreshHome({bool showMessage = false, String statusId}) async {
+  Future refreshHome({bool showMessage = false, String? statusId}) async {
     await getBookingStatuses();
     await getStatistics();
     Get.find<RootController>().getNotificationsCount();
-    changeTab(statusId);
+    changeTab(statusId!);
     if (showMessage) {
       Get.showSnackbar(Ui.SuccessSnackBar(message: "Home page refreshed successfully".tr));
     }
@@ -56,8 +56,8 @@ class HomeController extends GetxController {
 
   void initScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !isDone.value) {
+    scrollController!.addListener(() {
+      if (scrollController!.position.pixels == scrollController!.position.maxScrollExtent && !isDone.value) {
         loadBookingsOfStatus(statusId: currentStatus.value);
       }
     });
@@ -91,7 +91,7 @@ class HomeController extends GetxController {
         return BookingStatus();
       });
 
-  Future loadBookingsOfStatus({String statusId}) async {
+  Future loadBookingsOfStatus({String? statusId}) async {
     try {
       isLoading.value = true;
       isDone.value = false;
@@ -100,7 +100,7 @@ class HomeController extends GetxController {
       List<SalonSubscription> _subscriptions = [];
       if (bookingStatuses.isNotEmpty) {
         print("Befor booking Repository Calll =>>>>>>>>>");
-        _bookings = await _bookingsRepository.all(statusId, page: page.value);
+        _bookings = await _bookingsRepository.all(statusId!, page: page.value);
         print("After booking Repository Calll =>>>>>>>>>");
         _subscriptions = await _subscriptionRepository.getEProviderSubscriptions();
       }
@@ -110,7 +110,7 @@ class HomeController extends GetxController {
         if(_subscriptions.isNotEmpty)
         {
           for(var sub in _subscriptions) {
-            if(sub.active)
+            if(sub.active!)
             {
               providerHasValidSubscription=true;
               break;
@@ -147,15 +147,15 @@ class HomeController extends GetxController {
   }
 
   Future<void> acceptBookingService(Booking booking) async {
-    final _status = Get.find<HomeController>().getStatusByOrder(Get.find<GlobalService>().global.value.accepted);
+    final _status = Get.find<HomeController>().getStatusByOrder(Get.find<GlobalService>().global.value.accepted!);
     await changeBookingStatus(booking, _status);
     Get.showSnackbar(Ui.SuccessSnackBar(title: "Status Changed".tr, message: "Booking has been accepted".tr));
   }
 
   Future<void> declineBookingService(Booking booking) async {
     try {
-      if (booking.status.order < Get.find<GlobalService>().global.value.onTheWay) {
-        final _status = getStatusByOrder(Get.find<GlobalService>().global.value.failed);
+      if (booking.status!.order! < Get.find<GlobalService>().global.value.onTheWay!) {
+        final _status = getStatusByOrder(Get.find<GlobalService>().global.value.failed!);
         final _booking = new Booking(id: booking.id, cancel: true, status: _status);
         await _bookingsRepository.update(_booking);
         bookings.removeWhere((element) => element.id == booking.id);

@@ -58,7 +58,7 @@ class ChatRepository {
   }
 
   Stream<List<Chat>> getChats(Message message) {
-    updateMessage(message.id, {'read_by_users': message.readByUsers});
+    updateMessage(message.id!, {'read_by_users': message.readByUsers});
     return FirebaseFirestore.instance.collection("messages").doc(message.id).collection("chats").orderBy('time', descending: true).snapshots().map((QuerySnapshot query) {
       List<Chat> retVal = [];
       query.docs.forEach((element) {
@@ -68,9 +68,25 @@ class ChatRepository {
     });
   }
 
-  Future<void> addMessage(Message message, Chat chat) {
+  /*Future<void> addMessage(Message message, Chat chat) {
     return FirebaseFirestore.instance.collection("messages").doc(message.id).collection("chats").add(chat.toJson()).whenComplete(() {
-      updateMessage(message.id, message.toUpdatedMap());
+      updateMessage(message.id!, message.toUpdatedMap());
+    }).catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  Future<void> updateMessage(String? messageId, Map<String, dynamic> message) {
+    return FirebaseFirestore.instance.collection("messages").doc(messageId).update(message).catchError((e) {
+      print(e.toString());
+    });
+  }*/
+
+  Future<void> addMessage(Message? message, Chat chat) {
+    final Map<dynamic, dynamic> dynamicMessageMap = message!.toUpdatedMap();
+    final Map<String, dynamic> updatedMessageMap = Map<String, dynamic>.from(dynamicMessageMap);
+    return FirebaseFirestore.instance.collection("messages").doc(message!.id!).collection("chats").add(chat.toJson()).whenComplete(() {
+      updateMessage(message!.id!, updatedMessageMap);
     }).catchError((e) {
       print(e.toString());
     });

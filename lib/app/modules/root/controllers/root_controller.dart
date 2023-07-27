@@ -20,8 +20,8 @@ class RootController extends GetxController {
   final currentIndex = 0.obs;
   final notificationsCount = 0.obs;
   final customPages = <CustomPage>[].obs;
-  NotificationRepository _notificationRepository;
-  CustomPageRepository _customPageRepository;
+  late NotificationRepository _notificationRepository;
+  late CustomPageRepository _customPageRepository;
 
   RootController() {
     _notificationRepository = new NotificationRepository();

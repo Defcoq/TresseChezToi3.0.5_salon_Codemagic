@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../providers/laravel_provider.dart';
 
 class UploadRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   UploadRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();

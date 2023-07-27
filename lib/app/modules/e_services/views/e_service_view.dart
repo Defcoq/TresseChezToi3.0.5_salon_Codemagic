@@ -93,10 +93,10 @@ class EServiceView extends GetView<EServiceController> {
                             if (controller.eService.value.description == '') {
                               return SizedBox();
                             }
-                            return Ui.applyHtml(_eService.description, style: Get.textTheme.bodyText1);
+                            return Ui.applyHtml(_eService.description!, style: Get.textTheme.bodyText1);
                           }),
                         ),
-                        if (_eService.images.isNotEmpty)
+                        if (_eService.images!.isNotEmpty)
                           EServiceTilWidget(
                             horizontalPadding: 0,
                             title: Text("Galleries".tr, style: Get.textTheme.subtitle2).paddingSymmetric(horizontal: 20),
@@ -106,9 +106,9 @@ class EServiceView extends GetView<EServiceController> {
                                   primary: false,
                                   shrinkWrap: false,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: _eService.images.length,
+                                  itemCount: _eService.images!.length,
                                   itemBuilder: (_, index) {
-                                    var _media = _eService.images.elementAt(index);
+                                    var _media = _eService.images!.elementAt(index);
                                     return InkWell(
                                       onTap: () {
                                         Get.toNamed(Routes.GALLERY, arguments: {'media': _eService.images, 'current': _media, 'heroTag': 'e_services_galleries'});
@@ -121,14 +121,14 @@ class EServiceView extends GetView<EServiceController> {
                                           alignment: AlignmentDirectional.topStart,
                                           children: [
                                             Hero(
-                                              tag: 'e_services_galleries' + _media.id,
+                                              tag: 'e_services_galleries' + _media!.id!,
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                                 child: CachedNetworkImage(
                                                   height: 100,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
-                                                  imageUrl: _media.thumb,
+                                                  imageUrl: _media!.thumb!,
                                                   placeholder: (context, url) => Image.asset(
                                                     'assets/img/loading.gif',
                                                     fit: BoxFit.cover,
@@ -144,7 +144,7 @@ class EServiceView extends GetView<EServiceController> {
                                               child: Text(
                                                 _media.name ?? '',
                                                 maxLines: 2,
-                                                style: Get.textTheme.bodyText2.merge(TextStyle(
+                                                style: Get.textTheme.bodyText2?.merge(TextStyle(
                                                   color: Get.theme.primaryColor,
                                                   shadows: <Shadow>[
                                                     Shadow(
@@ -234,16 +234,16 @@ class EServiceView extends GetView<EServiceController> {
           controller.currentSlide.value = index;
         },
       ),
-      items: _eService.images.map((Media media) {
+      items: _eService.images?.map((Media media) {
         return Builder(
           builder: (BuildContext context) {
             return Hero(
-              tag: controller.heroTag.value + _eService.id,
+              tag: controller.heroTag.value + _eService!.id!,
               child: CachedNetworkImage(
                 width: double.infinity,
                 height: 350,
                 fit: BoxFit.cover,
-                imageUrl: media.url,
+                imageUrl: media.url!,
                 placeholder: (context, url) => Image.asset(
                   'assets/img/loading.gif',
                   fit: BoxFit.cover,
@@ -263,7 +263,7 @@ class EServiceView extends GetView<EServiceController> {
       margin: EdgeInsets.symmetric(vertical: 100, horizontal: 20),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: _eService.images.map((Media media) {
+        children: _eService.images!.map((Media media) {
           return Container(
             width: 20.0,
             height: 5.0,
@@ -272,7 +272,7 @@ class EServiceView extends GetView<EServiceController> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: controller.currentSlide.value == _eService.images.indexOf(media) ? Get.theme.hintColor : Get.theme.primaryColor.withOpacity(0.4)),
+                color: controller.currentSlide.value == _eService.images!.indexOf(media) ? Get.theme.hintColor : Get.theme.primaryColor.withOpacity(0.4)),
           );
         }).toList(),
       ),
@@ -290,20 +290,20 @@ class EServiceView extends GetView<EServiceController> {
               Expanded(
                 child: Text(
                   _eService.name ?? '',
-                  style: Get.textTheme.headline5.merge(TextStyle(height: 1.1)),
+                  style: Get.textTheme.headline5?.merge(TextStyle(height: 1.1)),
                   maxLines: 2,
                   softWrap: true,
                   overflow: TextOverflow.fade,
                 ),
               ),
-              SalonAvailabilityBadgeWidget(salon: _eService.salon)
+              SalonAvailabilityBadgeWidget(salon: _eService.salon!)
             ],
           ),
           SizedBox(height: 5),
           Row(
             children: [
               Expanded(
-                child: DurationChipWidget(duration: _eService.duration),
+                child: DurationChipWidget(duration: _eService.duration!),
               ),
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
@@ -312,11 +312,11 @@ class EServiceView extends GetView<EServiceController> {
                   if (_eService.getOldPrice > 0)
                     Ui.getPrice(
                       _eService.getOldPrice,
-                      style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
+                      style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
                     ),
                   Ui.getPrice(
                     _eService.getPrice,
-                    style: Get.textTheme.headline3.merge(TextStyle(color: Get.theme.colorScheme.secondary)),
+                    style: Get.textTheme.headline3?.merge(TextStyle(color: Get.theme.colorScheme.secondary)),
                   ),
                 ],
               ),
@@ -334,23 +334,23 @@ class EServiceView extends GetView<EServiceController> {
         alignment: WrapAlignment.start,
         spacing: 5,
         runSpacing: 8,
-        children: List.generate(_eService.categories.length, (index) {
-              var _category = _eService.categories.elementAt(index);
+        children: List.generate(_eService.categories!.length, (index) {
+              var _category = _eService.categories!.elementAt(index);
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: Text(_category.name, style: Get.textTheme.bodyText1.merge(TextStyle(color: _category.color))),
+                child: Text(_category.name!, style: Get.textTheme.bodyText1!.merge(TextStyle(color: _category.color))),
                 decoration: BoxDecoration(
-                    color: _category.color.withOpacity(0.2),
+                    color: _category.color!.withOpacity(0.2),
                     border: Border.all(
-                      color: _category.color.withOpacity(0.1),
+                      color: _category.color!.withOpacity(0.1),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
               );
             }) +
-            List.generate(_eService.subCategories.length, (index) {
+            List.generate(_eService.subCategories!.length, (index) {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: Text(_eService.subCategories.elementAt(index).name, style: Get.textTheme.caption),
+                child: Text(_eService.subCategories!.elementAt(index).name!, style: Get.textTheme.caption),
                 decoration: BoxDecoration(
                     color: Get.theme.primaryColor,
                     border: Border.all(

@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class SalonTitleBarWidget extends StatelessWidget implements PreferredSize {
   final Widget title;
 
-  const SalonTitleBarWidget({Key key, @required this.title}) : super(key: key);
+  const SalonTitleBarWidget({Key? key, required this.title}) : super(key: key);
 
   Widget buildTitleBar() {
     return Container(

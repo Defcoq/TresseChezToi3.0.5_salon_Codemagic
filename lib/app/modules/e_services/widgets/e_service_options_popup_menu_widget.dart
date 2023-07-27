@@ -7,8 +7,8 @@ import '../controllers/e_services_controller.dart';
 
 class EServiceOptionsPopupMenuWidget extends GetView<EServicesController> {
   const EServiceOptionsPopupMenuWidget({
-    Key key,
-    @required EService eService,
+    Key? key,
+    required EService eService,
   })  : _eService = eService,
         super(key: key);
 

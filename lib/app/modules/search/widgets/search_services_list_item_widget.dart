@@ -16,8 +16,8 @@ import '../../global_widgets/salon_availability_badge_widget.dart';
 
 class SearchServicesListItemWidget extends StatelessWidget {
   const SearchServicesListItemWidget({
-    Key key,
-    @required EService service,
+    Key? key,
+    required EService service,
   })  : _service = service,
         super(key: key);
 
@@ -39,7 +39,7 @@ class SearchServicesListItemWidget extends StatelessWidget {
             Column(
               children: [
                 Hero(
-                  tag: 'search_list_item' + _service.id,
+                  tag: 'search_list_item' + _service.id!,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                     child: CachedNetworkImage(
@@ -57,7 +57,7 @@ class SearchServicesListItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SalonAvailabilityBadgeWidget(salon: _service.salon, withImage: true)
+                SalonAvailabilityBadgeWidget(salon: _service.salon!, withImage: true)
               ],
             ),
             SizedBox(width: 12),
@@ -93,7 +93,7 @@ class SearchServicesListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _service.salon.name,
+                          _service.salon!.name!,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -112,7 +112,7 @@ class SearchServicesListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _service.salon.address.address,
+                          _service.salon!.address!.address!,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -124,10 +124,10 @@ class SearchServicesListItemWidget extends StatelessWidget {
                   Divider(height: 8, thickness: 1),
                   Wrap(
                     spacing: 5,
-                    children: List.generate(_service.subCategories.length, (index) {
+                    children: List.generate(_service.subCategories!.length, (index) {
                       return Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        child: Text(_service.subCategories.elementAt(index).name, style: Get.textTheme.caption.merge(TextStyle(fontSize: 10))),
+                        child: Text(_service.subCategories!.elementAt(index).name!, style: Get.textTheme.caption?.merge(TextStyle(fontSize: 10))),
                         decoration: BoxDecoration(
                             color: Get.theme.primaryColor,
                             border: Border.all(

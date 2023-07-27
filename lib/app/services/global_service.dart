@@ -12,5 +12,5 @@ class GlobalService extends GetxService {
     return this;
   }
 
-  String get baseUrl => global.value.laravelBaseUrl;
+  String get baseUrl => global.value.laravelBaseUrl!;
 }

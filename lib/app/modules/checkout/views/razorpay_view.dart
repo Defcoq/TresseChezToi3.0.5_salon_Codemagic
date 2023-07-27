@@ -14,7 +14,7 @@ class RazorPayViewWidget extends GetView<RazorPayController> {
         centerTitle: true,
         title: Text(
           "RazorPay Payment".tr,
-          style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+          style: Get.textTheme.headline6?.merge(TextStyle(letterSpacing: 1.3)),
         ),
         automaticallyImplyLeading: false,
         leading: new IconButton(

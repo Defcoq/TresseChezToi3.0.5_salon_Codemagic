@@ -8,7 +8,7 @@ import '../../root/controllers/root_controller.dart';
 
 class CustomPageDrawerLinkWidget extends GetView<RootController> {
   const CustomPageDrawerLinkWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

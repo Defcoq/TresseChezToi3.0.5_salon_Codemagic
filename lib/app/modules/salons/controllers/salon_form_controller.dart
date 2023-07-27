@@ -21,10 +21,10 @@ class SalonFormController extends GetxController {
   final addresses = <Address>[].obs;
   final salons = <Salon>[].obs;
   GlobalKey<FormState> salonForm = new GlobalKey<FormState>();
-  EServiceRepository _eServiceRepository;
-  CategoryRepository _categoryRepository;
-  SalonRepository _salonRepository;
-  AddressRepository _addressRepository;
+  late EServiceRepository _eServiceRepository;
+  late CategoryRepository _categoryRepository;
+  late SalonRepository _salonRepository;
+  late AddressRepository _addressRepository;
 
   SalonFormController() {
     _eServiceRepository = new EServiceRepository();
@@ -54,14 +54,14 @@ class SalonFormController extends GetxController {
     await getSalons();
     //await getOptionGroups();
     if (showMessage) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name + " " + "page refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name! + " " + "page refreshed successfully".tr));
     }
   }
 
   Future getSalon() async {
     if (salon.value.hasData) {
       try {
-        salon.value = await _salonRepository.get(salon.value.id);
+        salon.value = await _salonRepository.get(salon.value.id!);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       }
@@ -88,20 +88,20 @@ class SalonFormController extends GetxController {
 
   List<SelectDialogItem<Address>> getMultiSelectAddressItems() {
     return addresses.map((element) {
-      return SelectDialogItem(element, element.address);
+      return SelectDialogItem(element, element.address!);
     }).toList();
   }
 
   List<SelectDialogItem<Salon>> getSelectSalonsItems() {
     return salons.map((element) {
-      return SelectDialogItem(element, element.name);
+      return SelectDialogItem(element, element.name!);
     }).toList();
   }
 
   Future getOptionGroups() async {
     if (salon.value.hasData) {
       try {
-        var _optionGroups = await _eServiceRepository.getOptionGroups(salon.value.id);
+        var _optionGroups = await _eServiceRepository.getOptionGroups(salon.value.id!);
         optionGroups.assignAll(_optionGroups);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
@@ -117,10 +117,10 @@ class SalonFormController extends GetxController {
   }
 
   void createSalonForm({bool createOptions = false}) async {
-    Get.focusScope.unfocus();
-    if (salonForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (salonForm.currentState!.validate()) {
       try {
-        salonForm.currentState.save();
+        salonForm.currentState!.save();
         var _eService = await _salonRepository.create(salon.value);
         if (createOptions)
           Get.offAndToNamed(Routes.OPTIONS_FORM, arguments: {'eService': _eService});
@@ -135,10 +135,10 @@ class SalonFormController extends GetxController {
   }
 
   void updateSalonForm() async {
-    Get.focusScope.unfocus();
-    if (salonForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (salonForm.currentState!.validate()) {
       try {
-        salonForm.currentState.save();
+        salonForm.currentState!.save();
         var _eService = await _salonRepository.update(salon.value);
         Get.offAndToNamed(Routes.SALON, arguments: {'salon': _eService, 'heroTag': 'e_service_update_form'});
       } catch (e) {
@@ -151,9 +151,9 @@ class SalonFormController extends GetxController {
 
   void deleteSalon() async {
     try {
-      await _salonRepository.delete(salon.value.id);
+      await _salonRepository.delete(salon.value.id!);
       Get.offAndToNamed(Routes.SALONS);
-      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name + " " + "has been removed".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name! + " " + "has been removed".tr));
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

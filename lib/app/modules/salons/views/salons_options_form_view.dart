@@ -70,7 +70,7 @@ class SalonsOptionsFormView extends GetView<SalonsOptionsFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -86,7 +86,7 @@ class SalonsOptionsFormView extends GetView<SalonsOptionsFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary.withOpacity(0.2),
-                  child: Text("Save & Add Other".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
+                  child: Text("Save & Add Other".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.colorScheme.secondary))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -162,7 +162,7 @@ class SalonsOptionsFormView extends GetView<SalonsOptionsFormController> {
                                 },
                               );
                               controller.availability.update((val) {
-                                val.day = selectedValue;
+                                val?.day = selectedValue;
                               });
                             },
                             shape: StadiumBorder(),
@@ -188,21 +188,21 @@ class SalonsOptionsFormView extends GetView<SalonsOptionsFormController> {
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.availability.value.day = input,
-                  validator: (input) => input.length < 1 ? "Field is required".tr : null,
+                  validator: (input) => input!.length < 1 ? "Field is required".tr : null,
                   initialValue: controller.availability.value.startAt,
                   hintText: "Large Size".tr,
                   labelText: "Start At".tr,
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.availability.value.day = input,
-                  validator: (input) => input.length < 1 ? "Field is required".tr : null,
+                  validator: (input) => input!.length < 1 ? "Field is required".tr : null,
                   initialValue: controller.availability.value.endAt,
                   hintText: "Large Size".tr,
                   labelText: "End  At".tr,
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.availability.value.startAt = input,
-                  validator: (input) => input.length < 3 ? "Should be more than 3 letters".tr : null,
+                  validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                   keyboardType: TextInputType.multiline,
                   initialValue: controller.availability.value.data,
                   hintText: "More information about the hour".tr,

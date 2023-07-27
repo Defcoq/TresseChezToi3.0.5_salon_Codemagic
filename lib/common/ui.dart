@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import '../app/services/settings_service.dart';
 
 class Ui {
-  static GetSnackBar SuccessSnackBar({String title = 'Success', String message, SnackPosition snackPosition = SnackPosition.BOTTOM}) {
+  static GetSnackBar SuccessSnackBar({String title = 'Success', String? message, SnackPosition snackPosition = SnackPosition.BOTTOM}) {
     Get.log("[$title] $message");
     return GetSnackBar(
-      titleText: Text(title.tr, style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor))),
-      messageText: Text(message, style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
+      titleText: Text(title.tr, style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor))),
+      messageText: Text(message!, style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor))),
       snackPosition: snackPosition,
       margin: EdgeInsets.all(20),
       backgroundColor: Colors.green,
@@ -21,11 +21,11 @@ class Ui {
     );
   }
 
-  static GetSnackBar ErrorSnackBar({String title = 'Error', String message, SnackPosition snackPosition = SnackPosition.BOTTOM}) {
+  static GetSnackBar ErrorSnackBar({String title = 'Error', String? message, SnackPosition snackPosition = SnackPosition.BOTTOM}) {
     Get.log("[$title] $message", isError: true);
     return GetSnackBar(
-      titleText: Text(title.tr, style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor))),
-      messageText: Text(message, style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
+      titleText: Text(title.tr, style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor))),
+      messageText: Text(message!, style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor))),
       snackPosition: snackPosition,
       margin: EdgeInsets.all(20),
       backgroundColor: Colors.redAccent,
@@ -36,11 +36,11 @@ class Ui {
     );
   }
 
-  static GetSnackBar defaultSnackBar({String title = 'Alert', String message}) {
+  static GetSnackBar defaultSnackBar({String title = 'Alert', String? message}) {
     Get.log("[$title] $message", isError: false);
     return GetSnackBar(
-      titleText: Text(title.tr, style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor))),
-      messageText: Text(message, style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.focusColor))),
+      titleText: Text(title.tr, style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.hintColor))),
+      messageText: Text(message!, style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.focusColor))),
       snackPosition: SnackPosition.BOTTOM,
       margin: EdgeInsets.all(20),
       backgroundColor: Get.theme.primaryColor,
@@ -52,13 +52,13 @@ class Ui {
     );
   }
 
-  static GetSnackBar notificationSnackBar({String title = 'Notification', String message, OnTap onTap, Widget mainButton}) {
+  static GetSnackBar notificationSnackBar({String title = 'Notification', String? message, OnTap? onTap, Widget? mainButton}) {
     Get.log("[$title] $message", isError: false);
     return GetSnackBar(
       onTap: onTap,
       mainButton: mainButton,
-      titleText: Text(title.tr, style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor))),
-      messageText: Text(message, style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.focusColor))),
+      titleText: Text(title.tr, style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.hintColor))),
+      messageText: Text(message!, style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.focusColor))),
       snackPosition: SnackPosition.TOP,
       margin: EdgeInsets.all(20),
       backgroundColor: Get.theme.primaryColor,
@@ -70,7 +70,7 @@ class Ui {
     );
   }
 
-  static Color parseColor(String hexCode, {double opacity}) {
+  static Color parseColor(String hexCode, {double? opacity}) {
     try {
       return Color(int.parse(hexCode.replaceAll("#", "0xFF"))).withOpacity(opacity ?? 1);
     } catch (e) {
@@ -92,10 +92,10 @@ class Ui {
     return list;
   }
 
-  static Widget getPrice(double myPrice, {TextStyle style, String zeroPlaceholder = '-', String unit}) {
+  static Widget getPrice(double? myPrice, {TextStyle? style, String zeroPlaceholder = '-', String? unit}) {
     var _setting = Get.find<SettingsService>();
     if (style != null) {
-      style = style.merge(TextStyle(fontSize: style.fontSize + 2));
+      style = style.merge(TextStyle(fontSize: style.fontSize! + 2));
     }
     try {
       if (myPrice == 0) {
@@ -108,17 +108,17 @@ class Ui {
         text: _setting.setting.value.currencyRight != null && _setting.setting.value?.currencyRight == false
             ? TextSpan(
                 text: _setting.setting.value?.defaultCurrency,
-                style: getPriceStyle(style),
+                style: getPriceStyle(style!),
                 children: <TextSpan>[
-                  TextSpan(text: myPrice.toStringAsFixed(_setting.setting.value?.defaultCurrencyDecimalDigits) ?? '', style: style ?? Get.textTheme.subtitle2),
+                  TextSpan(text: myPrice?.toStringAsFixed(_setting.setting.value!.defaultCurrencyDecimalDigits!) ?? '', style: style ?? Get.textTheme.subtitle2),
                   if (unit != null) TextSpan(text: " " + unit + " ", style: getPriceStyle(style)),
                 ],
               )
             : TextSpan(
-                text: myPrice.toStringAsFixed(_setting.setting.value?.defaultCurrencyDecimalDigits) ?? '',
+                text: myPrice?.toStringAsFixed(_setting.setting.value!.defaultCurrencyDecimalDigits!) ?? '',
                 style: style ?? Get.textTheme.subtitle2,
                 children: <TextSpan>[
-                  TextSpan(text: _setting.setting.value?.defaultCurrency, style: getPriceStyle(style)),
+                  TextSpan(text: _setting.setting.value?.defaultCurrency, style: getPriceStyle(style!)),
                   if (unit != null) TextSpan(text: " " + unit + " ", style: getPriceStyle(style)),
                 ],
               ),
@@ -130,15 +130,15 @@ class Ui {
 
   static TextStyle getPriceStyle(TextStyle style) {
     if (style == null) {
-      return Get.textTheme.subtitle2.merge(
-        TextStyle(fontWeight: FontWeight.w300, fontSize: Get.textTheme.subtitle2.fontSize - 4),
+      return Get.textTheme.subtitle2!.merge(
+        TextStyle(fontWeight: FontWeight.w300, fontSize: Get.textTheme.subtitle2!.fontSize! - 4),
       );
     } else {
-      return style.merge(TextStyle(fontWeight: FontWeight.w300, fontSize: style.fontSize - 4));
+      return style.merge(TextStyle(fontWeight: FontWeight.w300, fontSize: style.fontSize! - 4));
     }
   }
 
-  static BoxDecoration getBoxDecoration({Color color, double radius, Border border, Gradient gradient}) {
+  static BoxDecoration getBoxDecoration({Color? color, double? radius, Border? border, Gradient? gradient}) {
     return BoxDecoration(
       color: color ?? Get.theme.primaryColor,
       borderRadius: BorderRadius.all(Radius.circular(radius ?? 10)),
@@ -150,7 +150,7 @@ class Ui {
     );
   }
 
-  static InputDecoration getInputDecoration({String hintText = '', String errorText, IconData iconData, Widget suffixIcon, Widget suffix}) {
+  static InputDecoration getInputDecoration({String hintText = '', String? errorText, IconData? iconData, Widget? suffixIcon, Widget? suffix}) {
     return InputDecoration(
       hintText: hintText,
       hintStyle: Get.textTheme.caption,
@@ -168,16 +168,16 @@ class Ui {
     );
   }
 
-  static Html applyHtml(String html, {TextStyle style, TextAlign textAlign, Alignment alignment = Alignment.centerLeft}) {
+  static Html applyHtml(String html, {TextStyle? style, TextAlign? textAlign, Alignment alignment = Alignment.centerLeft}) {
     CustomRenderMatcher pMatcher() => (context) => context.tree.element?.localName == "p";
     return Html(
       data: html.replaceAll('\r\n', '') ?? '',
       customRenders: {
         pMatcher(): CustomRender.widget(widget: (context, child) {
           return Text(
-            context.tree.element.text,
+            context.tree.element!.text!,
             textAlign: textAlign,
-            style: style == null ? Get.textTheme.bodyText1.merge(TextStyle(fontSize: 11)) : style.merge(TextStyle(fontSize: 11)),
+            style: style == null ? Get.textTheme.bodyText1?.merge(TextStyle(fontSize: 11)) : style.merge(TextStyle(fontSize: 11)),
           );
         }),
       },
@@ -200,12 +200,12 @@ class Ui {
         ),
         "h4,h5,h6": Style(
           textAlign: textAlign,
-          fontSize: style == null ? FontSize(16.0) : FontSize(style.fontSize + 2),
+          fontSize: style == null ? FontSize(16.0) : FontSize(style.fontSize! + 2),
         ),
         "h1,h2,h3": Style(
           textAlign: textAlign,
           lineHeight: LineHeight.number(2),
-          fontSize: style == null ? FontSize(18.0) : FontSize(style.fontSize + 4),
+          fontSize: style == null ? FontSize(18.0) : FontSize(style.fontSize! + 4),
         ),
         "br": Style(
           height: 0,
@@ -235,16 +235,16 @@ class Ui {
     }
   }
 
-  static Html removeHtml(String html, {TextStyle style, TextAlign textAlign, Alignment alignment = Alignment.centerLeft}) {
+  static Html removeHtml(String html, {TextStyle? style, TextAlign? textAlign, Alignment alignment = Alignment.centerLeft}) {
     CustomRenderMatcher pMatcher() => (context) => context.tree.element?.localName == "p";
     return Html(
       data: html.replaceAll('\r\n', '') ?? '',
       customRenders: {
         pMatcher(): CustomRender.widget(widget: (context, child) {
           return Text(
-            context.tree.element.text,
+            context.tree.element!.text!,
             textAlign: textAlign,
-            style: style == null ? Get.textTheme.bodyText1.merge(TextStyle(fontSize: 11)) : style.merge(TextStyle(fontSize: 11)),
+            style: style == null ? Get.textTheme.bodyText1?.merge(TextStyle(fontSize: 11)) : style.merge(TextStyle(fontSize: 11)),
           );
         }),
       },
@@ -316,7 +316,7 @@ class Ui {
   }
 
   static String getDistance(double distance) {
-    String _unit = Get.find<SettingsService>().setting.value.distanceUnit;
+    String _unit = Get.find<SettingsService>().setting.value.distanceUnit!;
     if (_unit == 'km') {
       distance *= 1.60934;
     }

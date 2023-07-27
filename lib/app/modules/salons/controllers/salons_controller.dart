@@ -15,8 +15,8 @@ class SalonsController extends GetxController {
   final page = 0.obs;
   final isLoading = true.obs;
   final isDone = false.obs;
-  SalonRepository _salonRepository;
-  EServiceRepository _eServiceRepository;
+  late SalonRepository _salonRepository;
+  late EServiceRepository _eServiceRepository;
   ScrollController scrollController = ScrollController();
 
   SalonsController() {
@@ -40,7 +40,7 @@ class SalonsController extends GetxController {
     scrollController.dispose();
   }
 
-  Future refreshEServices({bool showMessage}) async {
+  Future refreshEServices({bool? showMessage}) async {
     toggleSelected(selected.value);
     await loadSalonsOfCategory(filter: selected.value);
     if (showMessage == true) {
@@ -60,7 +60,7 @@ class SalonsController extends GetxController {
     }
   }
 
-  Future loadSalonsOfCategory({CategoryFilter filter}) async {
+  Future loadSalonsOfCategory({CategoryFilter? filter}) async {
     try {
       isLoading.value = true;
       isDone.value = false;
@@ -100,9 +100,9 @@ class SalonsController extends GetxController {
 
   void deleteEService(Salon salon) async {
     try {
-      await _salonRepository.delete(salon.id);
+      await _salonRepository.delete(salon.id!);
       salons.remove(salon);
-      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.name + " " + "has been removed".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.name! + " " + "has been removed".tr));
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

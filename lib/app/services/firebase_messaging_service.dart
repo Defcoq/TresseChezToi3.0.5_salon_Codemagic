@@ -36,7 +36,7 @@ class FireBaseMessagingService extends GetxService {
   }
 
   Future fcmOnLaunchListeners() async {
-    RemoteMessage message = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? message = await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
       _notificationsBackground(message);
     }
@@ -79,9 +79,9 @@ class FireBaseMessagingService extends GetxService {
     if (Get.currentRoute == Routes.BOOKING) {
       Get.find<BookingController>().refreshBooking();
     }
-    RemoteNotification notification = message.notification;
+    RemoteNotification notification = message.notification!;
     Get.showSnackbar(Ui.notificationSnackBar(
-      title: notification.title,
+      title: notification.title!,
       message: notification.body,
       mainButton: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -104,7 +104,8 @@ class FireBaseMessagingService extends GetxService {
       ),
       onTap: (getBar) async {
         if (message.data['bookingId'] != null) {
-          await Get.back();
+          Get.back();
+          await Future.delayed(Duration.zero);
           Get.toNamed(Routes.BOOKING, arguments: new Booking(id: message.data['bookingId']));
         }
       },
@@ -112,13 +113,13 @@ class FireBaseMessagingService extends GetxService {
   }
 
   void _newMessageNotification(RemoteMessage message) {
-    RemoteNotification notification = message.notification;
+    RemoteNotification notification = message.notification!;
     if (Get.find<MessagesController>().initialized) {
       Get.find<MessagesController>().refreshMessages();
     }
     if (Get.currentRoute != Routes.CHAT) {
       Get.showSnackbar(Ui.notificationSnackBar(
-        title: notification.title,
+        title: notification.title!,
         message: notification.body,
         mainButton: Container(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -141,7 +142,8 @@ class FireBaseMessagingService extends GetxService {
         ),
         onTap: (getBar) async {
           if (message.data['messageId'] != null) {
-            await Get.back();
+            Get.back();
+            await Future.delayed(Duration.zero);
             Get.toNamed(Routes.CHAT, arguments: new Message([], id: message.data['messageId']));
           }
         },

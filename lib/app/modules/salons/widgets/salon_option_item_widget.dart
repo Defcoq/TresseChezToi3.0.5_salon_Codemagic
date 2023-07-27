@@ -15,7 +15,7 @@ import '../controllers/salon_controller.dart';
 
 class SalonOptionItemWidget extends GetWidget<SalonController> {
   SalonOptionItemWidget({
-    @required Option option,
+    required Option option,
   }) : _option = option;
 
   final Option _option;
@@ -39,7 +39,7 @@ class SalonOptionItemWidget extends GetWidget<SalonController> {
                 height: 54,
                 width: 54,
                 fit: BoxFit.cover,
-                imageUrl: _option.image.thumb,
+                imageUrl: _option.image!.thumb!,
                 placeholder: (context, url) => Image.asset(
                   'assets/img/loading.gif',
                   fit: BoxFit.cover,
@@ -58,15 +58,15 @@ class SalonOptionItemWidget extends GetWidget<SalonController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(_option.name, style: Get.textTheme.bodyText2).paddingOnly(bottom: 5),
-                        Ui.applyHtml(_option.description, style: Get.textTheme.caption),
+                        Text(_option.name!, style: Get.textTheme.bodyText2).paddingOnly(bottom: 5),
+                        Ui.applyHtml(_option.description!, style: Get.textTheme.caption),
                       ],
                     ),
                   ),
                   SizedBox(width: 8),
                   Ui.getPrice(
                     _option.price,
-                    style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                    style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.hintColor)),
                   ),
                 ],
               ),

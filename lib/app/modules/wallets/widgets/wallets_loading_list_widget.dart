@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 class WalletsLoadingListWidget extends StatelessWidget {
   const WalletsLoadingListWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class WalletsLoadingListWidget extends StatelessWidget {
         itemBuilder: (_, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey.withOpacity(0.1),
-            highlightColor: Colors.grey[200].withOpacity(0.1),
+            highlightColor: Colors.grey[200]!.withOpacity(0.1),
             child: Container(
               width: 260,
               height: 190,

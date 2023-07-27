@@ -95,7 +95,7 @@ class SalonView extends GetView<SalonController> {
                             if (controller.salon.value?.address?.address == '') {
                               return SizedBox();
                             }
-                            return Ui.applyHtml(_salon.address.address, style: Get.textTheme.bodyText1);
+                            return Ui.applyHtml(_salon.address!.address!, style: Get.textTheme.bodyText1);
                           }),
                         ),
                         SalonTilWidget(
@@ -104,11 +104,11 @@ class SalonView extends GetView<SalonController> {
                             if (controller.salon.value.description == '') {
                               return SizedBox();
                             }
-                            return Ui.applyHtml(_salon.description, style: Get.textTheme.bodyText1);
+                            return Ui.applyHtml(_salon.description!, style: Get.textTheme.bodyText1);
                           }),
                         ),
                         buildOptions(_salon),
-                        if (_salon.images.isNotEmpty)
+                        if (_salon.images!.isNotEmpty)
                           SalonTilWidget(
                             horizontalPadding: 0,
                             title: Text("Galleries".tr, style: Get.textTheme.subtitle2).paddingSymmetric(horizontal: 20),
@@ -118,9 +118,9 @@ class SalonView extends GetView<SalonController> {
                                   primary: false,
                                   shrinkWrap: false,
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: _salon.images.length,
+                                  itemCount: _salon.images!.length,
                                   itemBuilder: (_, index) {
-                                    var _media = _salon.images.elementAt(index);
+                                    var _media = _salon.images!.elementAt(index);
                                     return InkWell(
                                       onTap: () {
                                         Get.toNamed(Routes.GALLERY, arguments: {'media': _salon.images, 'current': _media, 'heroTag': 'e_services_galleries'});
@@ -133,14 +133,14 @@ class SalonView extends GetView<SalonController> {
                                           alignment: AlignmentDirectional.topStart,
                                           children: [
                                             Hero(
-                                              tag: 'e_services_galleries' + _media.id,
+                                              tag: 'e_services_galleries' + _media.id!,
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                                 child: CachedNetworkImage(
                                                   height: 100,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover,
-                                                  imageUrl: _media.thumb,
+                                                  imageUrl: _media.thumb!,
                                                   placeholder: (context, url) => Image.asset(
                                                     'assets/img/loading.gif',
                                                     fit: BoxFit.cover,
@@ -156,7 +156,7 @@ class SalonView extends GetView<SalonController> {
                                               child: Text(
                                                 _media.name ?? '',
                                                 maxLines: 2,
-                                                style: Get.textTheme.bodyText2.merge(TextStyle(
+                                                style: Get.textTheme.bodyText2?.merge(TextStyle(
                                                   color: Get.theme.primaryColor,
                                                   shadows: <Shadow>[
                                                     Shadow(
@@ -191,7 +191,7 @@ class SalonView extends GetView<SalonController> {
   Widget buildOptions(Salon _salon) {
     controller.SorteAvailabilityHour();
     return Obx(() {
-      if (controller.salon.value.availabilityHours.isEmpty) {
+      if (controller.salon.value.availabilityHours!.isEmpty) {
         return SalonTilWidget(
           title: Text("Open Hours".tr, style: Get.textTheme.subtitle2),
           content: Center(
@@ -216,12 +216,12 @@ class SalonView extends GetView<SalonController> {
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
 
-            return SalonOptionGroupItemWidget(availabilityHour: controller.salon.value.availabilityHours.elementAt(index), salon: controller.salon.value);
+            return SalonOptionGroupItemWidget(availabilityHour: controller.salon.value.availabilityHours!.elementAt(index), salon: controller.salon.value);
           },
           separatorBuilder: (context, index) {
             return Divider(height: 16, thickness: 0.8);
           },
-          itemCount: controller.salon.value.availabilityHours.length,
+          itemCount: controller.salon.value.availabilityHours!.length,
           primary: false,
           shrinkWrap: true,
         ),
@@ -248,16 +248,16 @@ class SalonView extends GetView<SalonController> {
           controller.currentSlide.value = index;
         },
       ),
-      items: _salon.images.map((Media media) {
+      items: _salon.images?.map((Media media) {
         return Builder(
           builder: (BuildContext context) {
             return Hero(
-              tag: controller.heroTag.value + _salon.id,
+              tag: controller.heroTag.value + _salon.id!,
               child: CachedNetworkImage(
                 width: double.infinity,
                 height: 350,
                 fit: BoxFit.cover,
-                imageUrl: media.url,
+                imageUrl: media.url!,
                 placeholder: (context, url) => Image.asset(
                   'assets/img/loading.gif',
                   fit: BoxFit.cover,
@@ -277,7 +277,7 @@ class SalonView extends GetView<SalonController> {
       margin: EdgeInsets.symmetric(vertical: 100, horizontal: 20),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: _salon.images.map((Media media) {
+        children: _salon.images!.map((Media media) {
           return Container(
             width: 20.0,
             height: 5.0,
@@ -286,7 +286,7 @@ class SalonView extends GetView<SalonController> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: controller.currentSlide.value == _salon.images.indexOf(media) ? Get.theme.hintColor : Get.theme.primaryColor.withOpacity(0.4)),
+                color: controller.currentSlide.value == _salon.images!.indexOf(media) ? Get.theme.hintColor : Get.theme.primaryColor.withOpacity(0.4)),
           );
         }).toList(),
       ),
@@ -304,7 +304,7 @@ class SalonView extends GetView<SalonController> {
               Expanded(
                 child: Text(
                   _salon.name ?? '',
-                  style: Get.textTheme.headline5.merge(TextStyle(height: 1.1)),
+                  style: Get.textTheme.headline5?.merge(TextStyle(height: 1.1)),
                   maxLines: 2,
                   softWrap: true,
                   overflow: TextOverflow.fade,
@@ -352,7 +352,7 @@ class SalonView extends GetView<SalonController> {
               var _category = _salon.salonLevel;
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: Text(_category.name, style: Get.textTheme.bodyText1.merge(TextStyle(color: Colors.green))),
+                child: Text(_category!.name!, style: Get.textTheme.bodyText1?.merge(TextStyle(color: Colors.green))),
                 decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.2),
                     border: Border.all(

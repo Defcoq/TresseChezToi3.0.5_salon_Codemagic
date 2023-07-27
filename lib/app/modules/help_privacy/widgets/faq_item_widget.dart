@@ -5,9 +5,9 @@ import '../../../../common/ui.dart';
 import '../../../models/faq_model.dart';
 
 class FaqItemWidget extends StatelessWidget {
-  final Faq faq;
+  final Faq? faq;
 
-  FaqItemWidget({Key key, this.faq}) : super(key: key);
+  FaqItemWidget({Key? key, this.faq}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,14 @@ class FaqItemWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            this.faq.question,
+            this.faq!.question!,
             style: Get.textTheme.bodyText2,
           ),
           Divider(
             height: 30,
             thickness: 1,
           ),
-          Ui.applyHtml(this.faq.answer, style: Get.textTheme.caption)
+          Ui.applyHtml(this.faq!.answer!, style: Get.textTheme.caption)
         ],
       ),
     );

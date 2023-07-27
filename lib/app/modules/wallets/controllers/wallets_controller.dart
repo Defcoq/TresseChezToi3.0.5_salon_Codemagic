@@ -9,7 +9,7 @@ class WalletsController extends GetxController {
   final wallets = <Wallet>[].obs;
   final walletTransactions = <WalletTransaction>[].obs;
   final selectedWallet = new Wallet().obs;
-  PaymentRepository _paymentRepository;
+  late PaymentRepository _paymentRepository;
 
   WalletsController() {
     _paymentRepository = new PaymentRepository();
@@ -21,7 +21,7 @@ class WalletsController extends GetxController {
     super.onInit();
   }
 
-  Future refreshWallets({bool showMessage}) async {
+  Future refreshWallets({bool? showMessage}) async {
     await getWallets();
     initSelectedWallet();
     await getWalletTransactions();

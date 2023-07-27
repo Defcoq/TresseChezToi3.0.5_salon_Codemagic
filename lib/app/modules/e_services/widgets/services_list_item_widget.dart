@@ -15,8 +15,8 @@ import 'e_service_options_popup_menu_widget.dart';
 
 class ServicesListItemWidget extends StatelessWidget {
   const ServicesListItemWidget({
-    Key key,
-    @required EService service,
+    Key? key,
+    required EService service,
   })  : _service = service,
         super(key: key);
 
@@ -38,7 +38,7 @@ class ServicesListItemWidget extends StatelessWidget {
             Column(
               children: [
                 Hero(
-                  tag: 'salon_services_list_item' + _service.id,
+                  tag: 'salon_services_list_item' + _service!.id!,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                     child: CachedNetworkImage(
@@ -56,7 +56,7 @@ class ServicesListItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                SalonAvailabilityBadgeWidget(salon: _service.salon, withImage: true),
+                SalonAvailabilityBadgeWidget(salon: _service.salon!, withImage: true),
               ],
             ),
             SizedBox(width: 12),
@@ -83,14 +83,14 @@ class ServicesListItemWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      DurationChipWidget(duration: _service.duration),
+                      DurationChipWidget(duration: _service.duration!),
                      Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           if (_service.getOldPrice > 0)
                             Ui.getPrice(
                               _service.getOldPrice,
-                              style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
+                              style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
                             ),
                           Ui.getPrice(
                             _service.getPrice,
@@ -110,7 +110,7 @@ class ServicesListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _service.salon.name,
+                          _service.salon!.name!,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -129,7 +129,7 @@ class ServicesListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _service.salon.address.address,
+                          _service.salon!.address!.address!,
                           maxLines: 3,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -141,10 +141,10 @@ class ServicesListItemWidget extends StatelessWidget {
                   Divider(height: 8, thickness: 1),
                   Wrap(
                     spacing: 5,
-                    children: List.generate(_service.categories.length, (index) {
+                    children: List.generate(_service.categories!.length, (index) {
                       return Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        child: Text(_service.categories.elementAt(index).name, style: Get.textTheme.caption.merge(TextStyle(fontSize: 10))),
+                        child: Text(_service.categories!.elementAt(index).name!, style: Get.textTheme.caption?.merge(TextStyle(fontSize: 10))),
                         decoration: BoxDecoration(
                             color: Get.theme.primaryColor,
                             border: Border.all(

@@ -6,7 +6,7 @@ import '../../../services/settings_service.dart';
 import 'theme_mode_controller.dart';
 
 class LanguageController extends GetxController {
-  GetStorage _box;
+  GetStorage? _box;
 
   LanguageController() {
     _box = new GetStorage();
@@ -20,7 +20,7 @@ class LanguageController extends GetxController {
       // en
       Get.updateLocale(Locale(value));
     }
-    await _box.write('language', value);
+    await _box!.write('language', value);
     if (Get.isDarkMode) {
       Get.find<ThemeModeController>().changeThemeMode(ThemeMode.light);
     }

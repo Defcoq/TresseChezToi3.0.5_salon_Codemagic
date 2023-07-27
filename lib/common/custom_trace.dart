@@ -1,12 +1,12 @@
 class CustomTrace {
-  final StackTrace _trace;
+  final StackTrace? _trace;
 
-  String fileName;
-  String functionName;
-  String callerFunctionName;
-  String message;
-  int lineNumber;
-  int columnNumber;
+  String? fileName;
+  String? functionName;
+  String? callerFunctionName;
+  String? message;
+  int? lineNumber;
+  int? columnNumber;
 
   CustomTrace(this._trace, {this.message}) {
     _parseTrace();

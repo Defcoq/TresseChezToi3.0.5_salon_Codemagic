@@ -6,9 +6,9 @@ import '../../../../common/ui.dart';
 import '../../../models/salon_subscription_model.dart';
 
 class SubscriptionItemWidget extends StatelessWidget {
-  final SalonSubscription subscription;
+  final SalonSubscription? subscription;
 
-  SubscriptionItemWidget({Key key, this.subscription}) : super(key: key);
+  SubscriptionItemWidget({Key? key, this.subscription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SubscriptionItemWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            this.subscription.salon.name,
+            this.subscription!.salon!.name!,
             style: Get.textTheme.bodyText2,
           ),
           Divider(
@@ -39,7 +39,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(text: "Starts At".tr, style: Get.textTheme.bodyText1, children: <TextSpan>[
                       TextSpan(
-                        text: DateFormat(' dd/MM/yyyy', Get.locale.toString()).format(subscription.startsAt),
+                        text: DateFormat(' dd/MM/yyyy', Get.locale.toString()).format(subscription!.startsAt!),
                         style: Get.textTheme.caption,
                       ),
                     ]),
@@ -47,18 +47,18 @@ class SubscriptionItemWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(text: "Expires At".tr, style: Get.textTheme.bodyText1, children: <TextSpan>[
                       TextSpan(
-                        text: DateFormat(' dd/MM/yyyy', Get.locale.toString()).format(subscription.expiresAt),
+                        text: DateFormat(' dd/MM/yyyy', Get.locale.toString()).format(subscription!.expiresAt!),
                         style: Get.textTheme.caption,
                       ),
                     ]),
                   ),
                 ],
               ),
-              if (subscription.active)
+              if (subscription!.active!)
                 Container(
                   child: Text("Enabled".tr,
                       maxLines: 1,
-                      style: Get.textTheme.bodyText2.merge(
+                      style: Get.textTheme.bodyText2?.merge(
                         TextStyle(color: Colors.green),
                       ),
                       softWrap: false,
@@ -70,11 +70,11 @@ class SubscriptionItemWidget extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
                 ),
-              if (!subscription.active)
+              if (!subscription!.active!)
                 Container(
                   child: Text("Disabled".tr,
                       maxLines: 1,
-                      style: Get.textTheme.bodyText2.merge(
+                      style: Get.textTheme.bodyText2?.merge(
                         TextStyle(color: Colors.grey),
                       ),
                       softWrap: false,
@@ -105,7 +105,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 child: Text(
-                  subscription.payment?.paymentMethod?.getName(),
+                  subscription!.payment!.paymentMethod!.getName(),
                   style: Get.textTheme.bodyText2,
                 ),
               ),
@@ -116,14 +116,14 @@ class SubscriptionItemWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  subscription.subscriptionPackage.name,
+                  subscription!.subscriptionPackage!.name!,
                   style: Get.textTheme.headline6,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              if (subscription.payment != null)
+              if (subscription!.payment != null)
                 Ui.getPrice(
-                  subscription.payment.amount,
+                  subscription!.payment!.amount!,
                   style: Get.textTheme.headline6,
                 ),
             ],

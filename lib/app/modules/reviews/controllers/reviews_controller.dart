@@ -8,7 +8,7 @@ class ReviewsController extends GetxController {
   final reviews = <Review>[].obs;
   final totalReviews = 0.obs;
   final rate = 0.0.obs;
-  SalonRepository _salonRepository;
+  late SalonRepository _salonRepository;
 
   ReviewsController() {
     _salonRepository = new SalonRepository();
@@ -36,7 +36,7 @@ class ReviewsController extends GetxController {
     try {
       reviews.assignAll(await _salonRepository.getReviews());
       totalReviews.value = reviews.length;
-      rate.value = reviews.map((element) => element.rate).reduce((value, element) => value + element) / reviews.length;
+      rate.value = reviews!.map((element) => element.rate).reduce((value, element) => value! + element!)! / reviews.length!;
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

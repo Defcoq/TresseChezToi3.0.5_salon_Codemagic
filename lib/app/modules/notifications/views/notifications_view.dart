@@ -62,9 +62,9 @@ class NotificationsView extends GetView<NotificationsController> {
             primary: false,
             itemBuilder: (context, index) {
               var _notification = controller.notifications.elementAt(index);
-              if (_notification.data['message_id'] != null) {
+              if (_notification.data!['message_id'] != null) {
                 return MessageNotificationItemWidget(notification: _notification);
-              } else if (_notification.data['booking_id'] != null) {
+              } else if (_notification.data!['booking_id'] != null) {
                 return BookingNotificationItemWidget(notification: _notification);
               } else {
                 return NotificationItemWidget(

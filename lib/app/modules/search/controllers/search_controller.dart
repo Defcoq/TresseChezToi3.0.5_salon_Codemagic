@@ -11,11 +11,11 @@ class SearchController extends GetxController {
   final heroTag = "".obs;
   final categories = <Category>[].obs;
   final selectedCategories = <String>[].obs;
-  TextEditingController textEditingController;
+  late TextEditingController textEditingController;
 
   final eServices = <EService>[].obs;
-  EServiceRepository _eServiceRepository;
-  CategoryRepository _categoryRepository;
+  late EServiceRepository _eServiceRepository;
+  late CategoryRepository _categoryRepository;
 
   SearchController() {
     _eServiceRepository = new EServiceRepository();
@@ -35,7 +35,7 @@ class SearchController extends GetxController {
     super.onReady();
   }
 
-  Future refreshSearch({bool showMessage}) async {
+  Future refreshSearch({bool? showMessage}) async {
     await getCategories();
     await searchEServices();
     if (showMessage == true) {
@@ -43,12 +43,12 @@ class SearchController extends GetxController {
     }
   }
 
-  Future searchEServices({String keywords}) async {
+  Future searchEServices({String? keywords}) async {
     try {
       if (selectedCategories.isEmpty) {
-        eServices.assignAll(await _eServiceRepository.search(keywords, categories.map((element) => element.id).toList()));
+        eServices.assignAll(await _eServiceRepository.search(keywords!, categories!.map((element) => element.id!).toList()));
       } else {
-        eServices.assignAll(await _eServiceRepository.search(keywords, selectedCategories.toList()));
+        eServices.assignAll(await _eServiceRepository.search(keywords!, selectedCategories.toList()));
       }
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
@@ -69,7 +69,7 @@ class SearchController extends GetxController {
 
   void toggleCategory(bool value, Category category) {
     if (value) {
-      selectedCategories.add(category.id);
+      selectedCategories.add(category.id!);
     } else {
       selectedCategories.removeWhere((element) => element == category.id);
     }

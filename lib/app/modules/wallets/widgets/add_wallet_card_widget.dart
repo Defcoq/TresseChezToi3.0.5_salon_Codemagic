@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class AddWalletCardWidget extends StatelessWidget {
   const AddWalletCardWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

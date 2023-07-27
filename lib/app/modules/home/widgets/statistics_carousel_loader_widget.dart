@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class StatisticsCarouselLoaderWidget extends StatelessWidget {
   const StatisticsCarouselLoaderWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

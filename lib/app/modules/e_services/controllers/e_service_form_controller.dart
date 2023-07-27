@@ -19,9 +19,9 @@ class EServiceFormController extends GetxController {
   final categories = <Category>[].obs;
   final salons = <Salon>[].obs;
   GlobalKey<FormState> eServiceForm = new GlobalKey<FormState>();
-  EServiceRepository _eServiceRepository;
-  CategoryRepository _categoryRepository;
-  SalonRepository _salonRepository;
+ late EServiceRepository _eServiceRepository;
+ late  CategoryRepository _categoryRepository;
+  late SalonRepository _salonRepository;
 
   EServiceFormController() {
     _eServiceRepository = new EServiceRepository();
@@ -50,14 +50,14 @@ class EServiceFormController extends GetxController {
     await getSalons();
     await getOptionGroups();
     if (showMessage) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: eService.value.name + " " + "page refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: eService.value.name! + " " + "page refreshed successfully".tr));
     }
   }
 
   Future getEService() async {
     if (eService.value.hasData) {
       try {
-        eService.value = await _eServiceRepository.get(eService.value.id);
+        eService.value = await _eServiceRepository.get(eService.value.id!);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       }
@@ -88,14 +88,14 @@ class EServiceFormController extends GetxController {
 
   List<SelectDialogItem<Salon>> getSelectSalonsItems() {
     return salons.map((element) {
-      return SelectDialogItem(element, element.name);
+      return SelectDialogItem(element, element.name!);
     }).toList();
   }
 
   Future getOptionGroups() async {
     if (eService.value.hasData) {
       try {
-        var _optionGroups = await _eServiceRepository.getOptionGroups(eService.value.id);
+        var _optionGroups = await _eServiceRepository.getOptionGroups(eService.value.id!);
         optionGroups.assignAll(_optionGroups);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
@@ -111,10 +111,10 @@ class EServiceFormController extends GetxController {
   }
 
   void createEServiceForm({bool createOptions = false}) async {
-    Get.focusScope.unfocus();
-    if (eServiceForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (eServiceForm.currentState!.validate()) {
       try {
-        eServiceForm.currentState.save();
+        eServiceForm.currentState!.save();
         var _eService = await _eServiceRepository.create(eService.value);
         if (createOptions)
           Get.offAndToNamed(Routes.OPTIONS_FORM, arguments: {'eService': _eService});
@@ -129,10 +129,10 @@ class EServiceFormController extends GetxController {
   }
 
   void updateEServiceForm() async {
-    Get.focusScope.unfocus();
-    if (eServiceForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (eServiceForm.currentState!.validate()) {
       try {
-        eServiceForm.currentState.save();
+        eServiceForm.currentState!.save();
         var _eService = await _eServiceRepository.update(eService.value);
         Get.offAndToNamed(Routes.E_SERVICE, arguments: {'eService': _eService, 'heroTag': 'e_service_update_form'});
       } catch (e) {
@@ -145,9 +145,9 @@ class EServiceFormController extends GetxController {
 
   void deleteEService() async {
     try {
-      await _eServiceRepository.delete(eService.value.id);
+      await _eServiceRepository.delete(eService.value.id!);
       Get.offAndToNamed(Routes.E_SERVICES);
-      Get.showSnackbar(Ui.SuccessSnackBar(message: eService.value.name + " " + "has been removed".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: eService.value.name! + " " + "has been removed".tr));
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

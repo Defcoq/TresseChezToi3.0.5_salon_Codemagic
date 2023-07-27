@@ -9,8 +9,8 @@ import '../../../routes/app_routes.dart';
 import '../../../services/global_service.dart';
 
 class PayStackController extends GetxController {
-  WebViewController webView;
-  PaymentRepository _paymentRepository;
+  WebViewController? webView;
+  late PaymentRepository _paymentRepository;
   final url = "".obs;
   final progress = 0.0.obs;
   final eProviderSubscription = new SalonSubscription().obs;

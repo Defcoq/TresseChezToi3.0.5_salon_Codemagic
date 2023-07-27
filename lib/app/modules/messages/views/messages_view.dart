@@ -69,7 +69,7 @@ class MessagesView extends GetView<MessagesController> {
       body: RefreshIndicator(
           onRefresh: () async {
             controller.messages.clear();
-            controller.lastDocument = new Rx<DocumentSnapshot>(null);
+            controller.lastDocument = new Rx<DocumentSnapshot?>(null);
             await controller.listenForMessages();
           },
           child: conversationsList()),

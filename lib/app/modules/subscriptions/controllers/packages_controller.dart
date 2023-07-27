@@ -13,8 +13,8 @@ class PackagesController extends GetxController {
   final subscriptionPackages = <SubscriptionPackage>[].obs;
   final eProviderSubscription = SalonSubscription().obs;
   final eProviders = <Salon>[].obs;
-  SubscriptionRepository _subscriptionRepository;
-  SalonRepository _eProviderRepository;
+  late SubscriptionRepository _subscriptionRepository;
+  late SalonRepository _eProviderRepository;
 
   PackagesController() {
     _subscriptionRepository = new SubscriptionRepository();
@@ -27,7 +27,7 @@ class PackagesController extends GetxController {
     super.onInit();
   }
 
-  Future refreshSubscriptionPackages({bool showMessage}) async {
+  Future refreshSubscriptionPackages({bool? showMessage}) async {
     await getEProviders();
     await getSubscriptionPackages();
     if (showMessage == true) {
@@ -55,7 +55,7 @@ class PackagesController extends GetxController {
 
   List<SelectDialogItem<Salon>> getSelectProvidersItems() {
     return eProviders.map((element) {
-      return SelectDialogItem(element, element.name);
+      return SelectDialogItem(element, element.name!);
     }).toList();
   }
 }

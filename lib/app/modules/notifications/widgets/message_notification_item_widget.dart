@@ -11,8 +11,8 @@ import '../controllers/notifications_controller.dart';
 import 'notification_item_widget.dart';
 
 class MessageNotificationItemWidget extends GetView<NotificationsController> {
-  MessageNotificationItemWidget({Key key, this.notification}) : super(key: key);
-  final model.Notification notification;
+  MessageNotificationItemWidget({Key? key, this.notification}) : super(key: key);
+  final model.Notification? notification;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MessageNotificationItemWidget extends GetView<NotificationsController> {
       ),
       onTap: (notification) async {
 
-        if(!notification.iSProviderSubscriptionActive)
+        if(!notification.iSProviderSubscriptionActive!)
         {
           final confirm = await showDialog<bool>(
             context: context,
@@ -41,7 +41,7 @@ class MessageNotificationItemWidget extends GetView<NotificationsController> {
               );
             },
           );
-          if (confirm) {
+          if (confirm!) {
             Get.showSnackbar(Ui.SuccessSnackBar(message: "You are redirecting to payment gateway".tr));
 
             Get.toNamed(Routes.PACKAGES);
@@ -53,7 +53,7 @@ class MessageNotificationItemWidget extends GetView<NotificationsController> {
         }
         else {
           Get.toNamed(Routes.CHAT, arguments: new Message(
-              [], id: notification.data['message_id'].toString()));
+              [], id: notification.data!['message_id'].toString()));
           await controller.markAsReadNotification(notification);
         }
       },

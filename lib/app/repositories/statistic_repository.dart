@@ -4,7 +4,7 @@ import '../models/statistic.dart';
 import '../providers/laravel_provider.dart';
 
 class StatisticRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   StatisticRepository() {
     _laravelApiClient = Get.find<LaravelApiClient>();

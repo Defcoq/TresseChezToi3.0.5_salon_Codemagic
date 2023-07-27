@@ -6,13 +6,13 @@ import '../../../models/wallet_model.dart';
 
 class WalletBalanceCard extends StatelessWidget {
   const WalletBalanceCard({
-    Key key,
+    Key? key,
     this.wallet,
-    this.onEdit,
-    this.onTap,
+    required this.onEdit,
+    required this.onTap,
   }) : super(key: key);
 
-  final Wallet wallet;
+  final Wallet? wallet;
   final ValueChanged<Wallet> onEdit;
   final ValueChanged<Wallet> onTap;
 
@@ -20,7 +20,7 @@ class WalletBalanceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTap(wallet);
+        onTap(wallet!);
       },
       child: Stack(
         children: <Widget>[
@@ -41,19 +41,19 @@ class WalletBalanceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Ui.getPrice(
-                    wallet.balance,
-                    style: Get.textTheme.headline2.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 28)),
+                    wallet!.balance!,
+                    style: Get.textTheme.headline2?.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 28)),
                   ),
                   SizedBox(height: 20),
                   Text(
-                    wallet.name ?? '',
-                    style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor)),
+                    wallet!.name ?? '',
+                    style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor)),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   Text(
-                    wallet.getId(),
-                    style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor)),
+                    wallet!.getId()!,
+                    style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor)),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   )
@@ -88,7 +88,7 @@ class WalletBalanceCard extends StatelessWidget {
               bottom: 22,
               child: IconButton(
                   onPressed: () {
-                    onEdit(wallet);
+                    onEdit(wallet!);
                   },
                   icon: Icon(
                     Icons.edit_outlined,

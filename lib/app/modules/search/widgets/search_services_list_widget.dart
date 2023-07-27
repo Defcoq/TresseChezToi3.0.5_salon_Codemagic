@@ -7,23 +7,23 @@ import '../../global_widgets/circular_loading_widget.dart';
 import 'search_services_list_item_widget.dart';
 
 class SearchServicesListWidget extends StatelessWidget {
-  final List<EService> services;
+  final List<EService>? services;
 
-  SearchServicesListWidget({Key key, List<EService> this.services}) : super(key: key);
+  SearchServicesListWidget({Key? key, List<EService>? this.services}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (this.services.isEmpty) {
+      if (this.services!.isEmpty) {
         return CircularLoadingWidget(height: 300);
       } else {
         return ListView.builder(
           padding: EdgeInsets.only(bottom: 10, top: 10),
           primary: false,
           shrinkWrap: true,
-          itemCount: services.length,
+          itemCount: services!.length,
           itemBuilder: ((_, index) {
-            var _service = services.elementAt(index);
+            var _service = services!.elementAt(index);
             return SearchServicesListItemWidget(service: _service);
           }),
         );

@@ -28,7 +28,7 @@ class ReviewView extends GetView<ReviewController> {
               iconTheme: IconThemeData(color: Get.theme.hintColor),
               title: Text(
                 "Review Details".tr,
-                style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.hintColor)),
               ),
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -54,9 +54,9 @@ class ReviewView extends GetView<ReviewController> {
                     child: Column(
                       children: [
                         Text(controller.review.value.rate.toString(),
-                            style: Get.textTheme.headline1.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
+                            style: Get.textTheme.headline1?.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
                         Wrap(
-                          children: Ui.getStarsList(controller.review.value.rate, size: 32),
+                          children: Ui.getStarsList(controller.review.value.rate!, size: 32),
                         ),
                       ],
                     ),

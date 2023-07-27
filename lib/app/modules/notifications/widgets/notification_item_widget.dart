@@ -6,11 +6,11 @@ import '../../../../common/ui.dart';
 import '../../../models/notification_model.dart' as model;
 
 class NotificationItemWidget extends StatelessWidget {
-  NotificationItemWidget({Key key, this.notification, this.onDismissed, this.onTap, this.icon}) : super(key: key);
-  final model.Notification notification;
+  NotificationItemWidget({Key? key, this.notification, required this.onDismissed, required this.onTap, this.icon}) : super(key: key);
+  final model.Notification? notification;
   final ValueChanged<model.Notification> onDismissed;
   final ValueChanged<model.Notification> onTap;
-  final Widget icon;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +32,18 @@ class NotificationItemWidget extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) {
-        onDismissed(this.notification);
+        onDismissed(this.notification!);
         // Then show a snackbar
         Get.showSnackbar(Ui.SuccessSnackBar(message: "The notification is deleted".tr));
       },
       child: GestureDetector(
         onTap: () {
-          onTap(notification);
+          onTap(notification!);
         },
         child: Container(
           padding: EdgeInsets.all(12),
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          decoration: Ui.getBoxDecoration(color: this.notification.read ? Get.theme.primaryColor : Get.theme.focusColor.withOpacity(0.15)),
+          decoration: Ui.getBoxDecoration(color: this.notification!.read! ? Get.theme.primaryColor : Get.theme.focusColor.withOpacity(0.15)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -55,8 +55,8 @@ class NotificationItemWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                          notification.read ? Get.theme.focusColor.withOpacity(0.6) : Get.theme.focusColor.withOpacity(1),
-                          notification.read ? Get.theme.focusColor.withOpacity(0.1) : Get.theme.focusColor.withOpacity(0.2),
+                          notification!.read! ? Get.theme.focusColor.withOpacity(0.6) : Get.theme.focusColor.withOpacity(1),
+                          notification!.read! ? Get.theme.focusColor.withOpacity(0.1) : Get.theme.focusColor.withOpacity(0.2),
                           // Get.theme.focusColor.withOpacity(0.2),
                         ])),
                     child: icon ??
@@ -100,13 +100,13 @@ class NotificationItemWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Text(
-                      this.notification.getMessage(),
+                      this.notification!.getMessage(),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
-                      style: Get.textTheme.bodyText1.merge(TextStyle(fontWeight: notification.read ? FontWeight.w300 : FontWeight.w600)),
+                      style: Get.textTheme.bodyText1!.merge(TextStyle(fontWeight: notification!.read! ? FontWeight.w300 : FontWeight.w600)),
                     ),
                     Text(
-                      DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(this.notification.createdAt),
+                      DateFormat('d, MMMM y | HH:mm', Get.locale.toString()).format(this.notification!.createdAt!),
                       style: Get.textTheme.caption,
                     )
                   ],

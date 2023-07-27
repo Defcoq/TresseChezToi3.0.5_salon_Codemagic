@@ -5,7 +5,7 @@ import '../models/subscription_package_model.dart';
 import '../providers/laravel_provider.dart';
 
 class SubscriptionRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   SubscriptionRepository() {
     _laravelApiClient = Get.find<LaravelApiClient>();

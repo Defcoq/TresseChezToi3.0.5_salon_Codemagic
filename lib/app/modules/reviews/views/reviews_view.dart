@@ -29,7 +29,7 @@ class ReviewsView extends GetView<ReviewsController> {
               iconTheme: IconThemeData(color: Get.theme.hintColor),
               title: Text(
                 "Reviews".tr,
-                style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.hintColor)),
               ),
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -57,7 +57,7 @@ class ReviewsView extends GetView<ReviewsController> {
                       return Column(
                         children: [
                           Text(controller.rate.value.toStringAsFixed(2),
-                              style: Get.textTheme.headline1.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
+                              style: Get.textTheme.headline1?.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
                           Wrap(
                             children: Ui.getStarsList(controller.rate.value, size: 32),
                           ),

@@ -11,7 +11,7 @@ import 'option_item_widget.dart';
 
 class OptionGroupItemWidget extends GetWidget<EServiceController> {
   OptionGroupItemWidget({
-    @required OptionGroup optionGroup,
+    required OptionGroup optionGroup,
   }) : _optionGroup = optionGroup;
 
   final OptionGroup _optionGroup;
@@ -41,12 +41,12 @@ class OptionGroupItemWidget extends GetWidget<EServiceController> {
           shrinkWrap: true,
           primary: false,
           padding: EdgeInsets.zero,
-          itemCount: _optionGroup.options.length,
+          itemCount: _optionGroup.options!.length!,
           separatorBuilder: (context, index) {
             return SizedBox(height: 6);
           },
           itemBuilder: (context, index) {
-            var _option = _optionGroup.options.elementAt(index);
+            var _option = _optionGroup.options!.elementAt(index);
             return OptionItemWidget(option: _option);
           },
         ),

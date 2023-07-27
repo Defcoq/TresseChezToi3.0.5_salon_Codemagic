@@ -7,9 +7,9 @@ import '../../../models/review_model.dart';
 import '../../../routes/app_routes.dart';
 
 class ReviewItemWidget extends StatelessWidget {
-  final Review review;
+  final Review? review;
 
-  ReviewItemWidget({Key key, this.review}) : super(key: key);
+  ReviewItemWidget({Key? key, this.review}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ReviewItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    review.booking.salon.name,
+                    review!.booking!.salon!.name!,
                     style: Get.textTheme.bodyText2,
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
@@ -39,7 +39,7 @@ class ReviewItemWidget extends StatelessWidget {
                   height: 26,
                   child: Chip(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    label: Text(review.booking.salon.totalReviews.toString(), style: Get.textTheme.bodyText1.merge(TextStyle(height: 0.6))),
+                    label: Text(review!.booking!.salon!.totalReviews.toString(), style: Get.textTheme.bodyText1?.merge(TextStyle(height: 0.6))),
                     backgroundColor: Get.theme.focusColor.withOpacity(0.2),
                     shape: StadiumBorder(),
                   ),
@@ -57,7 +57,7 @@ class ReviewItemWidget extends StatelessWidget {
                     height: 65,
                     width: 65,
                     fit: BoxFit.cover,
-                    imageUrl: review.booking.user.avatar.thumb,
+                    imageUrl: review!.booking!.user!.avatar!.thumb!,
                     placeholder: (context, url) => Image.asset(
                       'assets/img/loading.gif',
                       fit: BoxFit.cover,
@@ -73,14 +73,14 @@ class ReviewItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        review.booking.user.name,
+                        review!.booking!.user!.name!,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                         maxLines: 2,
-                        style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.hintColor)),
+                        style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.hintColor)),
                       ),
                       Text(
-                        review.booking.user.bio,
+                        review!.booking!.user!.bio!,
                         overflow: TextOverflow.ellipsis,
                         style: Get.textTheme.caption,
                       ),
@@ -94,7 +94,7 @@ class ReviewItemWidget extends StatelessWidget {
                     label: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(review.rate.toString(), style: Get.textTheme.bodyText1.merge(TextStyle(color: Get.theme.primaryColor))),
+                        Text(review!.rate.toString(), style: Get.textTheme.bodyText1?.merge(TextStyle(color: Get.theme.primaryColor))),
                         Icon(
                           Icons.star_border,
                           color: Get.theme.primaryColor,
@@ -108,7 +108,7 @@ class ReviewItemWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Ui.removeHtml(review.review, style: Get.textTheme.bodyText1),
+            Ui.removeHtml(review!.review!, style: Get.textTheme.bodyText1),
           ],
         ),
       ),

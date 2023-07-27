@@ -6,8 +6,8 @@ import '../providers/laravel_provider.dart';
 import '../services/auth_service.dart';
 
 class UserRepository {
-  LaravelApiClient _laravelApiClient;
-  FirebaseProvider _firebaseProvider;
+  late LaravelApiClient _laravelApiClient;
+  late FirebaseProvider _firebaseProvider;
 
   UserRepository() {}
 

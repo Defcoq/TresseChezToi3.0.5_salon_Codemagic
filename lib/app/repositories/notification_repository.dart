@@ -5,7 +5,7 @@ import '../models/user_model.dart';
 import '../providers/laravel_provider.dart';
 
 class NotificationRepository {
-  LaravelApiClient _laravelApiClient;
+ late  LaravelApiClient _laravelApiClient;
 
   NotificationRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();

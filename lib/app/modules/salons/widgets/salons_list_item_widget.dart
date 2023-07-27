@@ -17,8 +17,8 @@ import '../../global_widgets/salon_availability_badge_widget.dart';
 
 class SalonsListItemWidget extends StatelessWidget {
   const SalonsListItemWidget({
-    Key key,
-    @required Salon salon,
+    Key? key,
+    required Salon salon,
   })  : _salon = salon,
         super(key: key);
 
@@ -40,7 +40,7 @@ class SalonsListItemWidget extends StatelessWidget {
             Column(
               children: [
                 Hero(
-                  tag: 'salon_services_list_item' + _salon.id,
+                  tag: 'salon_services_list_item' + _salon.id!,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                     child: CachedNetworkImage(
@@ -112,7 +112,7 @@ class SalonsListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _salon.name,
+                          _salon.name!,
                           maxLines: 1,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -131,7 +131,7 @@ class SalonsListItemWidget extends StatelessWidget {
                       SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          _salon.address.address,
+                          _salon.address!.address!,
                           maxLines: 3,
                           overflow: TextOverflow.fade,
                           softWrap: false,
@@ -146,7 +146,7 @@ class SalonsListItemWidget extends StatelessWidget {
                     children: List.generate(1, (index) {
                       return Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        child: Text(_salon.salonLevel.name, style: Get.textTheme.caption.merge(TextStyle(fontSize: 10))),
+                        child: Text(_salon.salonLevel!.name!, style: Get.textTheme.caption?.merge(TextStyle(fontSize: 10))),
                         decoration: BoxDecoration(
                             color: Get.theme.primaryColor,
                             border: Border.all(

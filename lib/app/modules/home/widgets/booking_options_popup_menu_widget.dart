@@ -8,8 +8,8 @@ import '../controllers/home_controller.dart';
 
 class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
   const BookingOptionsPopupMenuWidget({
-    Key key,
-    @required Booking booking,
+    Key? key,
+    required Booking booking,
   })  : _booking = booking,
         super(key: key);
 
@@ -51,7 +51,7 @@ class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
               children: [
                 Icon(Icons.assignment_outlined, color: Get.theme.hintColor),
                 Text(
-                  "ID #".tr + _booking.id,
+                  "ID #".tr + _booking.id!,
                   style: TextStyle(color: Get.theme.hintColor),
                 ),
               ],
@@ -75,7 +75,7 @@ class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
             value: "view",
           ),
         );
-        if (_booking.status.order == Get.find<GlobalService>().global.value.received) {
+        if (_booking.status!.order == Get.find<GlobalService>().global.value.received) {
           list.add(
             PopupMenuItem(
               child: Wrap(
@@ -93,7 +93,7 @@ class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
             ),
           );
         }
-        if (_booking.status.order < Get.find<GlobalService>().global.value.onTheWay) {
+        if (_booking.status!.order! < Get.find<GlobalService>().global.value.onTheWay!) {
           list.add(
             PopupMenuItem(
               child: Wrap(

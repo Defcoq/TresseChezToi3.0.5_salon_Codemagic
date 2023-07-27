@@ -36,9 +36,9 @@ import 'api_provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 class LaravelApiClient extends GetxService with ApiClient {
-  dio.Dio _httpClient;
-  dio.Options _optionsNetwork;
-  dio.Options _optionsCache;
+  dio.Dio? _httpClient;
+  dio.Options? _optionsNetwork;
+  dio.Options? _optionsCache;
 
   LaravelApiClient() {
     this.baseUrl = this.globalService.global.value.laravelBaseUrl;
@@ -52,7 +52,7 @@ class LaravelApiClient extends GetxService with ApiClient {
     } else {
       _optionsNetwork = buildCacheOptions(Duration(days: 3), forceRefresh: true);
       _optionsCache = buildCacheOptions(Duration(minutes: 10), forceRefresh: false);
-      _httpClient.interceptors.add(DioCacheManager(CacheConfig(baseUrl: getApiBaseUrl(""))).interceptor);
+      _httpClient!.interceptors.add(DioCacheManager(CacheConfig(baseUrl: getApiBaseUrl(""))).interceptor);
     }
     return this;
   }
@@ -78,46 +78,46 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/user").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(
+    var response = await _httpClient!.getUri(
       _uri,
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return User.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return User.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
   Future<User> login(User user) async {
     Uri _uri = getApiBaseUri("salon_owner/login");
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(user.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      response.data['data']['auth'] = true;
-      return User.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      response!.data['data']['auth'] = true;
+      return User.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
   Future<User> register(User user) async {
     Uri _uri = getApiBaseUri("salon_owner/register");
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(user.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      response.data['data']['auth'] = true;
-      return User.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      response!.data['data']['auth'] = true;
+      return User.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -126,15 +126,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Get.log(_uri.toString());
     // to remove other attributes from the user object
     user = new User(email: user.email);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(user.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -147,16 +147,16 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/users/${user.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(user.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      response.data['data']['auth'] = true;
-      return User.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      response!.data['data']['auth'] = true;
+      return User.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -169,11 +169,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/dashboard").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Statistic>((obj) => Statistic.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Statistic>((obj) => Statistic.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -189,11 +189,11 @@ class LaravelApiClient extends GetxService with ApiClient {
       'sortedBy': 'desc',
     };
     Uri _uri = getApiBaseUri("addresses").replace(queryParameters: _queryParameters);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Address>((obj) => Address.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Address>((obj) => Address.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -207,11 +207,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -224,11 +224,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
     Uri _uri = getApiBaseUri("e_services/$id").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return EService.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return EService.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -242,15 +242,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     try {
-      var response = await _httpClient.postUri(
+      var response = await _httpClient?.postUri(
         _uri,
         data: json.encode(eService.toJson()),
         options: _optionsNetwork,
       );
-      if (response.data['success'] == true) {
-        return EService.fromJson(response.data['data']);
+      if (response!.data['success'] == true) {
+        return EService.fromJson(response!.data['data']);
       } else {
-        throw new Exception(response.data['message']);
+        throw new Exception(response!.data['message']);
       }
     } catch (e) {
       print(e.toString());
@@ -267,15 +267,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services/${eService.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(eService.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return EService.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return EService.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -288,14 +288,14 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("e_services/${eServiceId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.deleteUri(
+    var response = await _httpClient?.deleteUri(
       _uri,
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -309,15 +309,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     try {
-      var response = await _httpClient.postUri(
+      var response = await _httpClient?.postUri(
         _uri,
         data: json.encode(salon.toJson()),
         options: _optionsNetwork,
       );
-      if (response.data['success'] == true) {
-        return EService.fromJson(response.data['data']);
+      if (response!.data['success'] == true) {
+        return EService.fromJson(response!.data['data']);
       } else {
-        throw new Exception(response.data['message']);
+        throw new Exception(response!.data['message']);
       }
     } catch (e) {
       print(e.toString());
@@ -334,15 +334,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services/${salon.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(salon.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return EService.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return EService.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -355,14 +355,14 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("e_services/${salonId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.deleteUri(
+    var response = await _httpClient?.deleteUri(
       _uri,
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -376,15 +376,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("options").replace(queryParameters: _queryParameters);
     print(option.toJson());
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(option.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return Option.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return Option.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -399,15 +399,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("availability_hours").replace(queryParameters: _queryParameters);
     print(availabilityHour.toJson());
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(availabilityHour.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return AvailabilityHour.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return AvailabilityHour.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -421,15 +421,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("options/${option.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     print(option.toJson());
-    var response = await _httpClient.patchUri(
+    var response = await _httpClient?.patchUri(
       _uri,
       data: json.encode(option.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return Option.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return Option.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -443,15 +443,15 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("availability_hours/${availabilityHour.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     print(availabilityHour.toJson());
-    var response = await _httpClient.patchUri(
+    var response = await _httpClient?.patchUri(
       _uri,
       data: json.encode(availabilityHour.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return AvailabilityHour.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return AvailabilityHour.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -465,14 +465,14 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("options/${optionId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.deleteUri(
+    var response = await _httpClient?.deleteUri(
       _uri,
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -486,14 +486,14 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("availability_hours/${availabilityId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.deleteUri(
+    var response = await _httpClient?.deleteUri(
       _uri,
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -503,11 +503,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salons/$salonId").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Salon.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Salon.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -531,11 +531,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("salon_owner/salons").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     print("========== getSalons check user salon data After ===================");
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Salon>((obj) => Salon.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Salon>((obj) => Salon.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -556,11 +556,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("salon_owner/salons").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     print("========== getSalons check user salon data After ===================");
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Salon>((obj) => Salon.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Salon>((obj) => Salon.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -579,11 +579,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     print(_queryParameters);
     Uri _uri = getApiBaseUri("salon_owner/salon_reviews").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Review>((obj) => Review.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Review>((obj) => Review.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -594,11 +594,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("e_service_reviews/$reviewId").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return Review.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return Review.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -611,11 +611,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("awards").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Award>((obj) => Award.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Award>((obj) => Award.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -628,11 +628,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("experiences").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Experience>((obj) => Experience.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Experience>((obj) => Experience.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -647,11 +647,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -666,11 +666,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -684,11 +684,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -703,11 +703,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/e_services").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -715,11 +715,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     var _queryParameters = {'with': 'users', 'only': 'users;users.id;users.name;users.email;users.phone_number;users.device_token'};
     Uri _uri = getApiBaseUri("salons/$salonId").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data']['users'].map<User>((obj) => User.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data']['users'].map<User>((obj) => User.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -737,11 +737,11 @@ class LaravelApiClient extends GetxService with ApiClient {
 
 
 
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<EService>((obj) => EService.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -756,11 +756,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_reviews").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Review>((obj) => Review.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Review>((obj) => Review.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -775,11 +775,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("option_groups").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<OptionGroup>((obj) => OptionGroup.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<OptionGroup>((obj) => OptionGroup.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -792,11 +792,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("option_groups").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<OptionGroup>((obj) => OptionGroup.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<OptionGroup>((obj) => OptionGroup.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -807,11 +807,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("categories").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -827,11 +827,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     print("biefore calinggggggggggggggggggggggggggggggggg");
     Uri _uri = getApiBaseUri("addresses").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Address>((obj) => Address.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Address>((obj) => Address.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -843,12 +843,12 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("availability_hours/$salonId").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<AvailabilityHour>((obj) => AvailabilityHour.fromJson(obj)).toList();
-      //return response.data['data'];
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<AvailabilityHour>((obj) => AvailabilityHour.fromJson(obj)).toList();
+      //return response!.data['data'];
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -860,11 +860,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("categories").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -877,11 +877,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("categories").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Category>((obj) => Category.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -897,11 +897,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("bookings").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Booking>((obj) => Booking.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Booking>((obj) => Booking.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -913,11 +913,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("booking_statuses").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<BookingStatus>((obj) => BookingStatus.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<BookingStatus>((obj) => BookingStatus.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -928,11 +928,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("bookings/${bookingId}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Booking.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Booking.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -945,11 +945,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/bookings/${booking.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(_uri, data: booking.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Booking.fromJson(response.data['data']);
+    var response = await _httpClient?.postUri(_uri, data: booking.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Booking.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -962,11 +962,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/payments/${payment.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.putUri(_uri, data: payment.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Payment.fromJson(response.data['data']);
+    var response = await _httpClient?.putUri(_uri, data: payment.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Payment.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -985,20 +985,20 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("notifications").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-   // print("Json Result return From Server before call =>");
-   // print(response.data.toString());
-    if (response.data['success'] == true) {
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    // print("Json Result return From Server before call =>");
+    // print(response!.data.toString());
+    if (response!.data['success'] == true) {
       print("Json Result return From Server =>");
 
-      print(response.data['data'].toString());
-     // var data = response.data['data'].map<Notification>((obj) => Notification.fromJson(obj)).toList();
-     // print("");
-     // print(data);
-      return response.data['data'].map<Notification>((obj) => Notification.fromJson(obj)).toList();
+      print(response!.data['data'].toString());
+      // var data = response!.data['data'].map<Notification>((obj) => Notification.fromJson(obj)).toList();
+      // print("");
+      // print(data);
+      return response!.data['data'].map<Notification>((obj) => Notification.fromJson(obj)).toList();
     } else {
       print("Json Result return From Server error =>");
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1011,11 +1011,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("salon_owner/notifications/${notification.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(_uri, data: notification.markReadMap(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Notification.fromJson(response.data['data']);
+    var response = await _httpClient?.postUri(_uri, data: notification.markReadMap(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Notification.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1036,11 +1036,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     Uri _uri = getApiBaseUri("notifications").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
     Get.log(data.toString());
-    var response = await _httpClient.postUri(_uri, data: data, options: _optionsNetwork);
-    if (response.data['success'] == true) {
+    var response = await _httpClient?.postUri(_uri, data: data, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1053,11 +1053,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("notifications/${notification.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.deleteUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Notification.fromJson(response.data['data']);
+    var response = await _httpClient?.deleteUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Notification.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1073,12 +1073,12 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("notifications/count").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      print("Count "+ response.data['data'].toString());
-      return response.data['data'];
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      print("Count "+ response!.data['data'].toString());
+      return response!.data['data'];
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1089,11 +1089,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("faq_categories").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<FaqCategory>((obj) => FaqCategory.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<FaqCategory>((obj) => FaqCategory.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1107,22 +1107,22 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("faqs").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Faq>((obj) => Faq.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Faq>((obj) => Faq.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
   Future<Setting> getSettings() async {
     Uri _uri = getApiBaseUri("salon_owner/settings");
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Setting.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Setting.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1135,22 +1135,22 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("custom_pages").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<CustomPage>((obj) => CustomPage.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<CustomPage>((obj) => CustomPage.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
   Future<CustomPage> getCustomPageById(String id) async {
     Uri _uri = getApiBaseUri("custom_pages/$id");
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return CustomPage.fromJson(response.data['data']);
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return CustomPage.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1169,12 +1169,12 @@ class LaravelApiClient extends GetxService with ApiClient {
       "uuid": Uuid().generateV4(),
       "field": field,
     });
-    var response = await _httpClient.postUri(_uri, data: formData);
-    print(response.data);
-    if (response.data['data'] != false) {
-      return response.data['data'];
+    var response = await _httpClient?.postUri(_uri, data: formData);
+    print(response!.data);
+    if (response!.data['data'] != false) {
+      return response!.data['data'];
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1187,12 +1187,12 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("uploads/clear").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(_uri, data: {'uuid': uuid});
-    print(response.data);
-    if (response.data['data'] != false) {
+    var response = await _httpClient?.postUri(_uri, data: {'uuid': uuid});
+    print(response!.data);
+    if (response!.data['data'] != false) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1205,12 +1205,12 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("uploads/clear").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
-    var response = await _httpClient.postUri(_uri, data: {'uuid': uuids});
-    print(response.data);
-    if (response.data['data'] != false) {
+    var response = await _httpClient?.postUri(_uri, data: {'uuid': uuids});
+    print(response!.data);
+    if (response!.data['data'] != false) {
       return true;
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1224,11 +1224,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("wallets").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<Wallet>((obj) => Wallet.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<Wallet>((obj) => Wallet.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1241,11 +1241,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("wallets").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.postUri(_uri, data: _wallet.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Wallet.fromJson(response.data['data']);
+    var response = await _httpClient?.postUri(_uri, data: _wallet.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Wallet.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1258,11 +1258,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("wallets/${_wallet.id}").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.putUri(_uri, data: _wallet.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Wallet.fromJson(response.data['data']);
+    var response = await _httpClient?.putUri(_uri, data: _wallet.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Wallet.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1275,11 +1275,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("wallets/${_wallet.id}").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.deleteUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'];
+    var response = await _httpClient?.deleteUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'];
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1295,11 +1295,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("wallet_transactions").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.getUri(_uri, options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<WalletTransaction>((obj) => WalletTransaction.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<WalletTransaction>((obj) => WalletTransaction.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1312,11 +1312,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("payments/cash").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.postUri(_uri, data: _booking.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Payment.fromJson(response.data['data']);
+    var response = await _httpClient?.postUri(_uri, data: _booking.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Payment.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1329,19 +1329,19 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("payments/wallets/${_wallet.id}").replace(queryParameters: _queryParameters);
     Get.log(_uri.toString());
-    var response = await _httpClient.postUri(_uri, data: _booking.toJson(), options: _optionsNetwork);
-    if (response.data['success'] == true) {
-      return Payment.fromJson(response.data['data']);
+    var response = await _httpClient?.postUri(_uri, data: _booking.toJson(), options: _optionsNetwork);
+    if (response!.data['success'] == true) {
+      return Payment.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
   String getPayPalUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id!,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/paypal/express-checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1350,8 +1350,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getRazorPayUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/razorpay/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1360,8 +1360,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getStripeUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/stripe/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1370,8 +1370,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getPayStackUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/paystack/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1380,8 +1380,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getPayMongoUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/paymongo/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1390,8 +1390,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getFlutterWaveUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/flutterwave/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1400,8 +1400,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getKkiapayUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/kkiapay/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1411,8 +1411,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getCinetpayUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/cinetpay/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1422,8 +1422,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getWazapayUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/wazapay/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1432,8 +1432,8 @@ class LaravelApiClient extends GetxService with ApiClient {
   String getStripeFPXUrl(SalonSubscription eProviderSubscription) {
     var _queryParameters = {
       'api_token': authService.apiToken,
-      'subscription_package_id': eProviderSubscription.subscriptionPackage.id,
-      'e_provider_id': eProviderSubscription.salon.id,
+      'subscription_package_id': eProviderSubscription.subscriptionPackage!.id,
+      'e_provider_id': eProviderSubscription.salon!.id,
     };
     Uri _uri = getBaseUri("subscription/payments/stripe-fpx/checkout").replace(queryParameters: _queryParameters);
     return _uri.toString();
@@ -1446,11 +1446,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("subscription/subscription_packages").replace(queryParameters: _queryParameters);
 
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<SubscriptionPackage>((obj) => SubscriptionPackage.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<SubscriptionPackage>((obj) => SubscriptionPackage.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1460,15 +1460,15 @@ class LaravelApiClient extends GetxService with ApiClient {
       'api_token': authService.apiToken,
     };
     Uri _uri = getApiBaseUri("subscription/e_provider_subscriptions/cash").replace(queryParameters: _queryParameters);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(eProviderSubscription.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return SalonSubscription.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return SalonSubscription.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1478,15 +1478,15 @@ class LaravelApiClient extends GetxService with ApiClient {
       'wallet_id': _wallet.id,
     };
     Uri _uri = getApiBaseUri("subscription/e_provider_subscriptions/wallet/${_wallet.id}").replace(queryParameters: _queryParameters);
-    var response = await _httpClient.postUri(
+    var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(eProviderSubscription.toJson()),
       options: _optionsNetwork,
     );
-    if (response.data['success'] == true) {
-      return SalonSubscription.fromJson(response.data['data']);
+    if (response!.data['success'] == true) {
+      return SalonSubscription.fromJson(response!.data['data']);
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1499,11 +1499,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("subscription/e_provider_subscriptions").replace(queryParameters: _queryParameters);
 
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<SalonSubscription>((obj) => SalonSubscription.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<SalonSubscription>((obj) => SalonSubscription.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 
@@ -1518,11 +1518,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     };
     Uri _uri = getApiBaseUri("payment_methods").replace(queryParameters: _queryParameters);
 
-    var response = await _httpClient.getUri(_uri, options: _optionsCache);
-    if (response.data['success'] == true) {
-      return response.data['data'].map<PaymentMethod>((obj) => PaymentMethod.fromJson(obj)).toList();
+    var response = await _httpClient?.getUri(_uri, options: _optionsCache);
+    if (response!.data['success'] == true) {
+      return response!.data['data'].map<PaymentMethod>((obj) => PaymentMethod.fromJson(obj)).toList();
     } else {
-      throw new Exception(response.data['message']);
+      throw new Exception(response!.data['message']);
     }
   }
 

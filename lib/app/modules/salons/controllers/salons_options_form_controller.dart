@@ -19,7 +19,7 @@ class SalonsOptionsFormController extends GetxController {
   final availabilities = <AvailabilityHour>[].obs;
   final days = <String>[].obs;
   GlobalKey<FormState> optionForm = new GlobalKey<FormState>();
-  SalonRepository _salonRepository;
+  late SalonRepository _salonRepository;
 
 
   SalonsOptionsFormController() {
@@ -50,14 +50,14 @@ class SalonsOptionsFormController extends GetxController {
   Future getSalon() async {
     if (salon.value.hasData) {
       try {
-        salon.value = await _salonRepository.get(salon.value.id);
+        salon.value = await _salonRepository.get(salon.value.id!);
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       }
     }
   }
 
-  void _initAvailability({Map<String, dynamic> arguments}) {
+  void _initAvailability({Map<String, dynamic>? arguments}) {
     if (arguments != null) {
       availability.value = (arguments['availability'] as AvailabilityHour) ?? availability();
     } else {
@@ -68,10 +68,10 @@ class SalonsOptionsFormController extends GetxController {
 
   void _initOptionGroup() {
     availability.update((val) {
-      val.id = availabilities
+      val?.id = availabilities
           .firstWhere(
             (element) => element.id == availability.value.id,
-            orElse: () => availabilities.isNotEmpty ? availabilities.first : new OptionGroup(),
+            orElse: () => availabilities.isNotEmpty ? availabilities.first : new AvailabilityHour(),
           )
           .id;
     });
@@ -116,10 +116,10 @@ class SalonsOptionsFormController extends GetxController {
   }
 
   void createOptionForm({bool addOther = false}) async {
-    Get.focusScope.unfocus();
-    if (optionForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (optionForm.currentState!.validate()) {
       try {
-        optionForm.currentState.save();
+        optionForm.currentState!.save();
         await _salonRepository.createAvailabilityHour(availability.value);
         if (addOther) {
           _resetOptionForm();
@@ -139,14 +139,14 @@ class SalonsOptionsFormController extends GetxController {
 
     _initOptionGroup();
     Get.find<ImageFieldController>(tag: optionForm.hashCode.toString()).reset();
-    optionForm.currentState.reset();
+    optionForm.currentState!.reset();
   }
 
   void updateOptionForm() async {
-    Get.focusScope.unfocus();
-    if (optionForm.currentState.validate()) {
+    Get.focusScope!.unfocus();
+    if (optionForm.currentState!.validate()) {
       try {
-        optionForm.currentState.save();
+        optionForm.currentState!.save();
         await _salonRepository.updateAvailabilityHour(availability.value);
         Get.offAndToNamed(Routes.SALON, arguments: {'salon': salon.value, 'heroTag': 'option_update_form'});
       } catch (e) {
@@ -159,7 +159,7 @@ class SalonsOptionsFormController extends GetxController {
 
   void deleteOption(AvailabilityHour availabilityHour) async {
     try {
-      await _salonRepository.deleteAvailabilityHour(availability.value.id);
+      await _salonRepository.deleteAvailabilityHour(availability.value.id!);
       Get.offAndToNamed(Routes.SALON, arguments: {'salon': salon.value, 'heroTag': 'option_remove_form'});
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));

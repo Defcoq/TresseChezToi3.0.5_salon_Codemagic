@@ -7,9 +7,9 @@ import 'settings_service.dart';
 
 class AuthService extends GetxService {
   final user = User().obs;
-  GetStorage _box;
+  GetStorage? _box;
 
-  UserRepository _usersRepo;
+ late UserRepository _usersRepo;
 
   AuthService() {
     _usersRepo = new UserRepository();
@@ -21,15 +21,15 @@ class AuthService extends GetxService {
       if (Get.isRegistered<SettingsService>()) {
         Get.find<SettingsService>().address.value.userId = _user.id;
       }
-      _box.write('current_user', _user.toJson());
+      _box!.write('current_user', _user.toJson());
     });
     await getCurrentUser();
     return this;
   }
 
   Future getCurrentUser() async {
-    if (user.value.auth == null && _box.hasData('current_user')) {
-      user.value = User.fromJson(await _box.read('current_user'));
+    if (user.value.auth == null && _box!.hasData('current_user')) {
+      user.value = User.fromJson(await _box!.read('current_user'));
       user.value.auth = true;
     } else {
       user.value.auth = false;
@@ -39,10 +39,10 @@ class AuthService extends GetxService {
   Future removeCurrentUser() async {
     user.value = new User();
     await _usersRepo.signOut();
-    await _box.remove('current_user');
+    await _box!.remove('current_user');
   }
 
   bool get isAuth => user.value.auth ?? false;
 
-  String get apiToken => (user.value.auth ?? false) ? user.value.apiToken : '';
+  String get apiToken => (user.value.auth! ?? false) ? user.value.apiToken! : '';
 }

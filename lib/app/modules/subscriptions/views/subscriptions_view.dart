@@ -17,7 +17,7 @@ class SubscriptionsView extends GetView<SubscriptionsController> {
         iconTheme: IconThemeData(color: Get.theme.hintColor),
         title: Text(
           "Subscriptions".tr,
-          style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
+          style: Get.textTheme.headline6?.merge(TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
         ),
         automaticallyImplyLeading: false,
         leading: new IconButton(

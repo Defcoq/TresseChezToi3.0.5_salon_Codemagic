@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'ui.dart';
 
 class Helper {
-  DateTime currentBackPressTime;
+  DateTime? currentBackPressTime;
 
   static Future<dynamic> getJsonFile(String path) async {
     return rootBundle.loadString(path).then(convert.jsonDecode);
@@ -29,7 +29,7 @@ class Helper {
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null || now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+    if (currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
       currentBackPressTime = now;
       Get.showSnackbar(Ui.defaultSnackBar(message: "Tap again to leave!".tr));
       return Future.value(false);

@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import '../../../../common/ui.dart';
 
 class SalonTilWidget extends StatelessWidget {
-  final Widget title;
-  final Widget content;
-  final List<Widget> actions;
-  final double horizontalPadding;
+  final Widget? title;
+  final Widget? content;
+  final List<Widget>? actions;
+  final double? horizontalPadding;
 
-  const SalonTilWidget({Key key, this.title, this.content, this.actions, this.horizontalPadding})
+  const SalonTilWidget({Key? key, this.title, this.content, this.actions, this.horizontalPadding})
       : super(key: key);
 
   @override
@@ -26,10 +26,10 @@ class SalonTilWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: title),
+              Expanded(child: title!),
               if (actions != null)
                 Wrap(
-                  children: actions,
+                  children: actions!,
                 )
             ],
           ),
@@ -37,7 +37,7 @@ class SalonTilWidget extends StatelessWidget {
             height: 26,
             thickness: 1.2,
           ),
-          content,
+          content!,
         ],
       ),
     );

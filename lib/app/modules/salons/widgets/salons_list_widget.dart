@@ -7,7 +7,7 @@ import '../controllers/salons_controller.dart';
 
 
 class SalonsListWidget extends GetView<SalonsController> {
-  SalonsListWidget({Key key}) : super(key: key);
+  SalonsListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

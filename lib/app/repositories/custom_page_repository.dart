@@ -4,7 +4,7 @@ import '../models/custom_page_model.dart';
 import '../providers/laravel_provider.dart';
 
 class CustomPageRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   CustomPageRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();

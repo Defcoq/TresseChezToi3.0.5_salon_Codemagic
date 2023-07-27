@@ -17,7 +17,7 @@ class SettingsController extends GetxController {
     Get.toNamed(pages[index], id: 1);
   }
 
-  Route onGenerateRoute(RouteSettings settings) {
+  Route? onGenerateRoute(RouteSettings settings) {
     if (settings.name == Routes.PROFILE)
       return GetPageRoute(
         settings: settings,

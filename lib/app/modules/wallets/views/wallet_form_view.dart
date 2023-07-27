@@ -14,7 +14,7 @@ class WalletFormView extends GetView<WalletFormController> {
         appBar: AppBar(
           title: Obx(() {
             return Text(
-              controller.isCreateForm() ? "Add New Wallet".tr : controller.wallet.value.name,
+              controller!.isCreateForm() ? "Add New Wallet".tr : controller.wallet.value.name!,
               style: context.textTheme.headline6,
             );
           }),
@@ -35,7 +35,7 @@ class WalletFormView extends GetView<WalletFormController> {
                   size: 28,
                 ),
                 onPressed: () {
-                  if (controller.wallet.value.balance > 0) {
+                  if (controller.wallet.value.balance! > 0) {
                     Get.showSnackbar(Ui.ErrorSnackBar(message: "You can't delete non empty wallet".tr));
                   } else {
                     _showDeleteDialog(context);
@@ -68,7 +68,7 @@ class WalletFormView extends GetView<WalletFormController> {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr, style: Get.textTheme.bodyText2?.merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -89,12 +89,12 @@ class WalletFormView extends GetView<WalletFormController> {
                 TextFieldWidget(
                   onSaved: (input) {
                     controller.wallet.update((val) {
-                      val.name = input;
+                      val?.name = input;
                     });
                     print(controller.wallet.value);
-                    return controller.wallet.value.name = input;
+                     controller.wallet.value.name = input;
                   },
-                  validator: (input) => input.length < 1 ? "Field is required".tr : null,
+                  validator: (input) => input!.length < 1 ? "Field is required".tr : null,
                   initialValue: controller.wallet.value.name,
                   hintText: "My Wallet".tr,
                   labelText: "Wallet Name".tr,

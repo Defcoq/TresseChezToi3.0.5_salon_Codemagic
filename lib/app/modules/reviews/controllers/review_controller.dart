@@ -6,7 +6,7 @@ import '../../../repositories/salon_repository.dart';
 
 class ReviewController extends GetxController {
   final review = Review().obs;
-  SalonRepository _salonRepository;
+  late SalonRepository _salonRepository;
 
   ReviewController() {
     _salonRepository = new SalonRepository();
@@ -33,7 +33,7 @@ class ReviewController extends GetxController {
 
   Future getReview() async {
     try {
-      review.value = await _salonRepository.getReview(review.value.id);
+      review.value = await _salonRepository.getReview(review.value.id!);
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

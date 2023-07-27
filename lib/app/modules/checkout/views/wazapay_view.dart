@@ -16,7 +16,7 @@ class WazaPayViewWidget extends GetView<WazaPayController> {
         centerTitle: true,
         title: Text(
           "WazaPay Payment".tr,
-          style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),
+          style: Get.textTheme.headline6?.merge(TextStyle(letterSpacing: 1.3)),
         ),
       ),
       body: Stack(

@@ -12,7 +12,7 @@ import '../models/user_model.dart';
 import '../providers/laravel_provider.dart';
 
 class SalonRepository {
-  LaravelApiClient _laravelApiClient;
+  late LaravelApiClient _laravelApiClient;
 
   SalonRepository() {
     this._laravelApiClient = Get.find<LaravelApiClient>();
@@ -27,8 +27,8 @@ class SalonRepository {
   }
 
 
-  Future<List<Salon>> getAllWithPaging({int page}) {
-    return _laravelApiClient.getSalonsWithPaging(page);
+  Future<List<Salon>> getAllWithPaging({int? page}) {
+    return _laravelApiClient.getSalonsWithPaging(page!);
   }
   Future<List<Review>> getReviews() {
     return _laravelApiClient.getSalonReviews();
@@ -46,28 +46,28 @@ class SalonRepository {
     return _laravelApiClient.getSalonExperiences(salonId);
   }
 
-  Future<List<EService>> getEServices({int page}) {
-    return _laravelApiClient.getSalonEServices(page);
+  Future<List<EService>> getEServices({int? page}) {
+    return _laravelApiClient.getSalonEServices(page!);
   }
 
   Future<List<User>> getEmployees(String salonId) {
     return _laravelApiClient.getSalonEmployees(salonId);
   }
 
-  Future<List<EService>> getPopularEServices({int page}) {
-    return _laravelApiClient.getSalonPopularEServices(page);
+  Future<List<EService>> getPopularEServices({int? page}) {
+    return _laravelApiClient.getSalonPopularEServices(page!);
   }
 
-  Future<List<EService>> getMostRatedEServices({int page}) {
-    return _laravelApiClient.getSalonMostRatedEServices(page);
+  Future<List<EService>> getMostRatedEServices({int? page}) {
+    return _laravelApiClient.getSalonMostRatedEServices(page!);
   }
 
-  Future<List<EService>> getAvailableEServices({int page}) {
-    return _laravelApiClient.getSalonAvailableEServices(page);
+  Future<List<EService>> getAvailableEServices({int? page}) {
+    return _laravelApiClient.getSalonAvailableEServices(page!);
   }
 
-  Future<List<EService>> getFeaturedEServices({int page}) {
-    return _laravelApiClient.getSalonFeaturedEServices(page);
+  Future<List<EService>> getFeaturedEServices({int? page}) {
+    return _laravelApiClient.getSalonFeaturedEServices(page!);
   }
 
   Future<bool> delete(String salonId) {

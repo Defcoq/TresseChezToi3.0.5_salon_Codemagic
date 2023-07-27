@@ -15,7 +15,7 @@ class SalonController extends GetxController {
   final availabilityHours = <AvailabilityHour>[].obs;
   final currentSlide = 0.obs;
   final heroTag = ''.obs;
-  SalonRepository _salonRepository;
+  late SalonRepository _salonRepository;
 
   SalonController() {
     _salonRepository = new SalonRepository();
@@ -39,13 +39,13 @@ class SalonController extends GetxController {
     await getSalon();
     await getOptionGroups();
     if (showMessage) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name + " " + "page refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(message: salon.value.name! + " " + "page refreshed successfully".tr));
     }
   }
 
   Future getSalon() async {
     try {
-      salon.value = await _salonRepository.get(salon.value.id);
+      salon.value = await _salonRepository.get(salon.value.id!);
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }
@@ -53,34 +53,34 @@ class SalonController extends GetxController {
 
   void SorteAvailabilityHour()
   {
-    this.salon.value.availabilityHours.map((e) => {
+    this.salon.value.availabilityHours?.map((e) => {
 
-      if(e.day.toLowerCase() == "monday")
+      if(e.day!.toLowerCase() == "monday")
         {
           e.sortOrder =1
         }
-      else if(e.day.toLowerCase() == "tuesday")
+      else if(e.day!.toLowerCase() == "tuesday")
         {
           e.sortOrder =2
         }
-      else if(e.day.toLowerCase() == "wednesday")
+      else if(e.day!.toLowerCase() == "wednesday")
           {
             e.sortOrder =3
           }
-        else if(e.day.toLowerCase() == "thursday")
+        else if(e.day!.toLowerCase() == "thursday")
             {
               e.sortOrder =4
             }
-          else if(e.day.toLowerCase() == "friday")
+          else if(e.day!.toLowerCase() == "friday")
               {
                 e.sortOrder =5
               }
-            else if(e.day.toLowerCase() == "saturday")
+            else if(e.day!.toLowerCase() == "saturday")
                 {
                   e.sortOrder =6
                 }
 
-              else if(e.day.toLowerCase() == "sunday")
+              else if(e.day!.toLowerCase() == "sunday")
                   {
                     e.sortOrder =7
                   }
@@ -88,7 +88,7 @@ class SalonController extends GetxController {
 
     });
     print(this.salon.value.availabilityHours);
-    this.salon.value.availabilityHours.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+    this.salon.value.availabilityHours!.sort((a, b) => a.sortOrder!.compareTo(b.sortOrder!));
 
   }
 
@@ -104,7 +104,7 @@ class SalonController extends GetxController {
     try {
      // var _availabilityHours = await _salonRepository.getAvailabilityHour(salon.value.id);
 
-      availabilityHours.assignAll(salon.value.availabilityHours);
+      availabilityHours.assignAll(salon.value.availabilityHours!);
      // return optionGroups;
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
