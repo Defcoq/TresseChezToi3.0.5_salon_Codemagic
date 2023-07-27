@@ -48,12 +48,16 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 20, bottom: 14, left: 20, right: 20),
-      margin: EdgeInsets.only(left: 20, right: 20, top: topMargin, bottom: bottomMargin),
+      margin: EdgeInsets.only(
+          left: 20, right: 20, top: topMargin, bottom: bottomMargin),
       decoration: BoxDecoration(
           color: Get.theme.primaryColor,
           borderRadius: buildBorderRadius,
           boxShadow: [
-            BoxShadow(color: Get.theme.focusColor.withOpacity(0.1), blurRadius: 10, offset: Offset(0, 5)),
+            BoxShadow(
+                color: Get.theme.focusColor.withOpacity(0.1),
+                blurRadius: 10,
+                offset: Offset(0, 5)),
           ],
           border: Border.all(color: Get.theme.focusColor.withOpacity(0.05))),
       child: Column(
@@ -77,10 +81,10 @@ class TextFieldWidget extends StatelessWidget {
             textAlign: textAlign ?? TextAlign.start,
             decoration: Ui.getInputDecoration(
               hintText: hintText ?? '',
-              iconData: iconData!,
-              suffixIcon: suffixIcon!,
-              suffix: suffix!,
-              errorText: errorText!,
+              iconData: iconData,
+              suffixIcon: suffixIcon,
+              suffix: suffix,
+              errorText: errorText,
             ),
           ),
         ],

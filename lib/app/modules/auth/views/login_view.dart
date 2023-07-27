@@ -104,7 +104,8 @@ class LoginView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
-                        initialValue: controller.currentUser?.value?.email ?? "",
+                        initialValue:
+                            controller?.currentUser?.value?.email ?? "",
                         onSaved: (input) =>
                             controller.currentUser.value.email = input,
                         validator: (input) => !input!.contains('@')
@@ -116,7 +117,8 @@ class LoginView extends GetView<AuthController> {
                         return TextFieldWidget(
                           labelText: "Password".tr,
                           hintText: "••••••••••••".tr,
-                          initialValue: controller.currentUser?.value?.password ?? "",
+                          initialValue:
+                              controller?.currentUser?.value?.password ?? "",
                           onSaved: (input) =>
                               controller.currentUser.value.password = input,
                           validator: (input) => input!.length < 3
