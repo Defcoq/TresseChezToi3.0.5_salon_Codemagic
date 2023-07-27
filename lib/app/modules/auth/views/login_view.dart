@@ -23,7 +23,8 @@ class LoginView extends GetView<AuthController> {
         appBar: AppBar(
           title: Text(
             "Login".tr,
-            style: Get.textTheme.headline6?.merge(TextStyle(color: context.theme.primaryColor)),
+            style: Get.textTheme.headline6
+                ?.merge(TextStyle(color: context.theme.primaryColor)),
           ),
           centerTitle: true,
           backgroundColor: Get.theme.colorScheme.secondary,
@@ -43,9 +44,13 @@ class LoginView extends GetView<AuthController> {
                     width: Get.width,
                     decoration: BoxDecoration(
                       color: Get.theme.colorScheme.secondary,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(10)),
                       boxShadow: [
-                        BoxShadow(color: Get.theme.focusColor.withOpacity(0.2), blurRadius: 10, offset: Offset(0, 5)),
+                        BoxShadow(
+                            color: Get.theme.focusColor.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: Offset(0, 5)),
                       ],
                     ),
                     margin: EdgeInsets.only(bottom: 50),
@@ -56,12 +61,14 @@ class LoginView extends GetView<AuthController> {
                           Text(
                             //_settings.salonAppName,
                             "Salon Name".tr,
-                            style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 24)),
+                            style: Get.textTheme.headline6?.merge(TextStyle(
+                                color: Get.theme.primaryColor, fontSize: 24)),
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Welcome to the best salon service system!".tr,
-                            style: Get.textTheme.caption?.merge(TextStyle(color: Get.theme.primaryColor)),
+                            style: Get.textTheme.caption?.merge(
+                                TextStyle(color: Get.theme.primaryColor)),
                             textAlign: TextAlign.center,
                           ),
                           // Text("Fill the following credentials to login your account", style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
@@ -72,7 +79,8 @@ class LoginView extends GetView<AuthController> {
                   Container(
                     decoration: Ui.getBoxDecoration(
                       radius: 14,
-                      border: Border.all(width: 5, color: Get.theme.primaryColor),
+                      border:
+                          Border.all(width: 5, color: Get.theme.primaryColor),
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -96,27 +104,36 @@ class LoginView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
-                        initialValue: controller.currentUser?.value?.email,
-                        onSaved: (input) => controller.currentUser.value.email = input,
-                        validator: (input) => !input!.contains('@') ? "Should be a valid email".tr : null,
+                        initialValue: controller.currentUser?.value?.email ?? "",
+                        onSaved: (input) =>
+                            controller.currentUser.value.email = input,
+                        validator: (input) => !input!.contains('@')
+                            ? "Should be a valid email".tr
+                            : null,
                         iconData: Icons.alternate_email,
                       ),
                       Obx(() {
                         return TextFieldWidget(
                           labelText: "Password".tr,
                           hintText: "••••••••••••".tr,
-                          initialValue: controller.currentUser?.value?.password,
-                          onSaved: (input) => controller.currentUser.value.password = input,
-                          validator: (input) => input!.length < 3 ? "Should be more than 3 characters".tr : null,
+                          initialValue: controller.currentUser?.value?.password ?? "",
+                          onSaved: (input) =>
+                              controller.currentUser.value.password = input,
+                          validator: (input) => input!.length < 3
+                              ? "Should be more than 3 characters".tr
+                              : null,
                           obscureText: controller.hidePassword.value,
                           iconData: Icons.lock_outline,
                           keyboardType: TextInputType.visiblePassword,
                           suffixIcon: IconButton(
                             onPressed: () {
-                              controller.hidePassword.value = !controller.hidePassword.value;
+                              controller.hidePassword.value =
+                                  !controller.hidePassword.value;
                             },
                             color: Theme.of(context).focusColor,
-                            icon: Icon(controller.hidePassword.value ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                            icon: Icon(controller.hidePassword.value
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined),
                           ),
                         );
                       }),
@@ -138,7 +155,8 @@ class LoginView extends GetView<AuthController> {
                         color: Get.theme.colorScheme.secondary,
                         text: Text(
                           "Login".tr,
-                          style: Get.textTheme.headline6?.merge(TextStyle(color: Get.theme.primaryColor)),
+                          style: Get.textTheme.headline6
+                              ?.merge(TextStyle(color: Get.theme.primaryColor)),
                         ),
                       ).paddingSymmetric(vertical: 10, horizontal: 20),
                       Row(

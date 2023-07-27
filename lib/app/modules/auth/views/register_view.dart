@@ -101,7 +101,7 @@ class RegisterView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Full Name".tr,
                         hintText: "John Doe".tr,
-                        initialValue: controller.currentUser?.value?.name,
+                        initialValue: controller.currentUser?.value?.name?? "",
                         onSaved: (input) => controller.currentUser.value.name = input,
                         validator: (input) => input!.length! < 3 ? "Should be more than 3 characters".tr : null,
                         iconData: Icons.person_outline,
@@ -111,7 +111,7 @@ class RegisterView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
-                        initialValue: controller.currentUser?.value?.email,
+                        initialValue: controller.currentUser?.value?.email?? "",
                         onSaved: (input) => controller.currentUser.value.email = input,
                         validator: (input) => !input!.contains('@') ? "Should be a valid email".tr : null,
                         iconData: Icons.alternate_email,
@@ -121,7 +121,7 @@ class RegisterView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Phone Number".tr,
                         hintText: "+237 111 222 333".tr,
-                        initialValue: controller.currentUser?.value?.phoneNumber,
+                        initialValue: controller.currentUser?.value?.phoneNumber ?? "",
                         onSaved: (input) {
                           if (input!.startsWith("00")) {
                             input = "+" + input.substring(2);
@@ -139,7 +139,7 @@ class RegisterView extends GetView<AuthController> {
                         return TextFieldWidget(
                           labelText: "Password".tr,
                           hintText: "••••••••••••".tr,
-                          initialValue: controller.currentUser?.value?.password,
+                          initialValue: controller.currentUser?.value?.password ?? "",
                           onSaved: (input) => controller.currentUser.value.password = input,
                           validator: (input) => input!.length < 3 ? "Should be more than 3 characters".tr : null,
                           obscureText: controller.hidePassword.value,

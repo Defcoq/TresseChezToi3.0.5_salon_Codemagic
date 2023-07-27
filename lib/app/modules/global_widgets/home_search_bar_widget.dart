@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../routes/app_routes.dart';
-import '../search/controllers/search_controller.dart';
+import '../search/controllers/search_controller.dart' as SearchSalon;
 import 'filter_bottom_sheet_widget.dart';
 
 class HomeSearchBarWidget extends StatelessWidget implements PreferredSize {
-  final controller = Get.find<SearchController>();
+  final controller = Get.find<SearchSalon.SearchController>();
 
   Widget buildSearchBar() {
     controller.heroTag.value = UniqueKey().toString();
@@ -29,7 +29,8 @@ class HomeSearchBarWidget extends StatelessWidget implements PreferredSize {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 12, left: 0),
-                child: Icon(Icons.search, color: Get.theme.colorScheme.secondary),
+                child:
+                    Icon(Icons.search, color: Get.theme.colorScheme.secondary),
               ),
               Expanded(
                 child: Text(
@@ -49,7 +50,8 @@ class HomeSearchBarWidget extends StatelessWidget implements PreferredSize {
                   );
                 },
                 child: Container(
-                  padding: const EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 10),
+                  padding: const EdgeInsets.only(
+                      right: 10, left: 10, top: 10, bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     color: Get.theme.focusColor.withOpacity(0.1),

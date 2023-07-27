@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '../../../../common/ui.dart';
 import '../../global_widgets/filter_bottom_sheet_widget.dart';
-import '../controllers/search_controller.dart';
+import '../controllers/search_controller.dart' as SearchSalon;
 import '../widgets/search_services_list_widget.dart';
 
-class SearchView extends GetView<SearchController> {
+class SearchView extends GetView<SearchSalon.SearchController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,8 @@ class SearchView extends GetView<SearchController> {
                   },
                   autofocus: true,
                   cursorColor: Get.theme.focusColor,
-                  decoration: Ui.getInputDecoration(hintText: "Search for salon services...".tr),
+                  decoration: Ui.getInputDecoration(
+                      hintText: "Search for salon services...".tr),
                 ),
               ),
             ),
@@ -75,7 +76,8 @@ class SearchView extends GetView<SearchController> {
                 );
               },
               child: Container(
-                padding: const EdgeInsets.only(right: 10, left: 10, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(
+                    right: 10, left: 10, top: 10, bottom: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   color: Get.theme.focusColor.withOpacity(0.1),
@@ -86,7 +88,8 @@ class SearchView extends GetView<SearchController> {
                   children: [
                     Text(
                       "Filter".tr,
-                      style: Get.textTheme.bodyText2, //TextStyle(color: Get.theme.hintColor),
+                      style: Get.textTheme
+                          .bodyText2, //TextStyle(color: Get.theme.hintColor),
                     ),
                     Icon(
                       Icons.filter_list,

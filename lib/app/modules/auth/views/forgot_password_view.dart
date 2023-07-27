@@ -92,7 +92,7 @@ class ForgotPasswordView extends GetView<AuthController> {
                       TextFieldWidget(
                         labelText: "Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
-                        initialValue: controller.currentUser?.value?.email,
+                        initialValue: controller.currentUser?.value?.email?? "",
                         onSaved: (input) => controller.currentUser.value.email = input,
                         validator: (input) => !GetUtils.isEmail(input!) ? "Should be a valid email".tr : null,
                         iconData: Icons.alternate_email,
