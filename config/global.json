@@ -1,6 +1,9 @@
 {
   "mock_base_url": "https://salondecoiffure.itinnovdesign.com/",
   "laravel_base_url": "https://salondecoiffure.itinnovdesign.com/",
+  "laravel_base_url_europa": "https://salondecoiffure.itinnovdesign.com/",
+  "laravel_base_url_canada": "https://salondecoiffure.itinnovdesign.com/",
+  "laravel_base_url_usa": "https://salondecoiffure.itinnovdesign.com/",
   "api_path": "api/",
   "received": 1,
   "accepted": 10,

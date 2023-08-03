@@ -38,6 +38,7 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/reviews/views/review_view.dart';
 import '../modules/root/bindings/root_binding.dart';
+import '../modules/root/views/country_selection_view.dart';
 import '../modules/root/views/root_view.dart';
 import '../modules/salons/bindings/salons_binding.dart';
 import '../modules/salons/views/salon_form_view.dart';
@@ -61,6 +62,7 @@ class Theme1AppPages {
   static const INITIAL = Routes.ROOT;
 
   static final routes = [
+    GetPage(name: Routes.COUNTRY_SELECTION, page: () => CountrySelectionView()),
     GetPage(name: Routes.ROOT, page: () => RootView(), binding: RootBinding(), middlewares: [AuthMiddleware()]),
     GetPage(name: Routes.CHAT, page: () => ChatsView(), binding: RootBinding()),
     GetPage(name: Routes.SETTINGS, page: () => SettingsView(), binding: SettingsBinding()),

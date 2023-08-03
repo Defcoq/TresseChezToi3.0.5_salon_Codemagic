@@ -46,4 +46,5 @@ class Routes {
   static const FLUTTERWAVE = '/flutterwave';
   static const CASH = '/cash';
   static const CONFIRMATION = '/confirmation';
+  static const COUNTRY_SELECTION = '/country_selection';
 }

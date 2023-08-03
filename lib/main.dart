@@ -11,6 +11,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'app/modules/root/bindings/initial_binding.dart';
+import 'app/modules/root/views/country_selection_view.dart';
 import 'app/providers/firebase_provider.dart';
 import 'app/providers/laravel_provider.dart';
 import 'app/routes/theme1_app_pages.dart';
@@ -19,6 +21,7 @@ import 'app/services/firebase_messaging_service.dart';
 import 'app/services/global_service.dart';
 import 'app/services/settings_service.dart';
 import 'app/services/translation_service.dart';
+import 'common/country_selection_setup_helper.dart';
 
 Future<void> initServices() async {
   Get.log('starting services ...');
@@ -35,7 +38,7 @@ Future<void> initServices() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
+  /*await initServices();
 
 
   runApp(
@@ -57,6 +60,31 @@ void main() async {
       themeMode: Get.find<SettingsService>().getThemeMode(),
       theme: Get.find<SettingsService>().getLightTheme(),
       darkTheme: Get.find<SettingsService>().getDarkTheme(),
+    ),
+  );*/
+  runApp(
+    GetMaterialApp(
+      //title: Get.find<SettingsService>().setting.value.appName,
+      title: "Tresse Chez Toi".tr,
+      initialBinding: InitialBinding(),
+      home: CountrySelectionView(),
+      onReady: () async {
+        await Firebase.initializeApp();
+        await Get.putAsync(() => FireBaseMessagingService().init());
+      },
+      //initialRoute: Theme1AppPages.INITIAL,
+
+      getPages: Theme1AppPages.routes,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: CountrySelectionSetupHelper.supportedLocales(),
+      translationsKeys: CountrySelectionSetupHelper.translations,
+      locale: CountrySelectionSetupHelper.getLocale(),
+      fallbackLocale: CountrySelectionSetupHelper.fallbackLocale,
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.cupertino,
+      themeMode: CountrySelectionSetupHelper.getThemeMode(),
+      theme: CountrySelectionSetupHelper.getLightTheme(),
+      darkTheme: CountrySelectionSetupHelper.getDarkTheme(),
     ),
   );
 }

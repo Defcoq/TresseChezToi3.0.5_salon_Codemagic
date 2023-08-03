@@ -12,8 +12,8 @@ class Helper {
     return rootBundle.loadString(path).then(convert.jsonDecode);
   }
 
-  static String toUrl(String path) {
-    if (!path.endsWith('/')) {
+  static String toUrl(String? path) {
+    if (!path!.endsWith('/')) {
       path += '/';
     }
     return path;
