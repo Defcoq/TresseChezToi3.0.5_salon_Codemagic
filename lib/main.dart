@@ -27,12 +27,12 @@ Future<void> initServices() async {
   Get.log('starting services ...');
   await GetStorage.init();
   await Get.putAsync(() => TranslationService().init());
-  await Get.putAsync(() => GlobalService().init());
+  /*await Get.putAsync(() => GlobalService().init());
   await Firebase.initializeApp();
   await Get.putAsync(() => AuthService().init());
   await Get.putAsync(() => LaravelApiClient().init());
   await Get.putAsync(() => FirebaseProvider().init());
-  await Get.putAsync(() => SettingsService().init());
+  await Get.putAsync(() => SettingsService().init());*/
   Get.log('All services started...');
 }
 
@@ -62,7 +62,34 @@ void main() async {
       darkTheme: Get.find<SettingsService>().getDarkTheme(),
     ),
   );*/
+
+  await initServices();
   runApp(
+    GetMaterialApp(
+      //title: Get.find<SettingsService>().setting.value.appName,
+      title: "Tresse Chez Toi".tr,
+      initialBinding: InitialBinding(),
+      home: CountrySelectionView(),
+      onReady: () async {
+        await Firebase.initializeApp();
+        await Get.putAsync(() => FireBaseMessagingService().init());
+      },
+      //initialRoute: Theme1AppPages.INITIAL,
+
+      getPages: Theme1AppPages.routes,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: Get.find<TranslationService>().supportedLocales(),
+      translationsKeys: Get.find<TranslationService>().translations,
+      locale: CountrySelectionSetupHelper.getLocale(),
+      fallbackLocale: Get.find<TranslationService>().fallbackLocale,
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.cupertino,
+      themeMode: CountrySelectionSetupHelper.getThemeMode(),
+      theme: CountrySelectionSetupHelper.getLightTheme(),
+      darkTheme: CountrySelectionSetupHelper.getDarkTheme(),
+    ),
+  );
+  /*runApp(
     GetMaterialApp(
       //title: Get.find<SettingsService>().setting.value.appName,
       title: "Tresse Chez Toi".tr,
@@ -86,5 +113,5 @@ void main() async {
       theme: CountrySelectionSetupHelper.getLightTheme(),
       darkTheme: CountrySelectionSetupHelper.getDarkTheme(),
     ),
-  );
+  );*/
 }
