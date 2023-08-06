@@ -27,6 +27,11 @@ class CountrySelectionController extends GetxController {
   var selectedClient = ''.obs;
   var isCountrySelected = false.obs;
 
+  Future<CountrySelectionController> init() async {
+    return this;
+  }
+
+
   Future<void> setSelectedClient(String client) async {
     selectedClient.value = client;
     Get.find<GlobalService>().setSelectedClient(client);

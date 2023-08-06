@@ -21,6 +21,12 @@ class GlobalService extends GetxService {
   final selectedClient = ''.obs; // Add a selectedClient variable to store the selected client
   GlobalService();
 
+  Future<GlobalService> initDefault() async {
+    var response = await Helper.getJsonFile('config/global.json');
+    global.value = Global.fromJson(response);
+    return this;
+  }
+
   Future<GlobalService> init() async {
     var response = await Helper.getJsonFile('config/global.json');
     global.value = Global.fromJson(response);
