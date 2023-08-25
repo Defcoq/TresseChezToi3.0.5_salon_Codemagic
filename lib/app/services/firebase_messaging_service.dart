@@ -69,6 +69,7 @@ class FireBaseMessagingService extends GetxService {
   }
 
   Future<void> setDeviceToken() async {
+    await FirebaseMessaging.instance.requestPermission( alert: true, announcement: false, badge: true, carPlay: false, criticalAlert: false, provisional: false, sound: true);
     Get.find<AuthService>().user.value.deviceToken = await FirebaseMessaging.instance.getToken();
   }
 
