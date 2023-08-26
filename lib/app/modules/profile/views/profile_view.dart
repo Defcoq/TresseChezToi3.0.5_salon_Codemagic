@@ -5,6 +5,7 @@ import '../../../models/media_model.dart';
 import '../../global_widgets/image_field_widget.dart';
 import '../../global_widgets/text_field_widget.dart';
 import '../controllers/profile_controller.dart';
+import '../widgets/delete_account_widget.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final bool hideAppBar;
@@ -222,6 +223,7 @@ class ProfileView extends GetView<ProfileController> {
                   isLast: true,
                 );
               }),
+              DeleteAccountWidget(),
             ],
           ),
         ));

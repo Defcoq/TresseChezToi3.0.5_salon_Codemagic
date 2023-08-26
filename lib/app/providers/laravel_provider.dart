@@ -6,6 +6,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:get/get.dart';
 
+import '../../common/custom_trace.dart';
 import '../../common/uuid.dart';
 import '../models/address_model.dart';
 import '../models/availability_hour_model.dart';
@@ -34,11 +35,13 @@ import '../models/wallet_model.dart';
 import '../models/wallet_transaction_model.dart';
 import 'api_provider.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:flutter/foundation.dart' as found;
 
 class LaravelApiClient extends GetxService with ApiClient {
   dio.Dio? _httpClient;
   dio.Options? _optionsNetwork;
   dio.Options? _optionsCache;
+  final _progress = <String>[].obs;
 
   LaravelApiClient() {
     this.baseUrl = this.globalService.global.value.laravelBaseUrl;
@@ -105,6 +108,27 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
+  Future<bool> deleteUser(User user) async {
+    if (!authService.isAuth) {
+      throw new Exception("You don't have the permission to access to this area!".tr + "[ deleteUser() ]");
+    }
+    var _queryParameters = {
+      'api_token': authService.apiToken,
+    };
+    Uri _uri = getApiBaseUri("users").replace(queryParameters: _queryParameters);
+    CustomTrace programInfo = CustomTrace(StackTrace.current);
+    _startProgress(programInfo);
+    var response = await _httpClient?.deleteUri(
+      _uri,
+      options: _optionsNetwork,
+    );
+    _endProgress(programInfo);
+    if (response?.data['success'] == true) {
+      return response?.data['data'];
+    } else {
+      throw new Exception(response?.data['message']);
+    }
+  }
   Future<User> register(User user) async {
     Uri _uri = getApiBaseUri("salon_owner/register");
     printUri(StackTrace.current, _uri);
@@ -138,6 +162,30 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
+
+  bool? isLoading({required String task,  List<String>? tasks}) {
+    if (tasks != null) {
+      return _progress.any((_task) => _progress.contains(_task));
+    }
+    return _progress.contains(task);
+  }
+
+
+  void _endProgress(CustomTrace programInfo) {
+    try {
+      _progress.remove(_getTaskName(programInfo));
+    } on found.FlutterError {}
+  }
+
+  void _startProgress(CustomTrace programInfo) {
+    try {
+      _progress.add(_getTaskName(programInfo));
+    } on found.FlutterError {}
+  }
+
+  String _getTaskName(programInfo) {
+    return programInfo.callerFunctionName.split('.')[1];
+  }
   Future<User> updateUser(User user) async {
     if (!authService.isAuth) {
       throw new Exception("You don't have the permission to access to this area!".tr + "[ updateUser() ]");

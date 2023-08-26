@@ -82,4 +82,12 @@ class ProfileController extends GetxController {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }
   }
+
+  Future<void> deleteUser() async {
+    try {
+      await _userRepository.deleteCurrentUser();
+    } catch (e) {
+      Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+    }
+  }
 }

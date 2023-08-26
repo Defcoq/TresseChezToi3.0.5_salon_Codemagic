@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../models/user_model.dart';
 import '../providers/firebase_provider.dart';
@@ -63,5 +64,14 @@ class UserRepository {
   Future signOut() async {
     _firebaseProvider = Get.find<FirebaseProvider>();
     return await _firebaseProvider.signOut();
+  }
+
+  Future<void> deleteCurrentUser() async {
+    _laravelApiClient = Get.find<LaravelApiClient>();
+    _firebaseProvider = Get.find<FirebaseProvider>();
+    await _laravelApiClient.deleteUser(Get.find<AuthService>().user.value);
+    await _firebaseProvider.deleteCurrentUser();
+    Get.find<AuthService>().user.value = new User();
+    GetStorage().remove('current_user');
   }
 }

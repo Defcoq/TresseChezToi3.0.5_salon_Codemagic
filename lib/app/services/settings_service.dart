@@ -101,10 +101,25 @@ class SettingsService extends GetxService {
             )));
   }
 
-  Locale getLocale() {
+  Locale? getLocale() {
+    final languages = [
+      'en',
+      'fr',
+      'it',
+    ];
+    Locale defaultLocale = Get.deviceLocale ?? Locale('en');
+    if (!languages.contains(defaultLocale.languageCode)) {
+      defaultLocale = Locale('en'); // Set default to English
+    }
+
     String? _locale = GetStorage().read<String>('language');
     if (_locale == null || _locale.isEmpty) {
-      _locale = setting.value.mobileLanguage;
+      if (!languages.contains(defaultLocale.languageCode)) {
+        _locale = setting.value.mobileLanguage;
+      }
+      else {
+        _locale = defaultLocale.languageCode;
+      }
     }
     return Get.find<TranslationService>().fromStringToLocale(_locale!);
   }

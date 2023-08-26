@@ -60,7 +60,7 @@ class CountrySelectionSetupHelper {
         focusColor: Ui.parseColor(accentColor),
         hintColor: Ui.parseColor(secondColor),
         textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: Ui.parseColor(mainColor)),
+          style: TextButton.styleFrom(onSurface: Ui.parseColor(mainColor)),
         ),
         colorScheme: ColorScheme.light(
           primary: Ui.parseColor(mainColor),
@@ -102,7 +102,7 @@ class CountrySelectionSetupHelper {
         hintColor: Ui.parseColor(secondDarkColor),
         toggleableActiveColor: Ui.parseColor(mainDarkColor),
         textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: Ui.parseColor(mainColor)),
+          style: TextButton.styleFrom(onSurface: Ui.parseColor(mainColor)),
         ),
         colorScheme: ColorScheme.dark(
           primary: Ui.parseColor(mainDarkColor),
