@@ -4,6 +4,7 @@
   "laravel_base_url_europa": "https://europe-backoffice.tressecheztoi.online/",
   "laravel_base_url_canada": "https://canada-backoffice.tressecheztoi.online/",
   "laravel_base_url_usa": "https://usa-backoffice.tressecheztoi.online/",
+  "laravel_base_url_domtom": "https://domtom-backoffice.tressecheztoi.online/",
   "api_path": "api/",
   "received": 1,
   "accepted": 10,
