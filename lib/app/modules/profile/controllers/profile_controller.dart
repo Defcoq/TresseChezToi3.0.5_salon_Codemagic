@@ -45,11 +45,15 @@ class ProfileController extends GetxController {
         user.value.deviceToken = null;
         user.value.password = newPassword.value == confirmPassword.value ? newPassword.value : null;
         user.value.avatar!.id = avatar.value.id;
-        await _userRepository.sendCodeToPhone();
+        user.value = await _userRepository.update(user.value);
+        Get.find<AuthService>().user.value = user.value;
+        Get.back();
+        Get.showSnackbar(Ui.SuccessSnackBar(message: "Profile saved successfully".tr));
+        /*await _userRepository.sendCodeToPhone();
         Get.bottomSheet(
           PhoneVerificationBottomSheetWidget(),
           isScrollControlled: false,
-        );
+        );*/
       } catch (e) {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       } finally {}
