@@ -23,6 +23,7 @@ import 'app/services/global_service.dart';
 import 'app/services/settings_service.dart';
 import 'app/services/translation_service.dart';
 import 'common/country_selection_setup_helper.dart';
+import 'package:upgrader/upgrader.dart';
 
 Future<void> initServices() async {
   Get.log('starting services ...');
@@ -48,7 +49,8 @@ void main() async {
       //title: Get.find<SettingsService>().setting.value.salonAppName,
       title: "Tresse Chez Toi".tr,
       //initialRoute: Theme1AppPages.INITIAL,
-      home: CountrySelectionView(),
+      home: UpgradeAlert(
+          child: CountrySelectionView()),
       onReady: () async {
         await Get.putAsync(() => FireBaseMessagingService().init());
       },
