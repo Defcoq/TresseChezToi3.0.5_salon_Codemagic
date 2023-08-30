@@ -23,6 +23,7 @@ class CountrySelectionController extends GetxController {
     'laravel_base_url_usa': 'TresseChezToi Usa',
     'laravel_base_url_canada': 'TresseChezToi Canada',
     'laravel_base_url_domtom': 'TresseChezToi Dom-Tom',
+    'laravel_base_url_cameroun': 'TresseChezToi Cameroun',
   };
   //var selectedClient = RxString('');
   var selectedClient = ''.obs;

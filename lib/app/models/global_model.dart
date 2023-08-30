@@ -17,6 +17,7 @@ class Global extends Model {
   String laravelBaseUrlCanada="";
 
   String laravelBaseUrlDomtom="";
+  String laravelBaseUrlCameroun="";
 
 
   Global({this.mockBaseUrl, this.laravelBaseUrl, this.apiPath});
@@ -36,6 +37,7 @@ class Global extends Model {
     laravelBaseUrlUsa = json['laravel_base_url_usa'].toString();
     laravelBaseUrlCanada = json['laravel_base_url_canada'].toString();
     laravelBaseUrlDomtom = json['laravel_base_url_domtom'].toString();
+    laravelBaseUrlCameroun = json['laravel_base_url_cameroun'].toString();
 
   }
 
@@ -48,6 +50,7 @@ class Global extends Model {
     data['laravel_base_url_usa'] = this.laravelBaseUrlUsa;
     data['laravel_base_url_canada'] = this.laravelBaseUrlCanada;
     data['laravel_base_url_domtom'] = this.laravelBaseUrlDomtom;
+    data['laravel_base_url_cameroun'] = this.laravelBaseUrlCameroun;
     return data;
   }
 }
