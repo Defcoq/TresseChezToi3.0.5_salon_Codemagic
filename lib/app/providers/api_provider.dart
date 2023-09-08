@@ -12,6 +12,7 @@ mixin ApiClient {
   Rx<String> _progress = Rx('');
 
   String getBaseUrl(String path) {
+    baseUrl = globalService.baseUrl;
     if (!path.endsWith('/')) {
       path += '/';
     }
