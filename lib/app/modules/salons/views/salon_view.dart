@@ -92,10 +92,14 @@ class SalonView extends GetView<SalonController> {
                         SalonTilWidget(
                           title: Text("Address".tr, style: Get.textTheme.subtitle2),
                           content: Obx(() {
-                            if (controller.salon.value?.address?.address == '') {
+                            /*if (controller.salon.value?.address?.address == '') {
+                              return SizedBox();
+                            }*/
+                            final address = controller.salon.value?.address?.address;
+                            if (address == null || address.isEmpty) {
                               return SizedBox();
                             }
-                            return Ui.applyHtml(_salon.address!.address!, style: Get.textTheme.bodyText1);
+                            return Ui.applyHtml(address, style: Get.textTheme.bodyText1);
                           }),
                         ),
                         SalonTilWidget(
@@ -349,10 +353,11 @@ class SalonView extends GetView<SalonController> {
         spacing: 5,
         runSpacing: 8,
         children: List.generate(1, (index) {
-              var _category = _salon.salonLevel;
+          var _category = _salon.salonLevel;
+          var categoryName = _category?.name ?? "";
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                child: Text(_category!.name!, style: Get.textTheme.bodyText1?.merge(TextStyle(color: Colors.green))),
+                child: Text(categoryName, style: Get.textTheme.bodyText1?.merge(TextStyle(color: Colors.green))),
                 decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.2),
                     border: Border.all(

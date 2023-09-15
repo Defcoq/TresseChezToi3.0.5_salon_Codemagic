@@ -75,11 +75,11 @@ class SalonRepository {
   }
 
 
-  Future<EService> create(Salon salon) {
+  Future<Salon> create(Salon salon) {
     return _laravelApiClient.createSalon(salon);
   }
 
-  Future<EService> update(Salon salon) {
+  Future<Salon> update(Salon salon) {
     return _laravelApiClient.updateSalon(salon);
   }
 

@@ -6,6 +6,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
+import '../../common/uuid.dart';
 import 'address_model.dart';
 import 'availability_hour_model.dart';
 import 'media_model.dart';
@@ -93,6 +94,15 @@ class Salon extends Model {
     data['total_reviews'] = this.totalReviews;
     data['verified'] = this.verified;
     data['distance'] = this.distance;
+    //data['availability_range'] = this.availabilityRange;
+    data['availability_range'] = this.availabilityRange != null && this.availabilityRange != 0
+        ? this.availabilityRange
+        : 10000;
+    data['address_id'] = this.address!.id;
+    if (this.images != null) {
+      // data['image'] = this.images.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
+      data['image'] = this.images!.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
+    }
     return data;
   }
 

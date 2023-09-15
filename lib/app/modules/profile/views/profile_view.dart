@@ -122,7 +122,7 @@ class ProfileView extends GetView<ProfileController> {
                   }
                    controller!.user.value.phoneNumber = input;
                 },
-                validator: (input) => !input!.startsWith('+') && !input.startsWith('00') ? "Phone number must start with country code!".tr : null,
+                //validator: (input) => !input!.startsWith('+') && !input.startsWith('00') ? "Phone number must start with country code!".tr : null,
                 initialValue: controller.user.value.phoneNumber,
                 hintText: "+1 223 665 7896".tr,
                 labelText: "Phone number".tr,
@@ -137,9 +137,9 @@ class ProfileView extends GetView<ProfileController> {
                         style: Get.textTheme.caption?.merge(TextStyle(color: Colors.redAccent)),
                       ),
               ),
-              TextFieldWidget(
+             /* TextFieldWidget(
                 onSaved: (input) => controller.user.value.address = input,
-                validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
+                //validator: (input) => input!.length < 3 ? "Should be more than 3 letters".tr : null,
                 initialValue: controller.user.value.address,
                 hintText: "123 Street, City 136, State, Country".tr,
                 labelText: "Address".tr,
@@ -151,7 +151,7 @@ class ProfileView extends GetView<ProfileController> {
                 hintText: "Your short biography here".tr,
                 labelText: "Short Biography".tr,
                 iconData: Icons.article_outlined,
-              ),
+              ),*/
               Text("Change password".tr, style: Get.textTheme.headline5).paddingOnly(top: 25, bottom: 0, right: 22, left: 22),
               Text("Fill your old password and type new password and confirm it".tr, style: Get.textTheme.caption).paddingSymmetric(horizontal: 22, vertical: 5),
               Obx(() {

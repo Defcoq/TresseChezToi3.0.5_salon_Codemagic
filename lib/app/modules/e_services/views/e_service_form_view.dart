@@ -311,9 +311,19 @@ class EServiceFormView extends GetView<EServiceFormController> {
                       child: TextFieldWidget(
                         keyboardType: TextInputType.numberWithOptions(decimal: true),
                         onSaved: (input) => controller.eService.value.price = (double.tryParse(input!) ?? 0),
-                        validator: (input) => (double.tryParse(input!) ?? 0) <= 0 ? "Should be number more than 0".tr : null,
-                        initialValue: controller.eService.value.price?.toString(),
-                        hintText: "23.00".tr,
+                        //validator: (input) => (double.tryParse(input!) ?? 0) <= 0 ? "Should be number more than 0".tr : null,
+                        //initialValue: controller.eService.value.price?.toString(),
+                        validator: (input) {
+                          if (input != null && input.isNotEmpty  && double.tryParse(input) == null) {
+                            return "Should be a valid number".tr;
+                          }
+                          return null; // No validation error
+                        },
+                        // initialValue: controller.eService.value.price?.toString(),
+                        initialValue: (controller.eService.value.price ?? 0) > 0
+                            ? controller.eService.value.price?.toString()
+                            : "0",
+                        hintText: "50".tr,
                         labelText: "Price".tr,
                         suffix: Text(Get.find<SettingsService>().setting.value.defaultCurrency!),
                       ),
@@ -322,9 +332,20 @@ class EServiceFormView extends GetView<EServiceFormController> {
                       child: TextFieldWidget(
                         keyboardType: TextInputType.numberWithOptions(decimal: true),
                         onSaved: (input) => controller.eService.value.discountPrice = double.tryParse(input!),
-                        validator: (input) => (input != "") && ((double.tryParse(input!) ?? 0) <= 0) ? "Should be number more than 0".tr : null,
-                        initialValue: (controller.eService.value.discountPrice ?? 0) > 0 ? controller.eService.value.discountPrice?.toString() : null,
-                        hintText: "21.00".tr,
+                       // validator: (input) => (input != "") && ((double.tryParse(input!) ?? 0) <= 0) ? "Should be number more than 0".tr : null,
+                        //initialValue: (controller.eService.value.discountPrice ?? 0) > 0 ? controller.eService.value.discountPrice?.toString() : null,
+                        //validator: (input) => (input != "") && ((double.tryParse(input) ?? 0) <= 0) ? "Should be number more than 0".tr : null,
+                        validator: (input) {
+                          if (input != null && input.isNotEmpty  && double.tryParse(input) == null) {
+                            return "Should be a valid number".tr;
+                          }
+                          return null; // No validation error
+                        },
+                        //initialValue: (controller.eService.value.discountPrice ?? 0) > 0 ? controller.eService.value.discountPrice?.toString() : null,
+                        initialValue: (controller.eService.value.discountPrice ?? 0) > 0
+                            ? controller.eService.value.discountPrice?.toString()
+                            : "0",
+                        hintText: "10".tr,
                         labelText: "Discount Price".tr,
                         suffix: Text(Get.find<SettingsService>().setting.value.defaultCurrency!),
                       ),
@@ -333,12 +354,18 @@ class EServiceFormView extends GetView<EServiceFormController> {
                 ),
                 TextFieldWidget(
                   onSaved: (input) => controller.eService.value.duration = input,
-                  initialValue: controller.eService.value.duration == null ? null : DateFormat('HH:mm').format(DateFormat("HH'h' mm'm'").parse(controller.eService.value.duration!)),
-                  validator: (input) => input!.isNotEmpty && !RegExp(r"^[0-1][0-9]|2[0-3]|[1-9]:[0-5][0-9]").hasMatch(input) ? "Should be a valid time" : null,
+                  initialValue: (controller.eService.value.duration == null || controller.eService.value.duration!.isEmpty) ? "00:00" : controller.eService.value.duration,
+                  validator: (input) {
+                    if (input != null && input.isNotEmpty && !RegExp(r"^[0-1][0-9]|2[0-3]|[1-9]:[0-5][0-9]").hasMatch(input)) {
+                      return "Should be a valid time".tr;
+                    }
+                    return null; // No validation error
+                  },
                   hintText: "02:30".tr,
                   labelText: "Duration".tr,
                   keyboardType: TextInputType.datetime,
                 ),
+
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   margin: EdgeInsets.all(20),

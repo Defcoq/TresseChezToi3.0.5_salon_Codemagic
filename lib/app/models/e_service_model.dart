@@ -50,10 +50,19 @@ class EService extends Model {
     print("Before duration value --------------------------------------");
     print("Duration fron json " + stringFromJson(json, 'duration'));
     String durationFromJson = stringFromJson(json, 'duration')?? "";
-    if(durationFromJson.isNotEmpty)
+    /*if(durationFromJson.isNotEmpty)
     duration = DateFormat("HH'h' mm'm'").format(DateFormat('HH:mm').parse(stringFromJson(json, 'duration')));
     else
-      duration="00:00";
+      duration="00:00";*/
+    if (durationFromJson != null) {
+      // Convert durationFromJson to an integer (assuming it represents hours)
+      int hours = int.tryParse(durationFromJson) ?? 0;
+
+      // Format hours and set minutes to "00"
+      duration = '${hours.toString().padLeft(2, '0')}h 00m';
+    } else {
+      duration = '00h 00m';
+    }
     print("after duration  duration value --------------------------------------");
     featured = boolFromJson(json, 'featured');
     enableBooking = boolFromJson(json, 'enable_booking');

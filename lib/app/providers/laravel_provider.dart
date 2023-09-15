@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:get/get.dart';
@@ -347,14 +348,14 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
-  Future<EService> createSalon(Salon salon) async {
+  Future<Salon> createSalon(Salon salon) async {
     if (!authService.isAuth) {
       throw new Exception("You don't have the permission to access to this area!".tr + "[ createSalon(EService eService) ]");
     }
     var _queryParameters = {
       'api_token': authService.apiToken,
     };
-    Uri _uri = getApiBaseUri("e_services").replace(queryParameters: _queryParameters);
+    Uri _uri = getApiBaseUri("salons").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     try {
       var response = await _httpClient?.postUri(
@@ -363,7 +364,7 @@ class LaravelApiClient extends GetxService with ApiClient {
         options: _optionsNetwork,
       );
       if (response!.data['success'] == true) {
-        return EService.fromJson(response!.data['data']);
+        return Salon.fromJson(response!.data['data']);
       } else {
         throw new Exception(response!.data['message']);
       }
@@ -373,22 +374,38 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
-  Future<EService> updateSalon(Salon salon) async {
+  Future<Salon> updateSalon(Salon salon) async {
     if (!authService.isAuth || !salon.hasData) {
       throw new Exception("You don't have the permission to access to this area!".tr + "[ updateEService(EService eService) ]");
     }
     var _queryParameters = {
       'api_token': authService.apiToken,
     };
-    Uri _uri = getApiBaseUri("salon_owner/e_services/${salon.id}").replace(queryParameters: _queryParameters);
+  /*  Uri _uri = getApiBaseUri("salon_owner/e_services/${salon.id}").replace(queryParameters: _queryParameters);
     printUri(StackTrace.current, _uri);
     var response = await _httpClient?.postUri(
       _uri,
       data: json.encode(salon.toJson()),
       options: _optionsNetwork,
+    );*/
+    Uri _uri = getApiBaseUri("salon_owner/salons/${salon.id}").replace(queryParameters: _queryParameters);
+    //Uri _uri = getApiBaseUri("salons/${salon.id}").replace(queryParameters: _queryParameters);
+    printUri(StackTrace.current, _uri);
+    String pippo = salon.toJson().toString();
+    var response = await _httpClient!.putUri(
+        _uri,
+        data: salon.toJson(),
+        // options : _optionsNetwork
+        options: Options(/*followRedirects: false,
+          maxRedirects : 5,*/
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              //'Authorization': 'Bearer ${authService.apiToken}',
+            })
     );
     if (response!.data['success'] == true) {
-      return EService.fromJson(response!.data['data']);
+      return Salon.fromJson(response!.data['data']);
     } else {
       throw new Exception(response!.data['message']);
     }
