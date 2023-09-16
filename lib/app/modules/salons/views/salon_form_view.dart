@@ -158,6 +158,23 @@ class SalonFormView extends GetView<SalonFormController> {
                   hintText: "Description for Post Party Cleaning".tr,
                   labelText: "Description".tr,
                 ),
+                TextFieldWidget(
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    onSaved: (input) => controller.salon.value.availabilityRange = (double.tryParse(input!) ?? 0),
+                    // validator: (input) => (double.tryParse(input) ?? 0) <= 0 ? "Should be number more than 0".tr : null,
+                    validator: (input) {
+                      if (input != null &&  input.isNotEmpty && double.tryParse(input!) == null) {
+                        return "Should be a valid number".tr;
+                      }
+                      return null; // No validation error
+                    },
+                    // initialValue: controller.eService.value.price?.toString(),
+                    initialValue: (controller.salon.value.availabilityRange ?? 0) > 0
+                        ? controller.salon.value.availabilityRange?.toString()
+                        : "10000",
+                    hintText: "10000".tr,
+                    labelText: "Distance de Couverture".tr
+                ),
 
                 Obx(() {
                   if (controller.addresses.length > 1)
