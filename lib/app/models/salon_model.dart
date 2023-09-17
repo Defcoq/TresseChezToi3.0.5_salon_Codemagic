@@ -82,7 +82,7 @@ class Salon extends Model {
     verified = boolFromJson(json, 'verified');
   }
 
-  Map<String, dynamic> toJson() {
+  /*Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
@@ -103,6 +103,42 @@ class Salon extends Model {
       // data['image'] = this.images.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
       data['image'] = this.images!.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
     }
+    return data;
+  }*/
+
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    //if (id != null)
+    data['id'] = id;
+    data['name'] = name;
+    data['description'] = description;
+    if (images != null) data['images'] = this.images!.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();// images.map((e) => e.toJson()).toList();
+    // data['image'] = this.images.where((element) => Uuid.isUuid(element.id)).map((v) => v.id).toList();
+    data['phone_number'] = phoneNumber;
+    data['mobile_number'] = mobileNumber;
+    if (salonLevel != null) {
+      //salon_level_id
+      //data['salon_level'] = salonLevel.toJson();
+      data['salon_level_id'] = salonLevel!.id;
+    }
+    if (availabilityHours != null) {
+      // data['availability_hours'] = availabilityHours.map((e) => e.toJson()).toList();
+    }
+    data['availability_range'] = availabilityRange ?? 10000;
+    data['distance'] = distance ?? 0.0;
+    data['closed'] = closed ?? false;
+    data['featured'] = featured ?? false;
+    if (address != null) {
+      // data['address'] = address.toJson();
+      data['address_id'] = this.address!.id;
+    }
+    //  if (taxes != null) data['taxes'] = taxes.map((e) => e.toJson()).toList();
+    // if (employees != null) data['users'] = employees.map((e) => e.toJson()).toList();
+    data['rate'] = rate ?? 0.0;
+    //if (reviews != null) data['salon_reviews'] = reviews.map((e) => e.toJson()).toList();
+    data['total_reviews'] = totalReviews ?? (reviews?.length ?? 0);
+    data['verified'] = verified ?? false;
     return data;
   }
 
