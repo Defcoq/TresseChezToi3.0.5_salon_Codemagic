@@ -56,7 +56,7 @@ class HomeView extends GetView<HomeController> {
                               var _status = controller.bookingStatuses.elementAt(index);
                               return ChipWidget(
                                 tag: 'home',
-                                text: _status.status!,
+                                text: _status.status!.tr,
                                 id: _status.id,
                                 onSelected: (id) {
                                   controller.changeTab(id);
