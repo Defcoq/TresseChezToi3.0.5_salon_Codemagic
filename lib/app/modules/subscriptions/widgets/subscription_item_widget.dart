@@ -105,7 +105,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 child: Text(
-                  subscription!.payment!.paymentMethod!.getName(),
+                  subscription!.payment!.paymentMethod!.getName() ?? '',
                   style: Get.textTheme.bodyText2,
                 ),
               ),
