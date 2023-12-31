@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
@@ -58,6 +59,13 @@ class LaravelApiClient extends GetxService with ApiClient {
       _optionsCache = buildCacheOptions(Duration(minutes: 10), forceRefresh: false);
       _httpClient!.interceptors.add(DioCacheManager(CacheConfig(baseUrl: getApiBaseUrl(""))).interceptor);
     }
+
+    (_httpClient?.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient dioClient) {
+      dioClient.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+      return dioClient;
+    };
     return this;
   }
 
