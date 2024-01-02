@@ -44,7 +44,7 @@ class HomeController extends GetxController {
     scrollController?.dispose();
   }
 
-  Future refreshHome({bool showMessage = false, String? statusId}) async {
+  /*Future refreshHome({bool showMessage = false, String? statusId}) async {
     await getBookingStatuses();
     await getStatistics();
     Get.find<RootController>().getNotificationsCount();
@@ -52,7 +52,22 @@ class HomeController extends GetxController {
     if (showMessage) {
       Get.showSnackbar(Ui.SuccessSnackBar(message: "Home page refreshed successfully".tr));
     }
+  }*/
+
+  Future refreshHome({bool showMessage = false, String? statusId}) async {
+    await getBookingStatuses();
+    await getStatistics();
+    Get.find<RootController>().getNotificationsCount();
+
+    if (statusId != null) {
+      changeTab(statusId);
+    }
+
+    if (showMessage) {
+      Get.showSnackbar(Ui.SuccessSnackBar(message: "Home page refreshed successfully".tr));
+    }
   }
+
 
   void initScrollController() {
     scrollController = ScrollController();
