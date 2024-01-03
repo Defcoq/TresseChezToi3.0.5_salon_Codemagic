@@ -131,7 +131,7 @@ class ImageFieldWidget extends StatelessWidget {
             ],
           ),
           Obx(() {
-            return buildImage(initialImage, controller.image.value!);
+            return buildImage(initialImage, controller.image.value);
           })
         ],
       ),
@@ -153,7 +153,7 @@ class ImageFieldWidget extends StatelessWidget {
         ));
   }
 
-  Widget buildImage(Media? initialImage, File image) {
+  Widget buildImage(Media? initialImage, File? image) {
     final controller = Get.put(ImageFieldController(), tag: tag);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
